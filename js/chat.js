@@ -1,41 +1,37 @@
 $(document).ready(function () {
-	loadchat();
-	setInterval(function()
-	{
-		loadchat();
+	LoadChat();
+	setInterval(function () {
+		LoadChat();
 	}, 100);
-	function loadchat()
-	{
-		$.post('message.php?action=getMessages', function(response)
-		{
-			var scrollpos = $('.chat-messages').scrollTop();
+	function LoadChat() {
+		$.post('message.php?action=getMessages', function (response) {
+
+			var scrollpos = $('#chat').scrollTop();
 			var scrollpos = parseInt(scrollpos) + 520;
-			var scrollHeight = $('.chat-messages').prop('scrollHeight');
-			$('.chat-messages').html(response)
-			if(scrollpos < scrollHeight)
-			{}
-			else
-			{
-				$('.chat-messages').scrollTop($('.chat-messages').prop('scrollHeight'));
+			var scrollHeight = $('#chat').prop('scrollHeight');
+			$('#chat').html(response);
+			if (scrollpos < scrollHeight) {
+
+			} else {
+				$('#chat').scrollTop($('#chat').prop('scrollHeight'));
 			}
 		});
 	}
 
-	$('.chat-textarea').keyup(function (e) {
+	$('#textarea').keyup(function (e) {
 		if (e.which == 13) {
 			$('form').submit();
 		}
 	});
 
 	$('form').submit(function () {
-		var message = $('.chat-textarea').val();
+		var message = $('#textarea').val();
 		$.post('message.php?action=sendMessage&message=' + message, function (response) {
-			loadchat();
 			if (response == 1) {
-				document.getElementById('messageform').reset();
+				LoadChat();
+				$('#messageFrm')[0].reset();
 			}
 		});
-
 		return false;
-	})
+	});
 });

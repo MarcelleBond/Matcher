@@ -15,10 +15,13 @@ switch ($_REQUEST['action']) {
         $res = $db->results();
         $chat = '';
         foreach ($res as $key) {
-            $chat .= "<div class='single-message'>
-                                <strong>" . $key->user . ": </strong> " . $key->message. "
-                                <span>".date('d-m-Y h:i a',strtotime($key->date))."</span>
-                                </div>";
+            $chat .= '<div class="single-message">
+            <strong>' . $key->user . ': </strong><br /> <p>' . $key->message . '</p>
+            <br/>
+            <span>' . date('h:i a', strtotime($key->date)) . '</span>
+            </div>
+            <div class="clear"></div>
+            ';
         }
         echo $chat;
         break;
@@ -27,3 +30,5 @@ switch ($_REQUEST['action']) {
         # code...
         break;
 }
+
+/* ' .  (($_SESSION['user'] == $key->user) ? 'right' : 'left') . ' */
