@@ -5,7 +5,7 @@ $db = DB::getInstance();
 
 switch ($_REQUEST['action']) {
     case 'sendMessage':
-        if ($db->insert('messages', array('user' => 'Tyler', 'message' => $_REQUEST['message']))) {
+        if ($db->insert('messages', array('user' => 'Tyler', 'message' => escape($_REQUEST['message'])))) {
             echo 1;
             exit;
         }
