@@ -4,7 +4,7 @@
     try {
         $dbh = new PDO("mysql:host=$DB_DNS", $DB_USER, $DB_PASSWORD);
         $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
-        $dbh->exec("CREATE DATABASE IF NOT EXISTS matcher;")
+        $dbh->exec("CREATE DATABASE IF NOT EXISTS `matcher` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;")
         or die(print_r($dbh->errorInfo(), true));
         $dbh->exec("CREATE TABLE IF NOT EXISTS `matcher`.`users`(
             `user_id` INT(255) NOT NULL AUTO_INCREMENT,
