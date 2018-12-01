@@ -7,7 +7,7 @@
 			'host' => $DB_DNS,
 			'user' => $DB_USER,
 			'password' => $DB_PASSWORD,
-			'db' => "matcher"
+			'db' => "matcha"
 		),
 		'remember' => array(
 			'cookie_name' => 'hash',
