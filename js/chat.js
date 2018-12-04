@@ -4,7 +4,7 @@ $(document).ready(function () {
 		LoadChat();
 	}, 100);
 	function LoadChat() {
-		$.post('message.php?action=getMessages', function (response) {
+		$.post('functions/message.php?action=getMessages', function (response) {
 
 			var scrollpos = $('#chat').scrollTop();
 			var scrollpos = parseInt(scrollpos) + 520;
@@ -26,7 +26,7 @@ $(document).ready(function () {
 
 	$('form').submit(function () {
 		var message = $('#textarea').val();
-		$.post('message.php?action=sendMessage&message=' + message, function (response) {
+		$.post('functions/message.php?action=sendMessage&message=' + message, function (response) {
 			if (response == 1) {
 				LoadChat();
 				$('#messageFrm')[0].reset();

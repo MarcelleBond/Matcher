@@ -1,5 +1,5 @@
 <?php
-require_once 'core/init.php';
+require_once '../core/init.php';
 $user = new user();
 function activeEmail($token, $mail)
 {
@@ -8,7 +8,6 @@ function activeEmail($token, $mail)
 		http://localhost:8080/camagru/active.php?token=' . $token . '&email=' . $mail;
     $message = wordwrap($message, 100, "\r\n");
     mail(escape($_POST['email']), 'Activation link', $message);
-    echo '<script>alert("Pls check email.")</script>';
 }
 if (!$user->isloggedin()) {
     if (Input::exists()) {
@@ -34,6 +33,9 @@ if (!$user->isloggedin()) {
                     'unique' => 'users',
                     'valid_email' => 1,
                 ),
+                'gender' => array(
+                    'required' => true,
+                )
             ));
 
             if ($validate->passed()) {
@@ -44,15 +46,17 @@ if (!$user->isloggedin()) {
                     $token = substr($token, 0, 10);
                     $user->create(array(
                         'username' => escape(input::get('username')),
+                        'first_name' => escape(input::get('first_name')),
+                        'last_name' => escape(input::get('last_name')),
                         'passwd' => hash::make(escape(input::get('passwd'))),
                         'email' => escape(input::get('email')),
                         'active' => 0,
                         'ver_code' => $token,
+                        'profile' => json_encode(input::get('gender')),
                     ));
                     activeEmail($token, escape(input::get('email')));
 
-                    session::flash('home', '<script>alert("Please check email.")</script>');
-                    redirect::to('index.php');
+                    echo "Please check your email.";
 
                 } catch (Exception $e) {
                     die($e->getMessage());
