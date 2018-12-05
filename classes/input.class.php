@@ -13,6 +13,10 @@
 					return (!empty($_GET)) ? true : false;
 					break;
 
+				case 'request':
+					return (!empty($_REQUEST)) ? true : false;
+					break;
+
 				default:
 					return false;
 					break;
@@ -25,6 +29,10 @@
 				return $_POST[$item];
 			} else if (isset($_GET[$item])){
 				return $_GET[$item];
+			}
+			else if (isset($_REQUEST[$item]))
+			{
+				return $_REQUEST[$item];
 			}
 			return '';
 			

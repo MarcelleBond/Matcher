@@ -15,8 +15,10 @@
 	<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
         crossorigin="anonymous"></script>
 	<script src="js/UI.js"></script>
+	<script src="js/login_reg.js"></script>
 	<!-- <script src="js/chat.js"></script> -->
 </head>
 <body>
+
 </body>
 </html>

@@ -1,5 +1,5 @@
 <?php
-require_once '../core/init.php';
+require_once 'core/init.php';
 $user = new user();
 function activeEmail($token, $mail)
 {
@@ -7,18 +7,23 @@ function activeEmail($token, $mail)
 		Click on link below to activate account:
 		http://localhost:8080/camagru/active.php?token=' . $token . '&email=' . $mail;
     $message = wordwrap($message, 100, "\r\n");
-    mail(escape($_POST['email']), 'Activation link', $message);
+    mail(escape($_REQUEST['email']), 'Activation link', $message);
 }
 if (!$user->isloggedin()) {
-    if (Input::exists()) {
-        if (token::check(input::get('token'))) {
+    if (Input::exists('request')) {
             $validate = new Validate();
-            $validate = $validate->check($_POST, array(
+            $validate = $validate->check($_REQUEST, array(
                 'username' => array(
                     'required' => true,
                     'min' => 2,
                     'max' => 20,
                     'unique' => 'users',
+                ),
+                'first_name' => array(
+                    'required' => true,
+                ),
+                'last_name' => array(
+                    'required' => true,
                 ),
                 'passwd' => array(
                     'required' => true,
@@ -41,7 +46,7 @@ if (!$user->isloggedin()) {
             if ($validate->passed()) {
                 try
                 {
-                    $token = "QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm1234567890!$()*";
+                    /* $token = "QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm1234567890!$()*";
                     $token = str_shuffle($token);
                     $token = substr($token, 0, 10);
                     $user->create(array(
@@ -54,21 +59,20 @@ if (!$user->isloggedin()) {
                         'ver_code' => $token,
                         'profile' => json_encode(input::get('gender')),
                     ));
-                    activeEmail($token, escape(input::get('email')));
+                    activeEmail($token, escape(input::get('email'))); */
 
-                    echo "Please check your email.";
+                    echo 1;
 
                 } catch (Exception $e) {
                     die($e->getMessage());
                 }
             } else {
-                $display;
-                foreach ($validation->errors() as $error) {
+                $display = "";
+                foreach ($validate->errors() as $error) {
                     $display .= $error . "<br>";
                 }
                 echo $display;
             }
-        }
     }
 } else {
     redirect::to('index.php');
