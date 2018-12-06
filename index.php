@@ -12,10 +12,9 @@
 	<link rel="stylesheet" type="text/css" media="screen" href="css/w3.css" />
 	<link rel="stylesheet" type="text/css" media="screen" href="css/theme.css" />
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
-        crossorigin="anonymous"></script>
+	<script src="js/jquery-3.3.1.min.js" ></script>
 	<script src="js/UI.js"></script>
-	<script src="js/login_reg.js"></script>
+	<!-- <script src="js/login_reg.js"></script> -->
 	<!-- <script src="js/chat.js"></script> -->
 </head>
 <body>

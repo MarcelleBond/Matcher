@@ -1,7 +1,7 @@
 <!--//////////////////////////////////////////// REGISTER FORM /////////////////////////////////////////////-->
 
-
-<form id="register" class="w3-container w3-card-4 w3-display-middle w3-light-grey w3-text-black w3-margin" style="width:60%">
+<div id="register">
+<form  class="w3-container w3-card-4 w3-display-middle w3-light-grey w3-text-black w3-margin" style="width:60%">
 	<h2 class="w3-center">REGISTER</h2>
 
 	<div id="errordiv" class="w3-panel w3-red w3-center"></div>
@@ -77,8 +77,12 @@
 	</div>
 	<p class="w3-center">
 		<button id="RegButton" class="w3-button w3-section w3-black w3-ripple"> REGISTER </button>
+		
 	</p>
 </form>
+<p><button id="removescript" class="w3-button w3-section w3-black w3-ripple" onclick="removescript()"> remove script </button></p>
+</div>
+
 
 <!--//////////////////////////////////////////// LOGIN FORM /////////////////////////////////////////////-->
 
