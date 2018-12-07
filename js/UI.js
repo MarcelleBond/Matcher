@@ -1,15 +1,16 @@
 $(document).ready(function () {
-	$('body').load("includes/UI/loggedout.php #register", function (e) {
+	$('#main_content').load("includes/UI/loggedout.php #register", function (e) {
 
 		$.getScript("js/login_reg.js", function() {
 			alert("Script loaded and executed.");
 			});
 
-		});
+		// });
 
 $('form').submit(function (event) {
 	event.preventDefault();
-//	value = $('form').serialize();
+	value = $('form').serialize();
+	register(value)
 /* 	alert(value); */
 alert("someshit");
 	//alert(register(value));
@@ -20,11 +21,12 @@ alert("someshit");
   }); */
 
 });
+});
 
-function removescript() {
+/* function removescript() {
 	alert("tset");
 	
-}
+} */
 
 
 
@@ -49,7 +51,7 @@ $(document).ready(function(){
 	});
  } */
 
- function register(value)
+ /* function register(value)
 {
     $.post('register.php?action=regester&' + value, function (response) { 
         if (response == 1)
@@ -68,3 +70,4 @@ $(document).ready(function(){
     })
     alert('i made it to the end bore i got it back')
 }
+ */

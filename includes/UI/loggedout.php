@@ -1,10 +1,9 @@
 <!--//////////////////////////////////////////// REGISTER FORM /////////////////////////////////////////////-->
 
-<div id="register">
-<form  class="w3-container w3-card-4 w3-display-middle w3-light-grey w3-text-black w3-margin" style="width:60%">
+<div id="register" class="w3-container w3-display-container">
+<form  class="w3-container w3-card-4 w3-light-grey w3-display-middle w3-text-black w3-margin" style="width:60%">
 	<h2 class="w3-center">REGISTER</h2>
 
-	<div id="errordiv" class="w3-panel w3-red w3-center"></div>
 	<div class="w3-row w3-section">
 		<div class="w3-col" style="width:50px"><i class="w3-xxlarge fa fa-user"></i></div>
 		<div class="w3-rest">
@@ -87,46 +86,47 @@
 <!--//////////////////////////////////////////// LOGIN FORM /////////////////////////////////////////////-->
 
 
+<div id="login" class="w3-container ">
+	<form class="w3-container w3-card-4 w3-light-grey w3-text-black w3-margin" style="width:60%">
+		<h2 class="w3-center">LOGIN</h2>
 
-<form id="login" class="w3-container w3-card-4 w3-display-middle w3-light-grey w3-text-black w3-margin" style="width:60%">
-	<h2 class="w3-center">LOGIN</h2>
-
-	<div class="w3-row w3-section">
-		<div class="w3-col" style="width:50px"><i class="w3-xxlarge fa fa-user"></i></div>
-		<div class="w3-rest">
-			<input class="w3-input w3-border" name="username" type="text" placeholder="Username" required>
+		<div class="w3-row w3-section">
+			<div class="w3-col" style="width:50px"><i class="w3-xxlarge fa fa-user"></i></div>
+			<div class="w3-rest">
+				<input class="w3-input w3-border" name="username" type="text" placeholder="Username" required>
+			</div>
 		</div>
-	</div>
 
-	<div class="w3-row w3-section">
-		<div class="w3-col" style="width:50px"><i class="w3-xxlarge fa fa-lock"></i></div>
-		<div class="w3-rest">
-			<input class="w3-input w3-border" name="passwd" type="password" placeholder="password" required>
+		<div class="w3-row w3-section">
+			<div class="w3-col" style="width:50px"><i class="w3-xxlarge fa fa-lock"></i></div>
+			<div class="w3-rest">
+				<input class="w3-input w3-border" name="passwd" type="password" placeholder="password" required>
+			</div>
 		</div>
-	</div>
 
-	<p class="w3-center">
-		<button id="LoginButton" class="w3-button  w3-black w3-ripple"> LOGIN </button>
-	</p>
-	<p class="w3-center">
-		<button id="ForgotButton" class="w3-button w3-black w3-ripple"> Forgot password </button>
-	</p>
-</form>
-
+		<p class="w3-center">
+			<button id="LoginButton" class="w3-button  w3-black w3-ripple"> LOGIN </button>
+		</p>
+		<p class="w3-center">
+			<button id="ForgotButton" class="w3-button w3-black w3-ripple"> Forgot password </button>
+		</p>
+	</form>
+</div>
 <!--//////////////////////////////////////////// FORGOT PASSWORD FORM /////////////////////////////////////////////-->
 
-
-<form id="forgot_password" class="w3-container w3-card-4 w3-display-middle w3-light-grey w3-text-black w3-margin" style="width:60%">
-	<h2 class="w3-center">FORGOT PASSWORD</h2>
-
-	<div class="w3-row w3-section">
-		<div class="w3-col" style="width:50px"><i class="w3-xxlarge fa fa-user"></i></div>
-		<div class="w3-rest">
-			<input class="w3-input w3-border" name="email" type="email" placeholder="example@host.com" required>
+<div id="forgot_password">
+	<form  class="w3-container w3-card-4 w3-display-middle w3-light-grey w3-text-black w3-margin" style="width:60%">
+		<h2 class="w3-center">FORGOT PASSWORD</h2>
+	
+		<div class="w3-row w3-section">
+			<div class="w3-col" style="width:50px"><i class="w3-xxlarge fa fa-user"></i></div>
+			<div class="w3-rest">
+				<input class="w3-input w3-border" name="email" type="email" placeholder="example@host.com" required>
+			</div>
 		</div>
-	</div>
-
-	<p class="w3-center">
-		<button id="SendButton" class="w3-button w3-section w3-black w3-ripple"> Send </button>
-	</p>
-</form>
+	
+		<p class="w3-center">
+			<button id="SendButton" class="w3-button w3-section w3-black w3-ripple"> Send </button>
+		</p>
+	</form>
+</div>
