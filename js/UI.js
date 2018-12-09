@@ -38,7 +38,7 @@ $(document).ready(function () {
 		
 		$('#content').load("includes/UI/loggedin.php #main_content", function()
 		{
-
+			
 		});
 	}
 });

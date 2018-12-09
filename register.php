@@ -1,14 +1,14 @@
 <?php
 require_once 'core/init.php';
 $user = new user();
-function activeEmail($token, $mail)
+/* function activeEmail($token, $mail)
 {
     $message = '
 		Click on link below to activate account:
 		http://localhost:8080/camagru/active.php?token=' . $token . '&email=' . $mail;
     $message = wordwrap($message, 100, "\r\n");
     mail(escape($_REQUEST['email']), 'Activation link', $message);
-}
+} */
 
 if (!$user->isloggedin()) {
     if (Input::exists('request')) {
@@ -60,7 +60,7 @@ if (!$user->isloggedin()) {
                         'ver_code' => '',
                         'profile' => json_encode(input::get('gender')),
                     ));
-                    // activeEmail($token, escape(input::get('email')));
+                    // Email(escape(input::get('email')), 'Account Activation', message);
 
                     echo 1;
 

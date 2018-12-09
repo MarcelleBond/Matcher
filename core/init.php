@@ -24,6 +24,7 @@
 	});
 
 	require_once 'functions/sanitize.php';
+	require_once 'functions/email.php';
 
  	 if(cookie::exists(config::get('remember/cookie_name')) && !session::exists(config::get('session/session_name')))
 	{

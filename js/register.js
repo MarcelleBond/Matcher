@@ -23,6 +23,6 @@ $('form').submit(function (event) {
 
 function register (value)
 {
-    request = Ajax('functions/register.php','POST',value, false);
+    request = Ajax('register.php','POST',value, false);
     return request;
 }
