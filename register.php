@@ -46,7 +46,7 @@ if (!$user->isloggedin()) {
             if ($validate->passed()) {
                 try
                 {
-                    /* $token = "QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm1234567890!$()*";
+                     $token = "QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm1234567890!$()*";
                     $token = str_shuffle($token);
                     $token = substr($token, 0, 10);
                     $user->create(array(
@@ -55,11 +55,11 @@ if (!$user->isloggedin()) {
                         'last_name' => escape(input::get('last_name')),
                         'passwd' => hash::make(escape(input::get('passwd'))),
                         'email' => escape(input::get('email')),
-                        'active' => 0,
-                        'ver_code' => $token,
+                        'active' => 1,
+                        'ver_code' => '',
                         'profile' => json_encode(input::get('gender')),
                     ));
-                    activeEmail($token, escape(input::get('email'))); */
+                    // activeEmail($token, escape(input::get('email')));
 
                     echo 1;
 
