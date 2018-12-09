@@ -9,6 +9,7 @@ function activeEmail($token, $mail)
     $message = wordwrap($message, 100, "\r\n");
     mail(escape($_REQUEST['email']), 'Activation link', $message);
 }
+
 if (!$user->isloggedin()) {
     if (Input::exists('request')) {
             $validate = new Validate();

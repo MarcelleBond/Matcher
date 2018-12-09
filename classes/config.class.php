@@ -1,5 +1,6 @@
 <?php
-
+	require_once 'core/init.php';
+	
 	class config
 	{
 		public static function get($path = null)
