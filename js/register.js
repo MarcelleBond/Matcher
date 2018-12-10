@@ -3,11 +3,13 @@ $('form').submit(function (event) {
     value = $('form').serialize();
     check = register(value)
     if (check == 1) {
-        $('#content').load("includes/UI/loggedout.php #login", function () {
-            $('h2').after('<div class="w3-panel w3-green w3-center"><h3> Registration Success!</h3><p>Please check your email to activate account </p></div>');
-            managescript('login.js', 'add');
-            managescript('register.js', 'remove');
-        })
+        $('#content').fadeOut('slow', function () {
+            $('#content').load("includes/UI/loggedout.php #login", function () {
+                $('h2').after('<div class="w3-panel w3-green w3-center"><h3> Registration Success!</h3><p>Please check your email to activate account </p></div>');           
+                managescript('login.js', 'add');
+                managescript('register.js', 'remove');
+            }).fadeIn('slow');
+        });
     }
     else {
         if (document.getElementById('error'))

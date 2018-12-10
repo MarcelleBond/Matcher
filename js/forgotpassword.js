@@ -27,7 +27,7 @@ $('form').submit(function (event) {
 
 function forgotpassword(value)
 {
-	request = Ajax('forgotpassword.php', 'POST', value, false);
+	request = Ajax('forgot.php', 'POST', value, false);
 	return request;
     
 }
