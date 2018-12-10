@@ -20,7 +20,7 @@
 					<a href="#" class="w3-bar-item w3-button">Jane likes your post</a>
 				</div>
 			</div>
-			<a href="logout.php" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white" title="My Account">
+			<a id="logout_link" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white" title="Logout">
 				Logout
 			</a>
 		</div>
@@ -47,13 +47,13 @@
 				<!-- Profile -->
 				<div class="w3-card w3-round w3-white">
 					<div class="w3-container">
-						<h4 class="w3-center">My Profile</h4>
-						<p class="w3-center"><img id="propic" src="/w3images/avatar3.png" class="w3-circle" style="height:106px;width:106px"
+						<h4 id="display_username" class="w3-center"></h4>
+						<p class="w3-center"><img id="propic" src="" class="w3-circle" style="height:106px;width:106px"
 								alt="Avatar"></p>
 						<hr>
-						<p><i class="fa fa-user fa-fw w3-margin-right w3-text-theme"></i> Name</p>
-						<p><i class="fa fa-home fa-fw w3-margin-right w3-text-theme"></i> Location</p>
-						<p><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i> April 1, 1988</p>
+						<p id="display_name"><i class="fa fa-user fa-fw w3-margin-right w3-text-theme"></i></p>
+						<p id="display_gender"><i class="fa fa-home fa-user w3-margin-right w3-text-theme"></i></p>
+						<p id="display_dob"><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i></p>
 					</div>
 				</div>
 				<br>
@@ -74,23 +74,8 @@
 						<button onclick="myFunction('Demo3')" class="w3-button w3-block w3-theme-l1 w3-left-align"><i
 								class="fa fa-users fa-fw w3-margin-right"></i> My Photos</button>
 						<div id="Demo3" class="w3-hide w3-container">
-							<div class="w3-row-padding">
+							<div id="display_images" class="w3-row-padding">
 								<br>
-								<div class="w3-half">
-									<img src="/w3images/lights.jpg" style="width:100%" class="w3-margin-bottom">
-								</div>
-								<div class="w3-half">
-									<img src="/w3images/nature.jpg" style="width:100%" class="w3-margin-bottom">
-								</div>
-								<div class="w3-half">
-									<img src="/w3images/mountains.jpg" style="width:100%" class="w3-margin-bottom">
-								</div>
-								<div class="w3-half">
-									<img src="/w3images/forest.jpg" style="width:100%" class="w3-margin-bottom">
-								</div>
-								<div class="w3-half">
-									<img src="/w3images/nature.jpg" style="width:100%" class="w3-margin-bottom">
-								</div>
 							</div>
 						</div>
 					</div>
@@ -101,18 +86,8 @@
 				<div class="w3-card w3-round w3-white w3-hide-small">
 					<div class="w3-container">
 						<p>Interests</p>
-						<p>
-							<span class="w3-tag w3-small w3-theme-d5">News</span>
-							<span class="w3-tag w3-small w3-theme-d4">W3Schools</span>
-							<span class="w3-tag w3-small w3-theme-d3">Labels</span>
-							<span class="w3-tag w3-small w3-theme-d2">Games</span>
-							<span class="w3-tag w3-small w3-theme-d1">Friends</span>
-							<span class="w3-tag w3-small w3-theme">Games</span>
-							<span class="w3-tag w3-small w3-theme-l1">Friends</span>
-							<span class="w3-tag w3-small w3-theme-l2">Food</span>
-							<span class="w3-tag w3-small w3-theme-l3">Design</span>
-							<span class="w3-tag w3-small w3-theme-l4">Art</span>
-							<span class="w3-tag w3-small w3-theme-l5">Photos</span>
+						<p id="display_interest">
+							
 						</p>
 					</div>
 				</div>
@@ -145,7 +120,7 @@
 					</div>
 				</div>
 
-				<div class="w3-container w3-card w3-white w3-round w3-margin"><br>
+				<!-- <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
 					<img src="/w3images/avatar2.png" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
 					<span class="w3-right w3-opacity">1 min</span>
 					<h4>John Doe</h4><br>
@@ -196,7 +171,7 @@
 					<button type="button" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-comment"></i>
 						 Comment</button>
 				</div>
-
+ -->
 				<!-- End Middle Column -->
 			</div>
 
@@ -205,10 +180,10 @@
 				<div class="w3-card w3-round w3-white w3-center">
 					<div class="w3-container">
 						<p>Upcoming Events:</p>
-						<img src="/w3images/forest.jpg" alt="Forest" style="width:100%;">
 						<p><strong>Holiday</strong></p>
 						<p>Friday 15:00</p>
 						<p><button class="w3-button w3-block w3-theme-l4">Info</button></p>
+						<input type="range" min="1" max="100" value="50" class="slider" id="myRange" style="width: 100%">
 					</div>
 				</div>
 				<br>
@@ -216,8 +191,8 @@
 				<div class="w3-card w3-round w3-white w3-center">
 					<div class="w3-container">
 						<p>Friend Request</p>
-						<img src="/w3images/avatar6.png" alt="Avatar" style="width:50%"><br>
-						<span>Jane Doe</span>
+						<img id="requsters_img" src="" alt="requesters image" style="width:50%"><br>
+						<span id="requsters_id">requesters name</span>
 						<div class="w3-row w3-opacity">
 							<div class="w3-half">
 								<button class="w3-button w3-block w3-green w3-section" title="Accept"><i class="fa fa-check"></i></button>

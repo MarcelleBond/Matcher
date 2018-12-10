@@ -60,10 +60,10 @@ if (!$user->isloggedin()) {
                     'ver_code' => $token,
                     'profile' => json_encode(input::get('gender')),
                 ));
-                $message = '
+                /* $message = '
 		        Click on link below to activate account:
 		        http://localhost:8080/camagru/active.php?token=' . $token . '&email=' . escape(input::get('email'));
-                Email(escape(input::get('email')), 'Account Activation', message);
+                Email(escape(input::get('email')), 'Account Activation', message); */
 
                 echo 1;
 

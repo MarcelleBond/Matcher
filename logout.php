@@ -5,7 +5,6 @@ $user = new user();
 if (!$user->isloggedin()) {
     redirect::to('index.php');
 }
-
 $user->logout();
-
-redirect::to('index.php');
+echo 1;
+// redirect::to('index.php');

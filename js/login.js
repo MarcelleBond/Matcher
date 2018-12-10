@@ -12,11 +12,9 @@ $('form').submit(function (event) {
 	value = $('form').serialize();
 	check = login(value)
 	if (check == 1) {
-		$('body').fadeOut('slow', function () {
 			managescript('UI.js', 'remove');
 			managescript('UI.js', 'add');
 			managescript('login.js', 'remove');
-		}).fadeIn('slow');
 	}
 	else {
 		if (document.getElementById('error'))

@@ -1,6 +1,6 @@
 $(document).ready(function () {
 	if ((check = Ajax('user_status.php', 'POST', "", false)) == 0) {
-		$('body').fadeOut('fast', function () {
+		$('body').fadeOut('slow', function () {
 			$('#nav').load("includes/UI/loggedout.php #nav_bar");
 			$('#foot').load("includes/UI/loggedout.php #footer");
 
@@ -33,11 +33,17 @@ $(document).ready(function () {
 		}).fadeIn('slow');
 	}
 	else {
-		$('#nav').load("includes/UI/loggedin.php #nav_bar");
+		$('body').fadeOut('slow', function () {
 
-		$('#content').load("includes/UI/loggedin.php #main_content", function () {
+			$('#nav').load("includes/UI/loggedin.php #nav_bar", function(){
+				managescript('logout.js', 'add');
+			});
 
-		});
+			$('#content').load("includes/UI/loggedin.php #main_content", function () {
+				managescript('display_profile.js', 'add');
+			});
+		}).fadeIn('slow');
+
 	}
 });
 
