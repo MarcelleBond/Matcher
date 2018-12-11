@@ -7,4 +7,3 @@ if (!$user->isloggedin()) {
 }
 $user->logout();
 echo 1;
-// redirect::to('index.php');

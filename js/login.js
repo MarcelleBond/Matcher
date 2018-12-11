@@ -1,5 +1,4 @@
 
-
 $('#ForgotButton').click(function (e) {
 	e.preventDefault()
 	$('#content').fadeOut('slow', function () {

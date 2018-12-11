@@ -1,6 +1,7 @@
 $('form').submit(function (event) {
     event.preventDefault();
-    value = $('form').serialize();
+    value = $('form').serializeArray();
+    console.log(value);
     check = register(value)
     if (check == 1) {
         $('#content').fadeOut('slow', function () {

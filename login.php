@@ -16,15 +16,21 @@ if (input::exists('request')) {
     ));
     if ($validation->passed()) {
         $user = new user(escape(input::get('username')));
-        if ($user->data()->active === '1') {
-            $login = $user->login(escape(input::get('username')), escape(input::get('passwd')));
-            if ($login) {
-                echo 1;
+        if($user->data() != NULL)
+        {
+            if ($user->data()->active === '1') {
+                $login = $user->login(escape(input::get('username')), escape(input::get('passwd')));
+                if ($login) {
+                    echo 1;
+                } else {
+                    echo "Login Failed! Please try again";
+                }
             } else {
-                echo "Login Failed! Please try again";
+                echo "Please activate your account";
             }
-        } else {
-            echo "Please activate your account";
+        }
+        else{
+            echo "Username and/or Password is incorrect";
         }
     } else {
         $display = "";

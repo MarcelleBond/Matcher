@@ -1,5 +1,5 @@
 $(document).ready(function () {
-	if ((check = Ajax('user_status.php', 'POST', "", false)) == 0) {
+	if ((check = Ajax('user_status.php', 'POST', null, false)) == 0) {
 		$('body').fadeOut('slow', function () {
 			$('#nav').load("includes/UI/loggedout.php #nav_bar");
 			$('#foot').load("includes/UI/loggedout.php #footer");
@@ -38,9 +38,10 @@ $(document).ready(function () {
 			$('#nav').load("includes/UI/loggedin.php #nav_bar", function(){
 				managescript('logout.js', 'add');
 			});
-
+			$('#foot').load("includes/UI/loggedout.php #footer");
 			$('#content').load("includes/UI/loggedin.php #main_content", function () {
 				managescript('display_profile.js', 'add');
+				
 			});
 		}).fadeIn('slow');
 

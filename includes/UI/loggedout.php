@@ -78,27 +78,27 @@
 		<div class="w3-row w3-section">
 			<div class="w3-col" style="width:50px"><i class="w3-xxlarge fa fa-male"></i></div>
 			<div class="w3-rest">
-				<input id="male" class="w3-radio" type="radio" name="gender" value="male"> MALE
+				<input id="male" class="w3-radio" type="radio" name="gender" value="Male"> MALE
 			</div>
 		</div>
 		<div class="w3-row w3-section">
 			<div class="w3-col" style="width:50px"><i class="w3-xxlarge fa fa-female"></i></div>
 			<div class="w3-rest">
-				<input id="female" class="w3-radio" type="radio" name="gender" value="female"> FEMALE
+				<input id="female" class="w3-radio" type="radio" name="gender" value="Female"> FEMALE
 			</div>
 		</div>
 
 		<div class="w3-row w3-section">
 			<div class="w3-col" style="width:50px"><i class="w3-xxlarge fa fa-transgender-alt"></i></div>
 			<div class="w3-rest">
-				<input id="transgender" class="w3-radio" type="radio" name="gender" value="transgender"> TRANSGENDER
+				<input id="transgender" class="w3-radio" type="radio" name="gender" value="Transgender"> TRANSGENDER
 			</div>
 		</div>
 
 		<div class="w3-row w3-section">
 			<div class="w3-col" style="width:50px"><i class="w3-xxlarge fa fa-genderless"></i></div>
 			<div class="w3-rest">
-				<input id="genderless" class="w3-radio" type="radio" name="gender" value="genderless" checked>
+				<input id="genderless" class="w3-radio" type="radio" name="gender" value="Genderless" checked>
 				GENDERLESS
 			</div>
 		</div>

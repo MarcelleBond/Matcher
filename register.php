@@ -47,6 +47,7 @@ if (!$user->isloggedin()) {
         if ($validate->passed()) {
             try
             {
+                $test = array('gender' => input::get('gender'));
                 $token = "QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm1234567890!$()*";
                 $token = str_shuffle($token);
                 $token = substr($token, 0, 10);
@@ -56,9 +57,9 @@ if (!$user->isloggedin()) {
                     'last_name' => escape(input::get('last_name')),
                     'passwd' => hash::make(escape(input::get('passwd'))),
                     'email' => escape(input::get('email')),
-                    'active' => 0,
-                    'ver_code' => $token,
-                    'profile' => json_encode(input::get('gender')),
+                    'active' => 1,
+                    'ver_code' => '',
+                    'profile' => json_encode($test),
                 ));
                 /* $message = '
 		        Click on link below to activate account:

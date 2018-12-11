@@ -4,7 +4,7 @@
 	$db = DB::getInstance();
 	if (Input::exists('request'))
 	{
-		if (!empty($_REQUEST['display_info']))
+		if ($_REQUEST['action'] === 'display_info')
 		{
 			echo json_encode ($user->data());
 		}
