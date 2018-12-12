@@ -4,7 +4,7 @@
 	$db = DB::getInstance();
 	if (Input::exists('request'))
 	{
-		if ($_REQUEST['action'] === 'display_info')
+		if (input::get('action') === 'display_info')
 		{
 			echo json_encode ($user->data());
 		}
@@ -13,6 +13,7 @@
 			$db->action('SELECT img_name', 'gallery', array('user_id', '=', $user->data()->user_id));
 			echo json_encode ($db->results());
 		} */
+		// if (input::get(action) == )
 	}
 
 ?>

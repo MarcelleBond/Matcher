@@ -87,7 +87,7 @@
 					<div class="w3-container">
 						<p>Interests</p>
 						<p id="display_interest">
-							
+
 						</p>
 					</div>
 				</div>
@@ -105,8 +105,7 @@
 				<!-- End Left Column -->
 			</div>
 
-			<div id='center'>
-				
+			<div id="middle_column" class="w3-col m7">
 			</div>
 
 			<!-- Right Column -->
@@ -168,9 +167,7 @@
 
 
 <!-- Middle Column -->
-<div id="middle_column" class="w3-col m7">
-
-<div class="w3-row-padding">
+<div id="search_bar"class="w3-row-padding">
 	<div class="w3-col m12">
 		<div class="w3-card w3-round w3-white">
 			<div class="w3-container w3-padding">
@@ -235,4 +232,94 @@
 </div>
 -->
 <!-- End Middle Column -->
+
+
+
+<!-- ////////////////////////////////////////////////////////////////// PERSONAL INFO ////////////////////////////////////////////////// -->
+
+<div id="preference" class="w3-container w3-content" style="max-width:100%">
+	<form class="w3-container w3-card-4 w3-light-grey w3-text-black w3-margin-top">
+		<h2 class="w3-center">PROFILE</h2>
+
+		<div class="w3-row w3-section">
+			<div class="w3-col" style="width:50px"></div>
+			<div class="w3-rest">
+                    <p class="w3-center">
+                    <input type="file" id="image" name="dp" style="display:none;">
+                    <br><br>Preview<br>
+                    <img class="uploaded_image" src="images/site_images/p_placeholder.jpeg" height='100px' width='100px' id="img1" name="uploaded_image"><br>
+                    <button id="Uploadbtn" class="w3-button w3-section w3-black w3-ripple">Upload</button>
+
+			</div>
+		</div>
+		<p class="w3-center">
+			<button id="RegButton" class="w3-button w3-section w3-black w3-ripple"> Submit </button>
+
+		</p>
+	</form>
+	<form class="w3-container w3-card-4 w3-light-grey w3-text-black w3-margin-top">
+	<h4 class="w3-center">BIO</h4>
+		<div class="w3-row w3-section">
+			<div class="w3-col" style="width:50px"><i class="w3-xxlarge fa fa-user"></i></div>
+			<div class="w3-rest">
+				<input class="w3-input w3-border" name="bio" type="text" placeholder="Bio" required>
+			</div>
+		</div>
+		<p class="w3-center">
+			<button id="RegButton" class="w3-button w3-section w3-black w3-ripple"> Submit </button>
+
+		</p>
+	</form>
+	<form class="w3-container w3-card-4 w3-light-grey w3-text-black w3-margin-top">
+        <h4 class="w3-center">INTEREST</h4>
+		<div class="w3-row w3-section">
+			<div class="w3-col" style="width:50px"><i class="w3-xxlarge fa fa-hand-pointer-o"></i></div>
+			<div class="w3-rest">
+				<select class="tags" name="tags[]" multiple style="width: 50%">
+  					<option value="Hoes">Hella Hoes</option>
+					<option value="Drugs">Drugs</option>
+					<option value="Mary">Mary Jane</option>
+					<option value="Guap">Money</option>
+				</select>
+			</div>
+		</div>
+		<p class="w3-center">
+			<button id="RegButton" class="w3-button w3-section w3-black w3-ripple"> Submit </button>
+
+		</p>
+	</form>
+	<form class="w3-container w3-card-4 w3-light-grey w3-text-black w3-margin-top">
+        <h4 class="w3-center">PREFERENCE</h4>
+		<div class="w3-row w3-section">
+			<div class="w3-col" style="width:50px"><i class="w3-xxlarge fa fa-male"></i></div>
+			<div class="w3-rest">
+				<input id="male" class="w3-radio" type="radio" name="pref" value="Male"> MALE
+			</div>
+		</div>
+		<div class="w3-row w3-section">
+			<div class="w3-col" style="width:50px"><i class="w3-xxlarge fa fa-female"></i></div>
+			<div class="w3-rest">
+				<input id="female" class="w3-radio" type="radio" name="pref" value="Female"> FEMALE
+			</div>
+		</div>
+
+		<div class="w3-row w3-section">
+			<div class="w3-col" style="width:50px"><i class="w3-xxlarge fa fa-transgender-alt"></i></div>
+			<div class="w3-rest">
+				<input id="transgender" class="w3-radio" type="radio" name="pref" value="Transgender"> TRANSGENDER
+			</div>
+		</div>
+
+		<div class="w3-row w3-section">
+			<div class="w3-col" style="width:50px"><i class="w3-xxlarge fa fa-genderless"></i></div>
+			<div class="w3-rest">
+				<input id="genderless" class="w3-radio" type="radio" name="pref" value="Genderless" checked>
+				GENDERLESS
+			</div>
+		</div>
+		<p class="w3-center">
+			<button id="RegButton" class="w3-button w3-section w3-black w3-ripple"> Submit </button>
+
+		</p>
+	</form>
 </div>

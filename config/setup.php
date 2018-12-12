@@ -41,7 +41,8 @@
         $dbh->exec("CREATE TABLE IF NOT EXISTS `matcha`.`likes`(
             `likie` INT NOT NULL,
             `likers_id` INT NOT NULL,
-            `like_status` INT NOT NULL
+            `likie_status` INT NOT NULL
+            `liker_status` INT NOT NULL
         )");
         $dbh->exec("ALTER TABLE
         `matcha`.`likes` ADD UNIQUE(`likie`, `likers_id`)");
