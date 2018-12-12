@@ -14,7 +14,7 @@
 		{
 			$test = $user->data()->profile;
 			$test = json_decode($test);
-			if (isset($test['p.p']))
+			if (isset($test->dp))
 				echo 1;
 			else
 				echo 0;

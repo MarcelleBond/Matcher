@@ -4,9 +4,10 @@ $(document).ready(function () {
     $('.tags').select2({
         placeholder: "select your interests"
     });
-    console.log($("#Uploadbtn"));    
+
+    var scriptcheck = document.getElementsByTagName('script');
+    console.log(scriptcheck);    
     $("#Uploadbtn").click(function (e) {
-        alert('hello');
         e.preventDefault();
         imageupload = document.getElementById("image");
         imageupload.click();

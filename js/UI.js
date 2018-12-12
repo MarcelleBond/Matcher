@@ -45,6 +45,10 @@ $(document).ready(function () {
 						managescript('pref.js', 'add')
 					})
 				}
+				else
+				{
+
+				}
 			});
 
 		}).fadeIn('slow');

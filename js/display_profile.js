@@ -7,19 +7,11 @@ profile = JSON.parse(details['profile']);
 // alert(imags);
 // images = JSON.parse(images);
 
-if (!profile.dp)
-{
-		$('#middle_column').load("includes/UI/loggedin.php #preference", function()
-		{
-			managescript('pref.js', 'add')
-		})
-}
-
-// $("#propic").attr('src', profile['profile_pic']);
-$('#display_username').append(details.username);
-$('#display_name').append(details.first_name + ' ' + details.last_name);
-$('#display_gender').append(profile.gender);
-$('#display_dob').append('September 11 1997');
+// $("#propic").attr('src', profile.dp);
+$('#display_username').html(details.username);
+$('#display_name').html(details.first_name + ' ' + details.last_name);
+$('#display_gender').html(profile.gender);
+$('#display_dob').html('September 11 1997');
 // for (var i = 0; i < 5; i++)
 	// $('#display_display_images').append('<div class="w3-half"><img src="'+images[i]+'" style="width:100%" class="w3-margin-bottom"></div>');
 // for(var i = 0; i < profile.interest.length; i++)
