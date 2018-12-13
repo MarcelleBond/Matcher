@@ -39,7 +39,7 @@
 
 
 <!-- Page Container -->
-	<div id='main_content' class="w3-container w3-content" style="max-width:1400px;margin-top:80px">
+	<div id='main_content' class="w3-container w3-content" style="max-width:1400px;margin-top:80px; margin-bottom: 80px">
 		<!-- The Grid -->
 		<div class="w3-row">
 			<!-- Left Column -->
@@ -237,8 +237,8 @@
 
 <!-- ////////////////////////////////////////////////////////////////// PERSONAL INFO ////////////////////////////////////////////////// -->
 
-<div id="preference" class="w3-container w3-content" style="max-width:100%">
-	<form class="w3-container w3-card-4 w3-light-grey w3-text-black ">
+<div id="preference" class="w3-container w3-content" style="max-width:100%;">
+	<form id='pic_form' class="w3-container w3-card-4 w3-light-grey w3-text-black ">
 		<h2 class="w3-center">PROFILE</h2>
 
 		<div class="w3-row w3-section">
@@ -249,6 +249,7 @@
                     <br><br>Preview<br>
                     <img class="uploaded_image" src="images/site_images/p_placeholder.jpeg" height='100px' width='100px' id="img1" name="uploaded_image"><br>
                     <button id="Uploadbtn" class="w3-button w3-section w3-black w3-ripple">Upload</button>
+					</p>
 
 			</div>
 		</div>
@@ -257,7 +258,7 @@
 
 		</p>
 	</form>
-	<form class="w3-container w3-card-4 w3-light-grey w3-text-black w3-margin-top">
+	<form id='bio_form' class="w3-container w3-card-4 w3-light-grey w3-text-black w3-margin-top">
 	<h4 class="w3-center">BIO</h4>
 		<div class="w3-row w3-section">
 			<div class="w3-col" style="width:50px"><i class="w3-xxlarge fa fa-user"></i></div>

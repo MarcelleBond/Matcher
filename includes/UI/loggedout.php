@@ -22,7 +22,7 @@
 
 <!--///////////////////////////////////////////// FOOTER /////////////////////////////////////////////-->
 
-<footer id="footer" class="w3-container w3-theme-d3 w3-padding-16">
+<footer id="footer" class="w3-container w3-theme-d3 w3-padding-16 w3-bottom">
 	<h5>&copymbond</h5>
 </footer>
 <!--//////////////////////////////////////////// REGISTER FORM /////////////////////////////////////////////-->
@@ -72,6 +72,22 @@
 			<div class="w3-rest">
 				<input class="w3-input w3-border" name="passwd_again" type="password" placeholder="Password again"
 					required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters">
+			</div>
+		</div>
+
+		<div class="w3-row w3-section">
+			<div class="w3-col" style="width:50px"><i class="w3-xxlarge fa fa-calendar"></i></div>
+			<div class="w3-rest">
+			<div class="row">
+               <div class="col-md-6 mb-3 mb-lg-0 col-lg-3">
+                 <!-- <label for="checkin_date">Date Of Birth</label> -->
+                 <div class="field-icon-wrap">
+                   <div class="icon"><span class="icon-calendar"></span></div>
+                   <input type="date" max="2001-01-02" id="checkin_date" class="w3-input w3-border" style = "width:100%">
+                   <p></p>
+                 </div>
+               </div>
+           </div>
 			</div>
 		</div>
 

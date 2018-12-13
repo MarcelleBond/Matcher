@@ -39,7 +39,7 @@ $(document).ready(function () {
 			});
 			$('#foot').load("includes/UI/loggedout.php #footer");
 			$('#content').load("includes/UI/loggedin.php #main_content", function () {
-				managescript('display_profile.js', 'add');
+				// managescript('display_profile.js', 'add');
 				if (Ajax('user_status.php', 'POST', "action=p.p", false) == 0) {
 					$('#middle_column').load("includes/UI/loggedin.php #preference", function () {
 						managescript('pref.js', 'add')
