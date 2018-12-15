@@ -15,8 +15,8 @@
 	<!-- Navbar on small screens -->
 	<div id="navDemo" class="w3-bar-block w3-theme-d2 w3-hide w3-hide-large w3-hide-medium w3-large">
 		<a  class="w3-bar-item w3-button w3-padding-large">Link 1</a>
-		<a class="w3-bar-item w3-button w3-padding-large fa fa-pencil w3-margin-right">Login</a>
-		<a class="w3-bar-item w3-button w3-padding-large fa fa-pencil w3-margin-right">Register</a>
+		<a id='login_link2' class="w3-bar-item w3-button w3-padding-large fa fa-pencil w3-margin-right">Login</a>
+		<a id='register_link2' class="w3-bar-item w3-button w3-padding-large fa fa-pencil w3-margin-right">Register</a>
 	</div>
 </div>
 
@@ -27,7 +27,7 @@
 </footer>
 <!--//////////////////////////////////////////// REGISTER FORM /////////////////////////////////////////////-->
 
-<div id="register" class="w3-container w3-content" style="max-width:60%	;margin-top:80px">
+<div id="register" class="w3-container w3-content" style="max-width:60%	;margin-top:80px; margin-bottom: 80px">
 	<form class="w3-container w3-card-4 w3-light-grey w3-text-black">
 		<h2 class="w3-center">REGISTER</h2>
 
@@ -75,19 +75,11 @@
 			</div>
 		</div>
 
+
 		<div class="w3-row w3-section">
 			<div class="w3-col" style="width:50px"><i class="w3-xxlarge fa fa-calendar"></i></div>
 			<div class="w3-rest">
-			<div class="row">
-               <div class="col-md-6 mb-3 mb-lg-0 col-lg-3">
-                 <!-- <label for="checkin_date">Date Of Birth</label> -->
-                 <div class="field-icon-wrap">
-                   <div class="icon"><span class="icon-calendar"></span></div>
-                   <input type="date" max="2001-01-02" id="checkin_date" class="w3-input w3-border" style = "width:100%">
-                   <p></p>
-                 </div>
-               </div>
-           </div>
+			<input type='date' name='age' max="2001-01-01" min="1940-01-01" required>
 			</div>
 		</div>
 
@@ -127,7 +119,7 @@
 
 <!--//////////////////////////////////////////// LOGIN FORM /////////////////////////////////////////////-->
 
-<div id="login" class="w3-container w3-content w3-light-grey" style="max-width:60%;margin-top:80px">
+<div id="login" class="w3-container w3-content w3-light-grey" style="max-width:60%;margin-top:80px; margin-bottom: 80px">
 	<form class="w3-container w3-card-4  w3-text-black w3-margin-bottom">
 		<h2 class="w3-center">LOGIN</h2>
 
@@ -156,7 +148,7 @@
 
 <!--//////////////////////////////////////////// FORGOT PASSWORD FORM /////////////////////////////////////////////-->
 
-<div id="forgot_password" class="w3-container w3-content" style="max-width:60%;margin-top:80px">
+<div id="forgot_password" class="w3-container w3-content" style="max-width:60%;margin-top:80px; margin-bottom: 80px">
 	<form class="w3-container w3-card-4  w3-light-grey w3-text-black w3-margin">
 		<h2 class="w3-center">FORGOT PASSWORD</h2>
 

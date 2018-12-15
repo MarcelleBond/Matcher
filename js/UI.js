@@ -1,13 +1,8 @@
 $(document).ready(function () {
 	if ((check = Ajax('user_status.php', 'POST', 'action=login', false)) == 0) {
 		$('body').fadeOut('slow', function () {
-			$('#nav').load("includes/UI/loggedout.php #nav_bar");
-			$('#foot').load("includes/UI/loggedout.php #footer");
-
-			$('#content').load("includes/UI/loggedout.php #register", function (e) {
-
-				managescript('register.js', 'add');
-
+			$('#nav').load("includes/UI/loggedout.php #nav_bar", function()
+			{
 				$('#login_link').click(function () {
 					if (!document.getElementById('login'))
 						$('#content').fadeOut('slow', function () {
@@ -29,6 +24,32 @@ $(document).ready(function () {
 						});
 				})
 
+				$('#login_link2').click(function () {
+					if (!document.getElementById('login'))
+						$('#content').fadeOut('slow', function () {
+							$('#content').load("includes/UI/loggedout.php #login", function () {
+								managescript('login.js', 'add');
+								managescript('register.js', 'remove');
+							}).fadeIn('slow');
+						});
+				})
+
+				$('#register_link2').click(function () {
+
+					if (!document.getElementById('register'))
+						$('#content').fadeOut('slow', function () {
+							$('#content').load("includes/UI/loggedout.php #register", function () {
+								managescript('login.js', 'remove');
+								managescript('register.js', 'add');
+							}).fadeIn('slow');
+						});
+				})
+			});
+			$('#foot').load("includes/UI/loggedout.php #footer");
+
+			$('#content').load("includes/UI/loggedout.php #register", function (e) {
+
+				managescript('register.js', 'add');
 			});
 		}).fadeIn('slow');
 	}
@@ -39,15 +60,14 @@ $(document).ready(function () {
 			});
 			$('#foot').load("includes/UI/loggedout.php #footer");
 			$('#content').load("includes/UI/loggedin.php #main_content", function () {
-				// managescript('display_profile.js', 'add');
+				managescript('display_profile.js', 'add');
 				if (Ajax('user_status.php', 'POST', "action=p.p", false) == 0) {
 					$('#middle_column').load("includes/UI/loggedin.php #preference", function () {
-						managescript('pref.js', 'add')
+						managescript('update.js', 'add')
 					})
 				}
-				else
-				{
-
+				else {
+					managescript('navbar.js', 'add')
 				}
 			});
 

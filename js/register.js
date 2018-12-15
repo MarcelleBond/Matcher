@@ -26,16 +26,3 @@ function register(value) {
     request = Ajax('register.php', 'POST', value, false);
     return request;
 }
-
-var dateAndTime = function () {
-    $('#m_date').datepicker({
-        'format': 'm/d/yyyy',
-        'autoclose': true
-    });
-    $('#checkin_date').datepicker({
-        'format': 'd/mm/yyyy',
-        'autoclose': true
-    });
-    $('#m_time').timepicker();
-};
-dateAndTime();

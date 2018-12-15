@@ -15,7 +15,7 @@ require_once 'core/init.php'
 	<link rel="stylesheet" type="text/css" media="screen" href="css/theme.css" />
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<script src="js/jquery-3.3.1.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+	<script src="js/select2.min.js"></script>
     <script src="js/UI.js"></script>
     <style>
         html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
@@ -36,7 +36,6 @@ require_once 'core/init.php'
 
 	<!-- Footer -->
 	<div id='foot'></div>
-
 </body>
 
 </html>

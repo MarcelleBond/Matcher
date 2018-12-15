@@ -47,7 +47,7 @@ if (!$user->isloggedin()) {
         if ($validate->passed()) {
             try
             {
-                $test = array('gender' => input::get('gender'), 'DOB' => input::get('age'));
+                $test = array('gender' => input::get('gender'), 'DOB' => input::get('age'), 'preference' => 'BI-SEXUAL');
                 $token = "QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm1234567890!$()*";
                 $token = str_shuffle($token);
                 $token = substr($token, 0, 10);

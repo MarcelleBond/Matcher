@@ -10,7 +10,7 @@
 			else
 				echo 0;
 		}
-		if(input::get('action') == 'p.p')
+		else if(input::get('action') == 'p.p')
 		{
 			$test = $user->data()->profile;
 			$test = json_decode($test);
