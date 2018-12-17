@@ -18,6 +18,8 @@ $(document).ready(function () {
     }
     $('input:radio[id="' + profile.preference.toLowerCase() + '"]').attr('checked', true);
     display_pics();
+    checkcheck();
+    
 
 
     ////////DISPLAY UPLODED IMAGE//////////
@@ -122,6 +124,12 @@ $(document).ready(function () {
         closeimage();
         display_pics()
     })
+    ////////UPDATE NOTIFICATIONS/////
+    $('#chbx').click(function(event)
+    {
+        alert('fuck the world')
+        testfunc();
+    })
 
 });
 
@@ -144,4 +152,127 @@ function onClick(element) {
 function closeimage() {
     $("#modal01").hide();
 }
+////////UPDATE PASSWORD//////////
+function updPass() {
+    var hr = new XMLHttpRequest();
+    var url = "profile.php";
+
+    curpass = document.getElementById("passwd_current").value;
+    newpass = document.getElementById("passwd_new").value;
+    newpassag = document.getElementById("passwd_new_again").value;
+    var vars = "passwd_new=" + newpass + "&passwd_new_again=" + newpassag + "&passwd_current=" + curpass + "";
+    hr.open("POST", url, true);
+    hr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    hr.onreadystatechange = function () {
+        if (hr.readyState == 4 && hr.status == 200) {
+            var return_data = hr.responseText;
+
+            document.getElementById("passres").innerHTML = return_data;
+            document.getElementById("passwd_current").value = "";
+            document.getElementById("passwd_new").value = "";
+            document.getElementById("passwd_new_again").value = "";
+
+        }
+    }
+    hr.send(vars);
+}
+
+////////UPDATE EMAIL//////////
+
+function updEmail() {
+    var hr = new XMLHttpRequest();
+    var url = "profile.php";
+
+    curpass = document.getElementById("email_again").value;
+    newpass = document.getElementById("email").value;
+    var vars = "email=" + newpass + "&email_again=" + newpass;
+    hr.open("POST", url, true);
+    hr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    hr.onreadystatechange = function () {
+        if (hr.readyState == 4 && hr.status == 200) {
+            var return_data = hr.responseText;
+            document.getElementById("emailres").innerHTML = return_data;
+            document.getElementById("email_again").value = "";
+            document.getElementById("email").value = "";
+
+
+
+        }
+    }
+    hr.send(vars);
+}
+
+////////UPDATE USERNAME//////////
+
+function updUser() {
+    var hr = new XMLHttpRequest();
+    var url = "profile.php";
+
+    curpass = document.getElementById("username").value;
+    var vars = "username=" + curpass;
+    hr.open("POST", url, true);
+    hr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    hr.onreadystatechange = function () {
+        if (hr.readyState == 4 && hr.status == 200) {
+            var return_data = hr.responseText;
+            document.getElementById("userres").innerHTML = return_data;
+            curpass = document.getElementById("username").value = "";
+
+        }
+    }
+    hr.send(vars);
+}
+
+////////UPDATE NOTIFICATION//////////
+
+function testfunc() {
+    var box = document.getElementById("chbx");
+    var xhr = new XMLHttpRequest();
+    var url = "profile.php";
+    alert(box.checked)
+    if (box.checked) {
+        var notify = 1;
+    }
+    else {
+        var notify = 0;
+    }
+    var newvars = "notify=" + notify;
+    alert(newvars)
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            chkstat = xhr.responseText;
+            alert(chkstat + ' response from notify');
+        }
+    };
+    xhr.send(newvars);
+}
+
+
+function checkcheck() {
+    var box = document.getElementById("chbx");
+    var xhr = new XMLHttpRequest();
+    var url = "profile.php";
+    var newvars = "mypostname=" + "testttt";
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            chkstat = xhr.responseText;
+            alert(chkstat);
+            if (chkstat == 1) {
+                box.checked = true;
+            }
+            else {
+                box.checked = false;
+            }
+
+        }
+    };
+    xhr.send(newvars);
+
+}
+
+
 

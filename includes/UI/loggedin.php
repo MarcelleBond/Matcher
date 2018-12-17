@@ -262,6 +262,62 @@
 
 		</p>
 	</form>
+	<div class="w3-container w3-card-4 w3-light-grey w3-text-black w3-margin-top">
+		<h4 class="w3-center">USERNAME</h4>
+		<div class="w3-row w3-section">
+			<div class="w3-col" style="width:50px"><i class="w3-xxlarge fa fa-user"></i></div>
+			<div class="w3-rest">
+				<input class="w3-input w3-border" id="username" type="text" name="username" placeholder="New Username">
+			</div>
+		</div>
+		<p id="userres" class="w3-panel w3-blue w3-center"></p>
+		<p class="w3-center">
+		<button class="w3-button w3-section w3-black w3-ripple" id="passupdate" type="submit" onclick="updUser();" value="Update"> Submit</button><br>
+		</p>
+	</div>
+	<div class="w3-container w3-card-4 w3-light-grey w3-text-black w3-margin-top">
+		<h4 class="w3-center">EMAIL</h4>
+		<div class="w3-row w3-section">
+			<div class="w3-col" style="width:50px"><i class="w3-xxlarge fa fa-envelope-o"></i></div>
+			<div class="w3-rest">
+				<input class="w3-input w3-border" type="email" id="email" name="email" placeholder="New Email"><br>
+				<input class="w3-input w3-border" type="email" id="email_again" name="email_again" placeholder="Confirm New Email">
+			</div>
+		</div>
+		<p id="emailres" class="w3-panel w3-blue w3-center"></p>
+		<p class="w3-center">
+		<button class="w3-button w3-section w3-black w3-ripple" id="passupdate" type="submit" onclick="updEmail();" value="Update"> Submit</button><br>
+		</p>
+	</div>
+	<div class="w3-container w3-card-4 w3-light-grey w3-text-black w3-margin-top">
+		<h4 class="w3-center">PASSWORD</h4>
+		<div class="w3-row w3-section">
+			<div class="w3-col" style="width:50px"><i class="w3-xxlarge fa fa-lock"></i></div>
+			<div class="w3-rest">
+				<input class="w3-input w3-border" type="password" name="passwd_current" id="passwd_current" placeholder="current password">
+				<br>
+				<input class="w3-input w3-border" type="password" name="passwd_new" id="passwd_new" placeholder="new password"> <br>
+				<input class="w3-input w3-border" type="password" name="passwd_new_again" id="passwd_new_again" placeholder="repeat new password">
+				<br>
+			</div>
+		</div>
+		<p id="passres" class="w3-panel w3-blue w3-center"></p>
+		<p class="w3-center">
+		<button class="w3-button w3-section w3-black w3-ripple" id="passupdate" type="submit" onclick="updPass();" value="Update"> Submit</button><br>
+		</p>
+	</div>
+	<div class="w3-container w3-card-4 w3-light-grey w3-text-black w3-margin-top">
+		<h4 class="w3-center">RECEIVE NOTIFICATIONS</h4>
+		<div class="w3-row w3-section">
+			<div class="w3-col" style="width:50px"><i class="w3-xxlarge"></i></div>
+			<div class="w3-rest">
+				<label class="container">
+					<input type='checkbox' id='chbx' name='chbx'>				
+					<span class="checkmark"></span>Notify
+				</label>
+			</div>
+		</div>
+	</div>
 	<form id='bio_form' class="w3-container w3-card-4 w3-light-grey w3-text-black w3-margin-top">
 		<h4 class="w3-center">BIO</h4>
 		<div class="w3-row w3-section">
@@ -332,7 +388,7 @@
 		<div class="w3-row w3-section">
 			<div class="w3-col" style="width:50px"><i class="w3-xxlarge fa fa-genderless"></i></div>
 			<div class="w3-rest">
-				<input id="genderless" class="w3-radio" type="radio" name="pref" value="BI-SEXUAL" checked>
+				<input id="bi-sexual" class="w3-radio" type="radio" name="pref" value="BI-SEXUAL" checked>
 				BI-SEXUAL
 			</div>
 		</div>

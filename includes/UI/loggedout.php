@@ -111,6 +111,10 @@
 			</div>
 		</div>
 		<p class="w3-center">
+			<button id="location" class="w3-button w3-section w3-black w3-ripple"> GET LOCATION </button>
+
+		</p>
+		<p class="w3-center">
 			<button id="RegButton" class="w3-button w3-section w3-black w3-ripple"> REGISTER </button>
 
 		</p>

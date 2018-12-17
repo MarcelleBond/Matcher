@@ -51,6 +51,38 @@ if (Input::exists('request')) {
 		unlink(input::get('delete_pic'));
         echo 1;
     }
+    ///////UPDATE USERNAME////////////
+    else if (input::get('username')) {
+        usernameupdate2();
+    } 
+    ///////UPDATE FIRST NAME////////////
+    else if (input::get('first_name'))
+    {
+        $user->update(array('first_name' => input::get('first_name')));
+        echo 1;
+    }
+    ///////UPDATE LAST NAME////////////
+    else if (input::get('last_name'))
+    {
+        $user->update(array('last_name' => input::get('last_name')));
+        echo 1;
+    }
+    ///////UPDATE EMAIL////////////    
+    else if (input::get('email')) {
+        emailupdate2();
+    } 
+    ///////UPDATE PASSWORD////////////    
+    else if (input::get('passwd_new') && input::get('passwd_current') && input::get('passwd_new_again')) {
+        passwordupdate2();
+    } 
+    ///////UPDATE NOTIFICATION////////////    
+    else if (input::get('notify')) {
+        notify();
+    } 
+    
+    else if (input::get('mypostname')) {
+        checknotify();
+    }
 
 }
 
@@ -99,6 +131,132 @@ else if ($_FILES['image']) {
             }
         } else {
             echo 2;
+        }
+
+    }
+}
+
+
+
+function checknotify()
+{
+    global $user;
+
+    echo $user->data()->notify;
+}
+
+function notify()
+{
+    
+    global $user;
+    echo (input::get('notify'));
+    $user->update(array(
+        'notify' => input::get('notify'),
+    ));
+    // echo "Update successful";
+}
+
+function passwordupdate2()
+{
+
+    if (input::exists()) {
+
+        global $user;
+
+        $validate = new validate();
+        $validation = $validate->check($_POST, array(
+            'passwd_current' => array(
+                'required' => true,
+                'min' => 6,
+            ),
+            'passwd_new' => array(
+                'required' => true,
+                'min' => 6,
+            ),
+            'passwd_new_again' => array(
+                'required' => true,
+                'min' => 6,
+                'matches' => 'passwd_new',
+            ),
+        ));
+
+        if ($validation->passed()) {
+            if (hash::make(input::get('passwd_current')) !== $user->data()->passwd) {
+                echo "Your current password was incorrect :(";
+            } else {
+                $user->update(array(
+                    'passwd' => hash::make(input::get('passwd_new')),
+                ));
+                echo "Successful update";
+            }
+        } else {
+            foreach ($validation->errors() as $error) {
+                echo $error, "<br>";
+            }
+        }
+
+    }
+}
+
+function usernameupdate2()
+{
+    global $user;
+    if (input::exists()) {
+
+        $validate = new validate();
+        $validation = $validate->check($_POST, array(
+            'username' => array(
+                'min' => 2,
+                'max' => 20,
+                'unique' => 'users',
+            ),
+        ));
+        if ($validation->passed()) {
+            try {
+                $user->update(array(
+                    'username' => escape(input::get('username')),
+                ));
+                echo "Username update successfully";
+            } catch (Exception $e) {
+                die($e->getMessage());
+            }
+        } else {
+            foreach ($validation->errors() as $error) {
+                echo $error, '<br>';
+            }
+        }
+
+    }
+}
+
+function emailupdate2()
+{
+    global $user;
+    if (input::exists()) {
+
+        $validate = new validate();
+        $validation = $validate->check($_POST, array(
+            'email' => array(
+                'required' => true,
+                'unique' => 'users',
+            ),
+            'email_again' => array(
+                'required' => true,
+                'matches' => 'email',
+            ),
+        ));
+
+        if ($validation->passed()) {
+
+            $user->update(array(
+                'email' => escape(input::get('email')),
+            ));
+            echo "Email update successfully";
+
+        } else {
+            foreach ($validation->errors() as $error) {
+                echo $error, "<br>";
+            }
         }
 
     }
