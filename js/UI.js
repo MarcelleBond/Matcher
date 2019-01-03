@@ -1,5 +1,6 @@
 $(document).ready(function () {
 	if ((check = Ajax('user_status.php', 'POST', 'action=login', false)) == 0) {
+		window.location.href = "#register"
 		$('body').fadeOut('slow', function () {
 			$('#nav').load("includes/UI/loggedout.php #nav_bar", function()
 			{
@@ -8,17 +9,16 @@ $(document).ready(function () {
 						$('#content').fadeOut('slow', function () {
 							$('#content').load("includes/UI/loggedout.php #login", function () {
 								managescript('login.js', 'add');
-								managescript('register.js', 'remove');
+								managescript(last_page(), 'remove');
 							}).fadeIn('slow');
 						});
 				})
 
 				$('#register_link').click(function () {
-
 					if (!document.getElementById('register'))
 						$('#content').fadeOut('slow', function () {
 							$('#content').load("includes/UI/loggedout.php #register", function () {
-								managescript('login.js', 'remove');
+								managescript(last_page(), 'remove');
 								managescript('register.js', 'add');
 							}).fadeIn('slow');
 						});
@@ -29,7 +29,7 @@ $(document).ready(function () {
 						$('#content').fadeOut('slow', function () {
 							$('#content').load("includes/UI/loggedout.php #login", function () {
 								managescript('login.js', 'add');
-								managescript('register.js', 'remove');
+								managescript(last_page(), 'remove');
 							}).fadeIn('slow');
 						});
 				})
@@ -39,7 +39,7 @@ $(document).ready(function () {
 					if (!document.getElementById('register'))
 						$('#content').fadeOut('slow', function () {
 							$('#content').load("includes/UI/loggedout.php #register", function () {
-								managescript('login.js', 'remove');
+								managescript(last_page(), 'remove');
 								managescript('register.js', 'add');
 							}).fadeIn('slow');
 						});
@@ -63,10 +63,12 @@ $(document).ready(function () {
 				managescript('display_profile.js', 'add');
 				if (Ajax('user_status.php', 'POST', "action=p.p", false) == 0) {
 					$('#middle_column').load("includes/UI/loggedin.php #preference", function () {
-						managescript('update.js', 'add')
+						window.location.href = "#update";
+						managescript('profile.js', 'add')
 					})
 				}
 				else {
+					window.location.href = "#home"
 					managescript('navbar.js', 'add')
 				}
 			});
@@ -116,3 +118,11 @@ function openNav() {
 		x.className = x.className.replace(" w3-show", "");
 	}
 } 
+
+
+function last_page()
+{
+	place = window.location.href;
+	place = place.split('#');
+	return place[1];
+}

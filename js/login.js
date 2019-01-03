@@ -4,6 +4,8 @@ $('#ForgotButton').click(function (e) {
 	$('#content').fadeOut('slow', function () {
 		$('#content').load("includes/UI/loggedout.php #forgot_password").fadeIn('slow');
 	});
+	managescript('forgotpassword.js', 'add');
+	managescript('login.js', 'remove');
 })
 
 $('form').submit(function (event) {

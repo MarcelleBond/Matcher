@@ -6,8 +6,8 @@
 			<a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-theme-d2"
 			 href="javascript:void(0);" onclick="openNav()"><i class="fa fa-bars"></i></a>
 			<a class="w3-bar-item w3-button w3-padding-large w3-theme-d4"><i class="fa fa-home w3-margin-right"></i>Matcher</a>
-			<a id='login_link' class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="News"><i class="fa fa-pencil w3-margin-right"></i>Login</a>
-			<a id='register_link' class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Account Settings"><i
+			<a href="#login" id='login_link' class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="News"><i class="fa fa-pencil w3-margin-right"></i>Login</a>
+			<a href="#register" id='register_link' class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Account Settings"><i
 				 class="fa fa-pencil w3-margin-right"></i>Register</a>	
 		</div>
 	</div>
@@ -15,8 +15,8 @@
 	<!-- Navbar on small screens -->
 	<div id="navDemo" class="w3-bar-block w3-theme-d2 w3-hide w3-hide-large w3-hide-medium w3-large">
 		<a  class="w3-bar-item w3-button w3-padding-large">Link 1</a>
-		<a id='login_link2' class="w3-bar-item w3-button w3-padding-large fa fa-pencil w3-margin-right">Login</a>
-		<a id='register_link2' class="w3-bar-item w3-button w3-padding-large fa fa-pencil w3-margin-right">Register</a>
+		<a href="#login" id='login_link2' class="w3-bar-item w3-button w3-padding-large fa fa-pencil w3-margin-right">Login</a>
+		<a href="#register" id='register_link2' class="w3-bar-item w3-button w3-padding-large fa fa-pencil w3-margin-right">Register</a>
 	</div>
 </div>
 
@@ -79,7 +79,8 @@
 		<div class="w3-row w3-section">
 			<div class="w3-col" style="width:50px"><i class="w3-xxlarge fa fa-calendar"></i></div>
 			<div class="w3-rest">
-			<input type='date' name='age' max="2001-01-01" min="1940-01-01" required>
+			<!-- <input class="w3-input w3-border" id="Birthdate" type="text" placeholder="Birthdate" required> -->
+			<input class="w3-input w3-border" type='date' name='age' id="age" max="2002-01-01" min="1940-01-01"  required>
 			</div>
 		</div>
 

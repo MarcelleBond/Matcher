@@ -5,10 +5,10 @@
 		<div class="w3-bar w3-theme-d2 w3-left-align w3-large">
 			<a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-theme-d2"
 			 href="javascript:void(0);" onclick="openNav()"><i class="fa fa-bars"></i></a>
-			<a href="#" class="w3-bar-item w3-button w3-padding-large w3-theme-d4"><i class="fa fa-home w3-margin-right"></i>Home</a>
-			<a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Account Settings"><i
+			<a href="#home" id="home" class="w3-bar-item w3-button w3-padding-large w3-theme-d4"><i class="fa fa-home w3-margin-right"></i>Home</a>
+			<a href="#profile" id="profile" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Account Settings"><i
 				 class="fa fa-user"></i></a>
-			<a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Messages"><i class="fa fa-envelope"></i></a>
+			<a href="#chat" id='chat' class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Messages"><i class="fa fa-envelope"></i></a>
 			<div class="w3-dropdown-hover w3-hide-small">
 				<button class="w3-button w3-padding-large" title="Notifications"><i class="fa fa-bell"></i><span class="w3-badge w3-right w3-small w3-green">3</span></button>
 				<div class="w3-dropdown-content w3-card-4 w3-bar-block" style="width:300px">
@@ -103,7 +103,7 @@
 			
 			<!-- Middle Column -->
 		<div id="middle_column" class="w3-col m7">
-			<div id="search_bar" class="w3-row-padding">
+			<div id="search_bar" class="w3-row-padding w3-margin-bottom">
 				<div class="w3-col m12">
 					<div class="w3-card w3-round w3-white">
 						<div class="w3-container w3-padding">
@@ -258,6 +258,32 @@
 		</div>
 		<p class="w3-center">
 			<button id="picButton" class="w3-button w3-section w3-black w3-ripple"> Submit </button>
+
+		</p>
+	</form>
+	<form id='firstname_form' class="w3-container w3-card-4 w3-light-grey w3-text-black w3-margin-top">
+		<h4 class="w3-center">FIRST NAME</h4>
+		<div class="w3-row w3-section">
+			<div class="w3-col" style="width:50px"><i class="w3-xxlarge fa fa-user"></i></div>
+			<div class="w3-rest">
+				<input id="first_name" class="w3-input w3-border" name="first_name" type="text" placeholder="First Name" required>
+			</div>
+		</div>
+		<p class="w3-center">
+			<button id="firstnameButton" class="w3-button w3-section w3-black w3-ripple"> Submit </button>
+
+		</p>
+	</form>
+	<form id='lastname_form' class="w3-container w3-card-4 w3-light-grey w3-text-black w3-margin-top">
+		<h4 class="w3-center">LAST NAME</h4>
+		<div class="w3-row w3-section">
+			<div class="w3-col" style="width:50px"><i class="w3-xxlarge fa fa-user"></i></div>
+			<div class="w3-rest">
+				<input id="last_tname" class="w3-input w3-border" name="last_tname" type="text" placeholder="Last Name" required>
+			</div>
+		</div>
+		<p class="w3-center">
+			<button id="lastnameButton" class="w3-button w3-section w3-black w3-ripple"> Submit </button>
 
 		</p>
 	</form>

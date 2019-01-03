@@ -1,3 +1,6 @@
+
+window.location.href = "#forgorpassword";
+
 $('form').submit(function (event) {
     event.preventDefault();
     value = $('form').serialize();

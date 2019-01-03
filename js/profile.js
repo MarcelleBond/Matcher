@@ -90,7 +90,21 @@ $(document).ready(function () {
         Ajax('profile.php', 'POST', value, true);
         return false;
     });
-    ////////SUBMIT BIO//////////
+    ////////SUBMIT LAST NAME//////////
+    $('#lastname_form').submit(function (event) {
+        event.preventDefault();
+        value = $('#lastname_form').serializeArray();
+        Ajax('profile.php', 'POST', value, true);
+        return false;
+    });
+    ////////SUBMIT FIRST NAME//////////
+    $('#firstname_form').submit(function (event) {
+        event.preventDefault();
+        value = $('#firstname_form').serializeArray();
+        Ajax('profile.php', 'POST', value, true);
+        return false;
+    });
+    ////////SUBMIT interest//////////
     $('#inter_form').submit(function (e) {
         e.preventDefault();
         value = $('#inter_form').serializeArray();

@@ -13,6 +13,7 @@ require_once 'core/init.php'
     <link rel="stylesheet" type="text/css" media="screen" href="css/select2.min.css"/>
 	<link rel="stylesheet" type="text/css" media="screen" href="css/w3.css" />
 	<link rel="stylesheet" type="text/css" media="screen" href="css/theme.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="css/datepicker.css" />
 	<link rel="stylesheet" type="text/css" media="screen" href="css/checkbox.css" />
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<script src="js/jquery-3.3.1.min.js"></script>

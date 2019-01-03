@@ -4,6 +4,7 @@ $(document).ready(function()
 {
     getLocation();
 })
+
 $('form').submit(function (event) {
     event.preventDefault();
     value = $('form').serializeArray();
@@ -30,10 +31,6 @@ $('form').submit(function (event) {
     }
     return false;
 });
-
-$(document).ready(function(event){
-    getLocation();
-})
 
 function register(value) {
     request = Ajax('register.php', 'POST', value, false);
