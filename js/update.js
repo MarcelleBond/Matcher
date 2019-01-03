@@ -273,6 +273,3 @@ function checkcheck() {
     xhr.send(newvars);
 
 }
-
-
-

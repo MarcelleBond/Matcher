@@ -22,8 +22,7 @@ $('form').submit(function (event) {
     return false;
 });
 
-$('#location').click(function(event){
-    event.preventDefault();
+$(document).ready(function(event){
     getLocation();
 })
 
