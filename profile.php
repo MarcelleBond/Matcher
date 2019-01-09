@@ -141,7 +141,6 @@ else if ($_FILES['image']) {
 function checknotify()
 {
     global $user;
-
     echo $user->data()->notify;
 }
 
@@ -153,7 +152,7 @@ function notify()
     $user->update(array(
         'notify' => input::get('notify'),
     ));
-    // echo "Update successful";
+    echo "Update successful";
 }
 
 function passwordupdate2()

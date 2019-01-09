@@ -1,4 +1,4 @@
-$(document).ready(function () {
+$(document).ready(function () {	
 	if ((check = Ajax('user_status.php', 'POST', 'action=login', false)) == 0) {
 		window.location.href = "#register"
 		$('body').fadeOut('slow', function () {

@@ -12,9 +12,9 @@
 			<div class="w3-dropdown-hover w3-hide-small">
 				<button class="w3-button w3-padding-large" title="Notifications"><i class="fa fa-bell"></i><span class="w3-badge w3-right w3-small w3-green">3</span></button>
 				<div class="w3-dropdown-content w3-card-4 w3-bar-block" style="width:300px">
-					<a href="#" class="w3-bar-item w3-button">One new friend request</a>
-					<a href="#" class="w3-bar-item w3-button">John Doe posted on your wall</a>
-					<a href="#" class="w3-bar-item w3-button">Jane likes your post</a>
+					<p class="w3-bar-item w3-button">One new friend request</p>
+					<p class="w3-bar-item w3-button">John Doe posted on your wall</p>
+					<p class="w3-bar-item w3-button">Jane likes your post</p>
 				</div>
 			</div>
 			<a id="logout_link" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white" title="Logout">
@@ -148,7 +148,7 @@
 			</div>
 			<br>
 
-			<div class="w3-card w3-round w3-white w3-padding-16 w3-center">
+			<div class=" w3-card w3-round w3-white w3-padding-16 w3-center">
 				<p>ADS</p>
 			</div>
 			<br>
@@ -157,6 +157,7 @@
 				<p><i class="fa fa-bug w3-xxlarge"></i></p>
 			</div>
 
+			<div id='error_spot'></div>
 			<!-- End Right Column -->
 		</div>
 

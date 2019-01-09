@@ -41,11 +41,11 @@ function register(value) {
 function getLocation() {
 
     if (navigator.geolocation) {
-        alert("it works");
+        // alert("it works");
          navigator.geolocation.getCurrentPosition(showPosition, showError);
     }
     else {
-        alert("Geolocation is not supported by this browser.");
+        // alert("Geolocation is not supported by this browser.");
         ipFetch();
     }
 }
@@ -57,7 +57,7 @@ function showPosition(position) {
         console.log("G API END");
         console.log(response.results[4]['formatted_address'])
         where_i_stay = response.results[4]['formatted_address'];
-        alert(where_i_stay)
+        // alert(where_i_stay)
     });
 
 }
@@ -93,10 +93,12 @@ function ipFetch() {
     $.post(url, function (response) {
         //var jsonified = response.slice(9,-1);
         //var test = JSON.parse(jsonified);
-        console.log(response);
-        console.log(response['latitude']);
-        console.log(response["longitude"]);
-        gMapSrch(response);
+        console.log("IPFETCh");
+        console.log(response['city']);
+        where_i_stay = response['city']
+       // console.log(response['latitude']);
+       // console.log(response["longitude"]);
+       // gMapSrch(response);
     });
 }
 
@@ -109,7 +111,7 @@ function ipFetch() {
             console.log("gmaps");
           console.log(response2.results[4]['formatted_address']);
               where_i_stay = response2.results[4]['formatted_address'];
-            alert(where_i_stay)
+            // alert(where_i_stay)
 
           });   
     

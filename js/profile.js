@@ -21,6 +21,9 @@ $(document).ready(function () {
     checkcheck();
     
 
+    ///////////PREVIEW PROFILE/////////////
+
+
 
     ////////DISPLAY UPLODED IMAGE//////////
     $("#Uploadbtn").click(function (e) {
@@ -141,10 +144,8 @@ $(document).ready(function () {
     ////////UPDATE NOTIFICATIONS/////
     $('#chbx').click(function(event)
     {
-        alert('fuck the world')
         testfunc();
     })
-
 });
 
 
@@ -180,8 +181,9 @@ function updPass() {
     hr.onreadystatechange = function () {
         if (hr.readyState == 4 && hr.status == 200) {
             var return_data = hr.responseText;
-
-            document.getElementById("passres").innerHTML = return_data;
+            $('error_spot').load("loggedin.php #response", function () {
+                $("#response").html(return_data);
+            });
             document.getElementById("passwd_current").value = "";
             document.getElementById("passwd_new").value = "";
             document.getElementById("passwd_new_again").value = "";
@@ -243,21 +245,18 @@ function testfunc() {
     var box = document.getElementById("chbx");
     var xhr = new XMLHttpRequest();
     var url = "profile.php";
-    alert(box.checked)
     if (box.checked) {
         var notify = 1;
     }
     else {
-        var notify = 0;
+        var notify = 2;
     }
     var newvars = "notify=" + notify;
-    alert(newvars)
     xhr.open("POST", url, true);
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     xhr.onreadystatechange = function () {
         if (xhr.readyState == 4 && xhr.status == 200) {
             chkstat = xhr.responseText;
-            alert(chkstat + ' response from notify');
         }
     };
     xhr.send(newvars);
@@ -274,7 +273,6 @@ function checkcheck() {
     xhr.onreadystatechange = function () {
         if (xhr.readyState == 4 && xhr.status == 200) {
             chkstat = xhr.responseText;
-            alert(chkstat);
             if (chkstat == 1) {
                 box.checked = true;
             }
@@ -287,3 +285,5 @@ function checkcheck() {
     xhr.send(newvars);
 
 }
+
+

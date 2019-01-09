@@ -23,3 +23,13 @@ $('#profile').click(function ()
 	});
 		}).fadeIn('slow');
 });
+
+$('#').click(function ()
+{
+	$('#middle_content').fadeOut('slow',function(){
+		$('#middle_content').load("includes/UI/loggedin.php #preference", function () {
+		managescript(last_page(), 'remove');
+		managescript('profile.js', 'add');
+	});
+		}).fadeIn('slow');
+});

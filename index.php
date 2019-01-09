@@ -20,6 +20,18 @@ require_once 'core/init.php'
 	<script src="js/select2.min.js"></script>
     <script src="js/UI.js"></script>
     <style>
+		.error
+		{
+			border-width: 3px;
+    background-color: #cae8ca;
+    border-style: solid;
+    position: fixed;
+    padding: 7px;
+    bottom: 80px;
+    right: 0;
+    max-width: 450px;
+    z-index: 999;
+		}
         html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
     </style>
 </head>
