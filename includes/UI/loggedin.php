@@ -11,7 +11,7 @@
 			<a href="#chat" id='chat' class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Messages"><i class="fa fa-envelope"></i></a>
 			<div class="w3-dropdown-hover w3-hide-small">
 				<button class="w3-button w3-padding-large" title="Notifications"><i class="fa fa-bell"></i><span class="w3-badge w3-right w3-small w3-green">3</span></button>
-				<div class="w3-dropdown-content w3-card-4 w3-bar-block" style="width:300px">
+				<div id="Notifications" class="w3-dropdown-content w3-card-4 w3-bar-block" style="width:300px">
 					<p class="w3-bar-item w3-button">One new friend request</p>
 					<p class="w3-bar-item w3-button">John Doe posted on your wall</p>
 					<p class="w3-bar-item w3-button">Jane likes your post</p>
@@ -49,8 +49,9 @@
 						 alt="Avatar"></p>
 					<hr>
 					<p id="display_name"><i class="fa fa-user fa-fw w3-margin-right w3-text-theme"></i></p>
-					<p id="display_gender"><i class="fa fa-user fa-fw w3-margin-right w3-text-theme"></i></p>
 					<p id="display_dob"><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i></p>
+					<p id="display_loca"><i class="fa fa-home fa-fw w3-margin-right w3-text-theme"></i></p>
+					<p id="display_gender"><i class="fa fa-user fa-fw w3-margin-right w3-text-theme"></i></p>
 				</div>
 			</div>
 			<br>
@@ -63,17 +64,17 @@
 					<div id="Demo1" class="w3-hide w3-container">
 						<p id="bio_text">Some text..</p>
 					</div>
-					<button onclick="myFunction('Demo2')" class="w3-button w3-block w3-theme-l1 w3-left-align"><i class="fa fa-calendar-check-o fa-fw w3-margin-right"></i>
-						My Events</button>
-					<div id="Demo2" class="w3-hide w3-container">
-						<p>Some other text..</p>
-					</div>
 					<button onclick="myFunction('Demo3')" class="w3-button w3-block w3-theme-l1 w3-left-align"><i class="fa fa-users fa-fw w3-margin-right"></i>
 						My Photos</button>
 					<div id="Demo3" class="w3-hide w3-container">
 						<div id="display_images" class="w3-row-padding">
 							<br>
 						</div>
+					</div>
+					<button onclick="myFunction('Demo2')" class="w3-button w3-block w3-theme-l1 w3-left-align"><i class="fa fa-calendar-check-o fa-fw w3-margin-right"></i>
+						My Events</button>
+					<div id="Demo2" class="w3-hide w3-container">
+						<p>Some other text..</p>
 					</div>
 				</div>
 			</div>
