@@ -10,12 +10,15 @@
 				 class="fa fa-user"></i></a>
 			<a href="#chat" id='chat' class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Messages"><i class="fa fa-envelope"></i></a>
 			<div class="w3-dropdown-hover w3-hide-small">
-				<button class="w3-button w3-padding-large" title="Notifications"><i class="fa fa-bell"></i><span class="w3-badge w3-right w3-small w3-green">3</span></button>
+				<button id="Notifications_icon" class="w3-button w3-padding-large" title="Notifications"><i class="fa fa-bell"></i><span id='notes_count' class="w3-badge w3-right w3-small w3-green">0</span></button>
 				<div id="Notifications" class="w3-dropdown-content w3-card-4 w3-bar-block" style="width:300px">
+				<button style="width:300px" id="NotificationsBtn" class="w3-button w3-padding-large" title="Clear Notifications">Clear</button>
+
 					<p class="w3-bar-item w3-button">One new friend request</p>
 					<p class="w3-bar-item w3-button">John Doe posted on your wall</p>
 					<p class="w3-bar-item w3-button">Jane likes your post</p>
 				</div>
+				
 			</div>
 			<a id="logout_link" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white" title="Logout">
 				Logout
@@ -158,7 +161,8 @@
 				<p><i class="fa fa-bug w3-xxlarge"></i></p>
 			</div>
 
-			<div id='error_spot'></div>
+			<div id='error_spot' class=" ">
+			</div>
 			<!-- End Right Column -->
 		</div>
 
@@ -297,7 +301,6 @@
 				<input class="w3-input w3-border" id="username" type="text" name="username" placeholder="New Username">
 			</div>
 		</div>
-		<p id="userres" class="w3-panel w3-blue w3-center"></p>
 		<p class="w3-center">
 		<button class="w3-button w3-section w3-black w3-ripple" id="passupdate" type="submit" onclick="updUser();" value="Update"> Submit</button><br>
 		</p>
@@ -311,7 +314,6 @@
 				<input class="w3-input w3-border" type="email" id="email_again" name="email_again" placeholder="Confirm New Email">
 			</div>
 		</div>
-		<p id="emailres" class="w3-panel w3-blue w3-center"></p>
 		<p class="w3-center">
 		<button class="w3-button w3-section w3-black w3-ripple" id="passupdate" type="submit" onclick="updEmail();" value="Update"> Submit</button><br>
 		</p>
@@ -328,7 +330,6 @@
 				<br>
 			</div>
 		</div>
-		<p id="passres" class="w3-panel w3-blue w3-center"></p>
 		<p class="w3-center">
 		<button class="w3-button w3-section w3-black w3-ripple" id="passupdate" type="submit" onclick="updPass();" value="Update"> Submit</button><br>
 		</p>

@@ -54,22 +54,23 @@ $(document).ready(function () {
 		}).fadeIn('slow');
 	}
 	else {
+		setInterval(checknotes(), 10000);
 		$('body').fadeOut('slow', function () {
 			$('#nav').load("includes/UI/loggedin.php #nav_bar", function () {
-				managescript('logout.js', 'add');
+				managescript('navbar.js', 'add');
 			});
 			$('#foot').load("includes/UI/loggedout.php #footer");
 			$('#content').load("includes/UI/loggedin.php #main_content", function () {
 				managescript('display_profile.js', 'add');
 				if (Ajax('user_status.php', 'POST', "action=p.p", false) == 0) {
 					$('#middle_column').load("includes/UI/loggedin.php #preference", function () {
+						$('#error_spot').html('<p>Please upload an image before you can continue</p>');
 						window.location.href = "#update";
 						managescript('profile.js', 'add')
 					})
 				}
 				else {
 					window.location.href = "#home"
-					managescript('navbar.js', 'add')
 				}
 			});
 
@@ -79,6 +80,14 @@ $(document).ready(function () {
 });
 
 
+function checknotes()
+{
+	notes = Ajax('notifications.php', 'POST', 'getnotes=getnotes', false);
+	if(notes)
+		$('#notes_count').html(notes.length);
+	else
+		$('#notes_count').html('0');
+}
 
 function Ajax(sendto, method, value, AsyncOrSync) {
 	request = "";

@@ -1,10 +1,11 @@
 
 
 $(document).ready(function () {
+
     $('.tags').select2({
         placeholder: "select your interests"
     });
-
+    $('#error_spot').addClass('error w3-card w3-round w3-padding-16 w3-center');
     ////////DISPLAY CURRENT INFO//////////
     details = Ajax('profile.php', 'POST', 'action=display_info', false);
     details = JSON.parse(details);
@@ -19,7 +20,7 @@ $(document).ready(function () {
     $('input:radio[id="' + profile.preference.toLowerCase() + '"]').attr('checked', true);
     display_pics();
     checkcheck();
-    
+
 
     ///////////PREVIEW PROFILE/////////////
 
@@ -91,6 +92,7 @@ $(document).ready(function () {
         event.preventDefault();
         value = $('#bio_form').serializeArray();
         Ajax('profile.php', 'POST', value, true);
+        $('#error_spot').html('<p>Bio updated successful</p>');
         return false;
     });
     ////////SUBMIT LAST NAME//////////
@@ -98,6 +100,7 @@ $(document).ready(function () {
         event.preventDefault();
         value = $('#lastname_form').serializeArray();
         Ajax('profile.php', 'POST', value, true);
+        $('#error_spot').html('<p>Last Name updated successful</p>');
         return false;
     });
     ////////SUBMIT FIRST NAME//////////
@@ -105,6 +108,8 @@ $(document).ready(function () {
         event.preventDefault();
         value = $('#firstname_form').serializeArray();
         Ajax('profile.php', 'POST', value, true);
+        $('#error_spot').html('<p>First Name updated successful</p>');
+
         return false;
     });
     ////////SUBMIT interest//////////
@@ -112,12 +117,16 @@ $(document).ready(function () {
         e.preventDefault();
         value = $('#inter_form').serializeArray();
         check = Ajax('profile.php', "POST", value, true)
+        $('#error_spot').html('<p>Interest updated successful</p>');
+
     });
     ////////UPDATE PREFERECNE//////////
     $('#prefernce_form').submit(function (event) {
         event.preventDefault();
         value = $('#prefernce_form').serializeArray();
         check = Ajax('profile.php', 'POST', value, true);
+        $('#error_spot').html('<p>Prefernce updated successful</p>');
+
         return false;
     });
     ////////UPDATE PROFILE PICTURE//////////
@@ -129,8 +138,7 @@ $(document).ready(function () {
         $('#propic').attr('src', value);
     });
     ////////DELETE PICTURES//////////
-    $('#delete_pic').click(function()
-    {
+    $('#delete_pic').click(function () {
         value = $("#img01").attr('src');
         n = value.indexOf("images");
         value = value.substring(n);
@@ -142,8 +150,7 @@ $(document).ready(function () {
         display_pics()
     })
     ////////UPDATE NOTIFICATIONS/////
-    $('#chbx').click(function(event)
-    {
+    $('#chbx').click(function (event) {
         testfunc();
     })
 });
@@ -181,9 +188,7 @@ function updPass() {
     hr.onreadystatechange = function () {
         if (hr.readyState == 4 && hr.status == 200) {
             var return_data = hr.responseText;
-            $('error_spot').load("loggedin.php #response", function () {
-                $("#response").html(return_data);
-            });
+            $('#error_spot').html('<p>' + return_data + '</p>');
             document.getElementById("passwd_current").value = "";
             document.getElementById("passwd_new").value = "";
             document.getElementById("passwd_new_again").value = "";
@@ -207,12 +212,7 @@ function updEmail() {
     hr.onreadystatechange = function () {
         if (hr.readyState == 4 && hr.status == 200) {
             var return_data = hr.responseText;
-            document.getElementById("emailres").innerHTML = return_data;
-            document.getElementById("email_again").value = "";
-            document.getElementById("email").value = "";
-
-
-
+            $('#error_spot').html('<p>' + return_data + '</p>');
         }
     }
     hr.send(vars);
@@ -231,9 +231,7 @@ function updUser() {
     hr.onreadystatechange = function () {
         if (hr.readyState == 4 && hr.status == 200) {
             var return_data = hr.responseText;
-            document.getElementById("userres").innerHTML = return_data;
-            curpass = document.getElementById("username").value = "";
-
+            $('#error_spot').html('<p>' + return_data + '</p>');
         }
     }
     hr.send(vars);
