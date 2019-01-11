@@ -11,7 +11,7 @@
 			<a href="#chat" id='chat' class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Messages"><i class="fa fa-envelope"></i></a>
 			<div class="w3-dropdown-hover w3-hide-small">
 				<button id="Notifications_icon" class="w3-button w3-padding-large" title="Notifications"><i class="fa fa-bell"></i><span id='notes_count' class="w3-badge w3-right w3-small w3-green">0</span></button>
-				<div id="Notifications" class="w3-dropdown-content w3-card-4 w3-bar-block" style="width:300px">
+				<div id="Notifications" class="w3-dropdown-content w3-card-4 w3-bar-block" style="width:300px; max-hight:500px; overflow:auto">
 				<button style="width:300px" id="NotificationsBtn" class="w3-button w3-padding-large" title="Clear Notifications">Clear</button>
 
 					<p class="w3-bar-item w3-button">One new friend request</p>

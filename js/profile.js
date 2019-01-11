@@ -147,7 +147,7 @@ $(document).ready(function () {
             $('#propic').attr('src', 'images/site_images/p_placeholder.jpeg');
         }
         closeimage();
-        display_pics()
+        display_pics();
     })
     ////////UPDATE NOTIFICATIONS/////
     $('#chbx').click(function (event) {
@@ -157,9 +157,9 @@ $(document).ready(function () {
 
 
 function display_pics() {
+    $('#upload_preview').empty();
     images = Ajax('profile.php', 'POST', 'images=images', false)
     images = JSON.parse(images);
-    $('#upload_preview').empty();
     for (var i = 0; i < images.length; i++)
         $('#upload_preview').append('<div class="w3-col" style="width:20%"><img onclick="onClick(this)" src="' + images[i]['img_name'] + '" style="width:120px; height:120px;" class="w3-margin-bottom"></div>');
 }

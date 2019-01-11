@@ -119,12 +119,12 @@ else if ($_FILES['image']) {
         echo 0;
     } else {
         if (($count = $db->get('gallery', array('user_id', '=', $user->data()->user_id))->count()) < 5) {
-            if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_dir . $user->data()->username . '_image_' . $count . '.jpeg')) {
-                if (!$profile->dp) {
-                    $profile->dp = $target_dir . $user->data()->username . '_image_' . $count . '.jpeg';
+            if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_dir . $user->data()->username . '_' . basename($_FILES["image"]["name"]) . '_' . $count . '.jpeg')) {
+                if (!isset($profile->dp)) {
+                    $profile->dp = $target_dir . $user->data()->username . '_' . basename($_FILES["image"]["name"]) . '_' . $count . '.jpeg';
                     $user->update(array('profile' => json_encode($profile)));
                 }
-                $db->insert('gallery', array('img_name' => $target_dir . $user->data()->username . '_image_' . $count . '.jpeg', 'user_id' => $user->data()->user_id));
+                $db->insert('gallery', array('img_name' => $target_dir . $user->data()->username . '_' . basename($_FILES["image"]["name"]) . '_' . $count . '.jpeg', 'user_id' => $user->data()->user_id));
                 echo 1;
             } else {
                 echo 0;

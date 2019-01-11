@@ -2,19 +2,18 @@
 	require_once 'core/init.php';
 
 	$user = new user;
+	$profile = json_decode($user->data()->profile);
 	if(input::exists('request'))
 	{
 		if (input::get('action') == 'login') {
 			if($user->isloggedin())
 				echo 1;
 			else
-				echo 0;
+				echo $profile->last_login;
 		}
 		else if(input::get('action') == 'p.p')
 		{
-			$test = $user->data()->profile;
-			$test = json_decode($test);
-			if (isset($test->dp))
+			if (isset($profile->dp))
 				echo 1;
 			else
 				echo 0;

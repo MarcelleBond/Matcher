@@ -21,17 +21,19 @@ require_once 'core/init.php'
 	<script src="js/UI.js"></script>
 	<style>
 		.error {
-			/* border-width: 3px; */
-			/* background-color: #cae8ca; */
-			/* border-style: solid; */
 			position: fixed;
 			padding: 7px;
 			bottom: 80px;
 			right: 15px;
-			/* max-width: 450px; */
 			z-index: 999;
 		}
-
+		.dot {
+			height: 25px;
+			width: 25px;
+			background-color: #1FDF22;
+			border-radius: 50%;
+			display: inline-block;
+			}
 		html,
 		body,
 		h1,

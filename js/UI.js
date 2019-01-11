@@ -1,5 +1,5 @@
 $(document).ready(function () {	
-	if ((check = Ajax('user_status.php', 'POST', 'action=login', false)) == 0) {
+	if ((check = Ajax('user_status.php', 'POST', 'action=login', false)) != 1) {
 		window.location.href = "#register"
 		$('body').fadeOut('slow', function () {
 			$('#nav').load("includes/UI/loggedout.php #nav_bar", function()
@@ -54,6 +54,7 @@ $(document).ready(function () {
 		}).fadeIn('slow');
 	}
 	else {
+		
 		setInterval(checknotes(), 10000);
 		$('body').fadeOut('slow', function () {
 			$('#nav').load("includes/UI/loggedin.php #nav_bar", function () {
@@ -70,7 +71,8 @@ $(document).ready(function () {
 					})
 				}
 				else {
-					window.location.href = "#home"
+					managescript('home.js', 'add');
+					window.location.href = "#home";
 				}
 			});
 
