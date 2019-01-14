@@ -1,10 +1,10 @@
 $(document).ready(function () {
-	LoadChat();
-	setInterval(function () {
+	// LoadChat();
+	/* setInterval(function () {
 		LoadChat();
-	}, 100);
-	function LoadChat() {
-		$.post('functions/message.php?action=getMessages', function (response) {
+	}, 100); */
+	/* function LoadChat() {
+		$.post('message.php?action=getMessages', function (response) {
 
 			var scrollpos = $('#chat').scrollTop();
 			var scrollpos = parseInt(scrollpos) + 520;
@@ -16,7 +16,7 @@ $(document).ready(function () {
 				$('#chat').scrollTop($('#chat').prop('scrollHeight'));
 			}
 		});
-	}
+	} */
 
 	$('#textarea').keyup(function (e) {
 		if (e.which == 13) {
@@ -26,7 +26,8 @@ $(document).ready(function () {
 
 	$('form').submit(function () {
 		var message = $('#textarea').val();
-		$.post('functions/message.php?action=sendMessage&message=' + message, function (response) {
+		$.post('message.php?action=sendMessage&message=' + message, function (response) {
+			alert(response);
 			if (response == 1) {
 				LoadChat();
 				$('#messageFrm')[0].reset();

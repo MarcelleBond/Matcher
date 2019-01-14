@@ -18,5 +18,10 @@
 			else
 				echo 0;
 		}
+		else if(input::get('action') == 'online')
+		{
+			$profile->last_login = "online";
+			$user->update(array('profile' => json_encode($profile)));
+		}
 	}
 ?>

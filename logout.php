@@ -6,7 +6,7 @@ $profile = json_decode($user->data()->profile);
 if (!$user->isloggedin()) {
     redirect::to('index.php');
 }
-$profile->last_login = date("jS \of F Y h:i:s A");
+$profile->last_login = date("jS \of F h:i A");
 $user->update(array('profile' => json_encode($profile)));
 $user->logout();
 echo 1;

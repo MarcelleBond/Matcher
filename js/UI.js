@@ -1,6 +1,7 @@
 $(document).ready(function () {	
+	/* if (window.location.href)
+		$('#' + last_page()).click(); */
 	if ((check = Ajax('user_status.php', 'POST', 'action=login', false)) != 1) {
-		window.location.href = "#register"
 		$('body').fadeOut('slow', function () {
 			$('#nav').load("includes/UI/loggedout.php #nav_bar", function()
 			{
@@ -48,17 +49,19 @@ $(document).ready(function () {
 			$('#foot').load("includes/UI/loggedout.php #footer");
 
 			$('#content').load("includes/UI/loggedout.php #register", function (e) {
-
+				window.location.href = "#register"
 				managescript('register.js', 'add');
 			});
 		}).fadeIn('slow');
 	}
 	else {
+		Ajax('user_status.php', 'POST', 'action=online', true)
 		
-		setInterval(checknotes(), 10000);
+		
 		$('body').fadeOut('slow', function () {
 			$('#nav').load("includes/UI/loggedin.php #nav_bar", function () {
 				managescript('navbar.js', 'add');
+				
 			});
 			$('#foot').load("includes/UI/loggedout.php #footer");
 			$('#content').load("includes/UI/loggedin.php #main_content", function () {
@@ -77,7 +80,7 @@ $(document).ready(function () {
 			});
 
 		}).fadeIn('slow');
-
+		setInterval(checknotes(), 10000);
 	}
 });
 
@@ -85,8 +88,21 @@ $(document).ready(function () {
 function checknotes()
 {
 	notes = Ajax('notifications.php', 'POST', 'getnotes=getnotes', false);
-	if(notes)
-		$('#notes_count').html(notes.length);
+
+	notes = JSON.parse(notes);
+	//console.log(notes);
+	//console.log(notes.length);
+
+
+
+	if(notes && notes != "0"){
+		var result = Object.keys(notes).map(function(key) {
+			return [Number(key), notes[key]];
+		  });
+	
+		  $('#notes_count').text(result.length);
+		//  alert(result.length);
+	}
 	else
 		$('#notes_count').html('0');
 }

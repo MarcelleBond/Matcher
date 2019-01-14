@@ -12,6 +12,8 @@
 			{
 				echo json_encode($profile->notifications);
 				
+			}else{
+				echo "0";
 			}
 		}
 		else if (input::get('addnotes'))
@@ -26,3 +28,4 @@
 		}
 	}
 ?>
+
