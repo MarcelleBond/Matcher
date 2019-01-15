@@ -8,13 +8,13 @@
             <a href="#home" id="home" class="w3-bar-item w3-button w3-padding-large w3-theme-d4"><i class="fa fa-home w3-margin-right"></i>Home</a>
             <a href="#profile" id="profile" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"
                 title="Account Settings"><i class="fa fa-user"></i></a>
-            <a href="#views_and_likes" id='views_and_likes' class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"
+            <a href="#views" id='views_and_likes' class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"
                 title="views_and_likes"><i class="fa fa-eye"></i></a>
             <div class="w3-dropdown-hover w3-hide-small">
                 <button id="Notifications_icon" class="w3-button w3-padding-large" title="Notifications"><i class="fa fa-bell"></i><span
                         id='notes_count' class="w3-badge w3-right w3-small w3-green">0</span></button>
-                <div id="Notifications" class="w3-dropdown-content w3-card-4 w3-bar-block" style="width:300px; max-hight:500px; overflow:auto">
-                    <button style="width:300px" id="NotificationsBtn" class="w3-button w3-padding-large" title="Clear Notifications">Clear</button>
+                <div id="Notifications" class="w3-dropdown-content w3-card-4 w3-bar-block" style="max-width:300px; max-hight:500px; overflow:auto">
+                    <button style="width:100%" id="NotificationsBtn" class="w3-button w3-padding-large" title="Clear Notifications">Clear</button>
 
                     <p class="w3-bar-item w3-button">One new friend request</p>
                     <p class="w3-bar-item w3-button">John Doe posted on your wall</p>
@@ -30,11 +30,11 @@
     </div>
 
     <!-- Navbar on small screens -->
-    <div id="navDemo" class="w3-bar-block w3-theme-d2 w3-hide w3-hide-large w3-hide-medium w3-large">
-        <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 1</a>
-        <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 2</a>
-        <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 3</a>
-        <a href="#" class="w3-bar-item w3-button w3-padding-large">My Profile</a>
+    <div id="navDemo" style="max-width:1400px;margin-top:50px" class="w3-bar-block w3-theme-d2 w3-hide w3-hide-large w3-hide-medium w3-large">
+        <a href="#profile" id="profile2" class="w3-bar-item w3-button w3-padding-large"><i class="fa fa-user"></i>
+            Profile</a>
+        <a href="#views_and_likes" id='views_and_likes2' class="w3-bar-item w3-button w3-padding-large">Link 2</a>
+        <a id="logout_link2" class="w3-bar-item w3-button w3-padding-large">Link 3</a>
     </div>
 </div>
 
@@ -435,4 +435,38 @@
 
         </p>
     </form>
+</div>
+
+
+<!-- ////////////////////////////////////////////////////////////////// PERSONS PROFILE ////////////////////////////////////////////////// -->
+
+
+<div id="person_profile" class="w3-container w3-card w3-white w3-round w3-margin">
+<div id="modal01" class="w3-modal " style="padding-top:0">
+        <span class="w3-button w3-red w3-xlarge w3-display-topright" onclick="closeimage()">×</span>
+        <div class="w3-modal-content w3-animate-zoom w3-center w3-transparent w3-padding-64">
+            <img id="img01" class="w3-image">
+        </div>
+    </div>
+    <br>
+    <img id="persons_dp" src="/w3images/avatar2.png" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
+    <span class="w3-right w3-opacity">1 min</span>
+    <h4 id="persons_username">John Doe</h4><br>
+    <h5 id="persons_names">John Doe</h5><br>
+    <button type="button" class=" w3-right w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-thumbs-up"></i>
+         Like</button>
+    <button type="button" class=" w3-right w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-comment"></i>
+         Comment</button>
+    <hr class="w3-clear">
+    <p id="persons_bio">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+        laboris nisi ut aliquip ex ea commodo consequat.</p>
+    <div id="persons_pics" class="w3-row-padding" style="margin:0 -16px">
+        <div class="w3-half">
+            <img src="/w3images/lights.jpg" style="width:100%" alt="Northern Lights" class="w3-margin-bottom">
+        </div>
+        <div class="w3-half">
+            <img src="/w3images/nature.jpg" style="width:100%" alt="Nature" class="w3-margin-bottom">
+        </div>
+    </div> 
 </div>

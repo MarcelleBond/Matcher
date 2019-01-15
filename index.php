@@ -27,13 +27,7 @@ require_once 'core/init.php'
 			right: 15px;
 			z-index: 999;
 		}
-		.dot {
-			height: 25px;
-			width: 25px;
-			background-color: #1FDF22;
-			border-radius: 50%;
-			display: inline-block;
-			}
+
 		html,
 		body,
 		h1,

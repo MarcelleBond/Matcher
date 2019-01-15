@@ -18,8 +18,10 @@
 		}
 		else if (input::get('addnotes'))
 		{
-			$profile->notifications[] = input::get('addnotes');
-			$user->update(array('profile' => json_encode($profile)));			
+			$user2 = new user(input::get('name'));
+			$profile2 = json_decode($user2->data()->profile);
+			$profile2->notifications[] = input::get('addnotes');
+			$user2->update(array('profile' => json_encode($profile)));			
 		}
 		else if(input::get('removenotes'))
 		{

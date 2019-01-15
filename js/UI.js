@@ -1,16 +1,13 @@
-$(document).ready(function () {	
-	/* if (window.location.href)
-		$('#' + last_page()).click(); */
+$(document).ready(function () {
 	if ((check = Ajax('user_status.php', 'POST', 'action=login', false)) != 1) {
 		$('body').fadeOut('slow', function () {
-			$('#nav').load("includes/UI/loggedout.php #nav_bar", function()
-			{
+			$('#nav').load("includes/UI/loggedout.php #nav_bar", function () {
 				$('#login_link').click(function () {
 					if (!document.getElementById('login'))
 						$('#content').fadeOut('slow', function () {
 							$('#content').load("includes/UI/loggedout.php #login", function () {
 								managescript('login.js', 'add');
-								managescript(last_page(), 'remove');
+								managescript(last_page() + ".js", 'remove');
 							}).fadeIn('slow');
 						});
 				})
@@ -19,7 +16,7 @@ $(document).ready(function () {
 					if (!document.getElementById('register'))
 						$('#content').fadeOut('slow', function () {
 							$('#content').load("includes/UI/loggedout.php #register", function () {
-								managescript(last_page(), 'remove');
+								managescript(last_page() + ".js", 'remove');
 								managescript('register.js', 'add');
 							}).fadeIn('slow');
 						});
@@ -30,7 +27,7 @@ $(document).ready(function () {
 						$('#content').fadeOut('slow', function () {
 							$('#content').load("includes/UI/loggedout.php #login", function () {
 								managescript('login.js', 'add');
-								managescript(last_page(), 'remove');
+								managescript(last_page() + ".js", 'remove');
 							}).fadeIn('slow');
 						});
 				})
@@ -40,7 +37,7 @@ $(document).ready(function () {
 					if (!document.getElementById('register'))
 						$('#content').fadeOut('slow', function () {
 							$('#content').load("includes/UI/loggedout.php #register", function () {
-								managescript(last_page(), 'remove');
+								managescript(last_page() + ".js", 'remove');
 								managescript('register.js', 'add');
 							}).fadeIn('slow');
 						});
@@ -53,15 +50,14 @@ $(document).ready(function () {
 				managescript('register.js', 'add');
 			});
 		}).fadeIn('slow');
-	}
-	else {
+	} else {
 		Ajax('user_status.php', 'POST', 'action=online', true)
-		
-		
+
+
 		$('body').fadeOut('slow', function () {
 			$('#nav').load("includes/UI/loggedin.php #nav_bar", function () {
 				managescript('navbar.js', 'add');
-				
+
 			});
 			$('#foot').load("includes/UI/loggedout.php #footer");
 			$('#content').load("includes/UI/loggedin.php #main_content", function () {
@@ -72,38 +68,26 @@ $(document).ready(function () {
 						window.location.href = "#update";
 						managescript('profile.js', 'add')
 					})
-				}
-				else {
+				} else {
 					managescript('home.js', 'add');
 					window.location.href = "#home";
 				}
 			});
 
 		}).fadeIn('slow');
-		setInterval(checknotes(), 10000);
 	}
 });
 
 
-function checknotes()
-{
+function checknotes() {
 	notes = Ajax('notifications.php', 'POST', 'getnotes=getnotes', false);
-
 	notes = JSON.parse(notes);
-	//console.log(notes);
-	//console.log(notes.length);
-
-
-
-	if(notes && notes != "0"){
-		var result = Object.keys(notes).map(function(key) {
+	if (notes && notes != "0") {
+		var result = Object.keys(notes).map(function (key) {
 			return [Number(key), notes[key]];
-		  });
-	
-		  $('#notes_count').text(result.length);
-		//  alert(result.length);
-	}
-	else
+		});
+		$('#notes_count').text(result.length);
+	} else
 		$('#notes_count').html('0');
 }
 
@@ -144,11 +128,10 @@ function openNav() {
 	} else {
 		x.className = x.className.replace(" w3-show", "");
 	}
-} 
+}
 
 
-function last_page()
-{
+function last_page() {
 	place = window.location.href;
 	place = place.split('#');
 	return place[1];
