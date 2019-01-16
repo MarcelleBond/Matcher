@@ -53,7 +53,6 @@ $(document).ready(function () {
 	} else {
 		Ajax('user_status.php', 'POST', 'action=online', true)
 
-
 		$('body').fadeOut('slow', function () {
 			$('#nav').load("includes/UI/loggedin.php #nav_bar", function () {
 				managescript('navbar.js', 'add');
@@ -76,6 +75,18 @@ $(document).ready(function () {
 
 		}).fadeIn('slow');
 	}
+	
+	setInterval(function()
+	{
+		$.post("user_status.php?action=login",
+			function (data) {
+				if (data != 1)
+				{
+					$('#logout_link').click();
+				}
+			}
+		);
+	}, 3000)
 });
 
 
@@ -135,4 +146,19 @@ function last_page() {
 	place = window.location.href;
 	place = place.split('#');
 	return place[1];
+}
+
+function Age(dob) {
+	var year = Number(dob.substr(0, 4));
+	console.log(year);
+	var month = Number(dob.substr(5, 2)) - 1;
+	console.log(month);
+	var day = Number(dob.substr(8, 2));
+	console.log(day);
+	var today = new Date();
+	var age = today.getFullYear() - year;
+	if (today.getMonth() < month || (today.getMonth() == month && today.getDate() < day)) {
+	  age--;
+	}
+	return age;
 }
