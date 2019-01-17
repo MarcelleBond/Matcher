@@ -80,13 +80,15 @@ $(document).ready(function () {
 	{
 		$.post("user_status.php?action=login",
 			function (data) {
-				if (data != 1)
+				if (data != 1 && (last_page() != 'login' && last_page() != 'register' && last_page() != 'forgotpassword'))
 				{
-					$('#logout_link').click();
+					// alert('fuck Im logged out');					
+					location.reload();
 				}
 			}
 		);
-	}, 3000)
+	}, 3000);
+
 });
 
 

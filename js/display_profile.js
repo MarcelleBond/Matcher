@@ -20,26 +20,3 @@ for (const key in profile.interest) {
 		$('#display_interest').append('<span class="w3-tag w3-small w3-theme-l1 w3-margin-right-16">' + element + '</span>  ');
 	}
 }
-
-
-
-
-	// SELECT * FROM users WHERE json_unquote(json_extract(`profile`, '$.Interests.food')) = "cats"
-
-
-/* 
-	/fetch only profile column
-SELECT json_unquote(json_extract(`profile`, '$.friends')) as SELFRIENDS FROM users
-
-
-
-"Nested":"[{"movies": "1", "food": "1", "Sports": "1",}]  ---ignore this line
-
-
-//select nested key
-SELECT json_unquote(json_extract(`profile`, '$.Interests.food')) FROM users
-
-
-
-//notation and structure with nesting
-{"friends": "none", "Profiletype": "NewProfile", "Interests": {"movies": "dogs", "food": "cats", "Sports": "cow tipping"}} */

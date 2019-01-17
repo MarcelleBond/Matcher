@@ -60,6 +60,6 @@ $('#NotificationsBtn').click(function () {
 
 
 
-/* setInterval(function () {
+setInterval(function () {
 	checknotes();
-}, 1000); */
+}, 1000);

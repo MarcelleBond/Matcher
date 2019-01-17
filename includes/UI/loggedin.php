@@ -78,7 +78,7 @@
                         </div>
                     </div>
                     <button onclick="myFunction('Demo2')" class="w3-button w3-block w3-theme-l1 w3-left-align"><i class="fa fa-calendar-check-o fa-fw w3-margin-right"></i>
-                        My Events</button>
+                        My Friends</button>
                     <div id="Demo2" class="w3-hide w3-container">
                         <p>Some other text..</p>
                     </div>
@@ -202,37 +202,7 @@
 			 Comment</button>
 	</div>
 	
-	<div class="w3-container w3-card w3-white w3-round w3-margin"><br>
-		<img src="/w3images/avatar5.png" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
-		<span class="w3-right w3-opacity">16 min</span>
-		<h4>Jane Doe</h4><br>
-		<hr class="w3-clear">
-		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-			labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-			laboris nisi ut aliquip ex ea commodo consequat.</p>
-		<button type="button" class="w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-thumbs-up"></i>
-			 Like</button>
-		<button type="button" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-comment"></i>
-			 Comment</button>
-	</div>
-	
-	<div class="w3-container w3-card w3-white w3-round w3-margin"><br>
-		<img src="/w3images/avatar6.png" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
-		<span class="w3-right w3-opacity">32 min</span>
-		<h4>Angie Jane</h4><br>
-		<hr class="w3-clear">
-		<p>Have you seen this?</p>
-		<img src="/w3images/nature.jpg" style="width:100%" class="w3-margin-bottom">
-		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-			labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-			laboris nisi ut aliquip ex ea commodo consequat.</p>
-		<button type="button" class="w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-thumbs-up"></i>
-			 Like</button>
-		<button type="button" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-comment"></i>
-			 Comment</button>
-	</div>
-	-->
-<!-- End Middle Column -->
+-->
 
 
 
@@ -405,21 +375,6 @@
             <div class="w3-col" style="width:50px"><i class="w3-xxlarge fa fa-female"></i></div>
             <div class="w3-rest">
                 <input id="female" class="w3-radio" type="radio" name="pref" value="Female"> FEMALE
-            </div>
-        </div>
-
-        <div class="w3-row w3-section">
-            <div class="w3-col" style="width:50px"><i class="w3-xxlarge fa fa-transgender-alt"></i></div>
-            <div class="w3-rest">
-                <input id="transgender" class="w3-radio" type="radio" name="pref" value="Transgender"> TRANSGENDER
-            </div>
-        </div>
-
-        <div class="w3-row w3-section">
-            <div class="w3-col" style="width:50px"><i class="w3-xxlarge fa fa-genderless"></i></div>
-            <div class="w3-rest">
-                <input id="genderless" class="w3-radio" type="radio" name="pref" value="Genderless">
-                GENDERLESS
             </div>
         </div>
 

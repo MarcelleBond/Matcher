@@ -14,10 +14,9 @@ if (input::exists('request')) {
                 <img src="' . $info->dp . '" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px; height:60px">
                 <span class="w3-right w3-opacity">' . $info->last_login . '</span>
                 <h4>' . $details->username . '</h4><br>
-                <h5>' . $details->first_name . ' ' . $details->last_name . '</h5><br>
-                <h5>Age: '. age($details->DOB) .'</h5>
+                <h5>' . $details->first_name . ' ' . $details->last_name . '</h5>
+                <h5>Age: '. age($info->DOB) .'</h5>
                 <hr class="w3-clear">
-                <p>' . $info->bio . '</p>
                 <div class="w3-row-padding" style="margin:0 -16px">';
             $db->query('SELECT * FROM `gallery` WHERE `user_id` = ? LIMIT 2', array('user_id' => $details->user_id));
             $images = $db->results();
@@ -38,16 +37,7 @@ function age($dob)
 {
     date_default_timezone_set('Africa/Johannesburg');
     $date = date_create($dob);
-    
-    //$today = date_create(date('Y-m-d'));
-    $age = date_diff($dob,"2019-01-17");
-    
+    $today = date_create(date('Y-m-d'));
+    $age = date_diff($date,$today);
     return $age->format('%y');
-    /* $year = intval(substr($dob,0, 4));
-    $month = intval(substr($dob,0, 4));
-    $day = intval(substr($dob,0, 4));
-    $today = date('Y-m-d');
-    $today = intval(substr($dob,0, 4)) - $year; */
-    
-
 }
