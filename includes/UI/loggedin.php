@@ -397,31 +397,32 @@
 
 
 <div id="person_profile" class="w3-container w3-card w3-white w3-round w3-margin">
-<div id="modal01" class="w3-modal " style="padding-top:0">
-        <span class="w3-button w3-red w3-xlarge w3-display-topright" onclick="closeimage()">×</span>
-        <div class="w3-modal-content w3-animate-zoom w3-center w3-transparent w3-padding-64">
-            <img id="img01" class="w3-image">
-        </div>
-    </div>
     <br>
-    <img id="persons_dp" src="/w3images/avatar2.png" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
-    <span class="w3-right w3-opacity">1 min</span>
-    <h4 id="persons_username">John Doe</h4><br>
-    <h5 id="persons_names">John Doe</h5><br>
-    <button type="button" class=" w3-right w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-thumbs-up"></i>
+    <img id="persons_dp" src="https://i.ytimg.com/vi/ktlQrO2Sifg/maxresdefault.jpg" alt="Avatar" class="w3-left w3-circle w3-margin-right"
+        style="width:60px; height:60px">
+    <span id="last_seen" class="w3-right w3-opacity"></span>
+    <h4 id="persons_username"></h4><br>
+    <div class="w3-container w3-right ">
+        <h4 id="persons_location"></h4>
+        <h5 id="persons_age"></h5>
+        <h5 id="persons_fame"></h5>
+
+    </div>
+    <h4 id="persons_names"></h4>
+    <h5 id="persons_birthday"></h5>
+    <button type="button" class="w3-button w3-theme-d1 "><i class="fa fa-thumbs-up"></i>
          Like</button>
-    <button type="button" class=" w3-right w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-comment"></i>
-         Comment</button>
+
     <hr class="w3-clear">
-    <p id="persons_bio">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-        laboris nisi ut aliquip ex ea commodo consequat.</p>
+    <h4>BIO</h4>
+    <p id="persons_bio"></p>
+    <hr class="w3-clear">
+    <h4>Interests</h4>
+    <p id='persons_interests'>
+
+    </p>
+    <hr class="w3-clear">
+    <h4>Images</h4>
     <div id="persons_pics" class="w3-row-padding" style="margin:0 -16px">
-        <div class="w3-half">
-            <img src="/w3images/lights.jpg" style="width:100%" alt="Northern Lights" class="w3-margin-bottom">
-        </div>
-        <div class="w3-half">
-            <img src="/w3images/nature.jpg" style="width:100%" alt="Nature" class="w3-margin-bottom">
-        </div>
-    </div> 
-</div>
+       
+    </div>

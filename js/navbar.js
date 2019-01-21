@@ -45,7 +45,7 @@ $('#Notifications_icon').hover(function () {
 		notes = JSON.parse(notes);
 		$("#Notifications p").remove();
 		var result = Object.keys(notes).map(function (key) {
-			return [Number(key), notes[key]];
+			return [notes[key]];
 		});
 		for (i = 0; i < result.length; i++) {
 			$('#Notifications').append('<p class="w3-bar-item w3-button">' + result[i] + '</p>');

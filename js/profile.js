@@ -37,7 +37,7 @@ $(document).ready(function () {
 
                 reader.onload = function (e) {
                     document.getElementById('img1').setAttribute('src', e.target.result);
-                    document.getElementById('img1').style.display = "inline-block";
+                    // document.getElementById('img1').style.display = "inline-block";
                 };
                 reader.readAsDataURL(imageupload.files[0]);
             }

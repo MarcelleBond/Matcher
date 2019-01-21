@@ -152,11 +152,8 @@ function last_page() {
 
 function Age(dob) {
 	var year = Number(dob.substr(0, 4));
-	console.log(year);
 	var month = Number(dob.substr(5, 2)) - 1;
-	console.log(month);
 	var day = Number(dob.substr(8, 2));
-	console.log(day);
 	var today = new Date();
 	var age = today.getFullYear() - year;
 	if (today.getMonth() < month || (today.getMonth() == month && today.getDate() < day)) {
@@ -164,3 +161,4 @@ function Age(dob) {
 	}
 	return age;
 }
+
