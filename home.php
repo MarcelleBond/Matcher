@@ -5,8 +5,10 @@ $user = new user;
 if (input::exists('request')) {
 	if (input::get('all'))
 	{
-		$db->query('SELECT * FROM `users` WHERE `user_id` = ?', array('user_id' => $user->data()->user_id));
+		$db->query('SELECT * FROM `users` WHERE `user_id` != ?', array('user_id' => $user->data()->user_id));
 		$people = $db->results();
+		// var_dump ($people[0]->username);
+		// exit();
 		$profiles = "";
 		foreach ($people as $person => $details) {
 			$info = json_decode($details->profile);
@@ -22,7 +24,7 @@ if (input::exists('request')) {
 			$images = $db->results();
 			foreach ($images as $image => $pic) {
 				$profiles .= '<div class="w3-half">
-					<img src="' . $pic->img_name . '" style="width:100%" alt="' . $pic->img_name . '" class="w3-margin-bottom">
+					<img src="' . $pic->img_name . '" style="max-width:100%" alt="' . $pic->img_name . '" class="w3-margin-bottom">
 					</div>';
 			}
 			$profiles .= '</div>
@@ -39,6 +41,11 @@ if (input::exists('request')) {
 		$user2->update(array('profile' => json_encode($pro)), $user2->data()->user_id);
 		if ($views){
 			if (!in_array($user->data()->username, $views)){
+				/* if($user2->data()->notify == 1)
+				{
+					
+					// Email($user2->data()->email,"Profile View", );
+				} */
 				$views[] = $user->data()->username;
 				$user2->update(array('views' => json_encode($views)), $user2->data()->user_id);
 			}

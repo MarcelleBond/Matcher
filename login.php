@@ -15,11 +15,11 @@ if (input::exists('request')) {
         'passwd' => array('required' => true),
     ));
     if ($validation->passed()) {
-        $user = new user(escape(input::get('username')));
+        $user = new user(escape(trim(input::get('username'))));
         if($user->data() != NULL)
         {
             if ($user->data()->active === '1') {
-                $login = $user->login(escape(input::get('username')), escape(input::get('passwd')));
+                $login = $user->login(escape(trim(input::get('username'))), escape(input::get('passwd')));
                 if ($login) {
                     echo 1;
                 } else {

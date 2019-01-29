@@ -29,10 +29,12 @@ if (!$user->isloggedin()) {
             'passwd' => array(
                 'required' => true,
                 'min' => 6,
+                'ascii' => true,
             ),
             'passwd_again' => array(
                 'required' => true,
                 'matches' => 'passwd',
+                'ascii' => true,
             ),
             'email' => array(
                 'required' => true,
@@ -52,11 +54,11 @@ if (!$user->isloggedin()) {
                 $token = str_shuffle($token);
                 $token = substr($token, 0, 10);
                 $user->create(array(
-                    'username' => escape(input::get('username')),
-                    'first_name' => escape(input::get('first_name')),
-                    'last_name' => escape(input::get('last_name')),
-                    'passwd' => hash::make(escape(input::get('passwd'))),
-                    'email' => escape(input::get('email')),
+                    'username' => escape(trim(input::get('username'))),
+                    'first_name' => escape(trim(input::get('first_name'))),
+                    'last_name' => escape(trim(input::get('last_name'))),
+                    'passwd' => hash::make(escape(trim(input::get('passwd')))),
+                    'email' => escape(trim(input::get('email'))),
                     'active' => 1,
                     'ver_code' => '',
                     'profile' => json_encode($test),

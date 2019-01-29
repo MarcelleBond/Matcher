@@ -103,6 +103,14 @@ $(document).ready(function () {
         $('#error_spot').html('<p>Last Name updated successful</p>');
         return false;
     });
+    ////////SUBMIT DATE OF BIRTH//////////
+    $('#DOB_form').submit(function (event) {
+        event.preventDefault();
+        value = $('#DOB_form').serializeArray();
+        Ajax('profile.php', 'POST', value, true);
+        $('#error_spot').html('<p>Birthday updated successful</p>');
+        return false;
+    });
     ////////SUBMIT FIRST NAME//////////
     $('#firstname_form').submit(function (event) {
         event.preventDefault();
@@ -131,11 +139,11 @@ $(document).ready(function () {
     });
     ////////UPDATE PROFILE PICTURE//////////
     $('#set_propic').click(function () {
-        value = $("#img01").attr('src');
+       /*  value = $("#img01").attr('src');
         n = value.indexOf("images");
-        value = value.substring(n);
-        Ajax('profile.php', 'POST', 'new_propic=' + value, true);
-        $('#propic').attr('src', value);
+        value = value.substring(n); */
+        Ajax('profile.php', 'POST', 'new_propic=' + $("#img01").attr('src'), true);
+        $('#propic').attr('src', $("#img01").attr('src'));
     });
     ////////DELETE PICTURES//////////
     $('#delete_pic').click(function () {
@@ -155,13 +163,13 @@ $(document).ready(function () {
     })
 });
 
-
+///////////// IMAGE WORK ////////////
 function display_pics() {
     $('#upload_preview').empty();
     images = Ajax('profile.php', 'POST', 'images=images', false)
     images = JSON.parse(images);
     for (var i = 0; i < images.length; i++)
-        $('#upload_preview').append('<div class="w3-col" style="width:20%"><img onclick="onClick(this)" src="' + images[i]['img_name'] + '" style="width:120px; height:120px;" class="w3-margin-bottom"></div>');
+        $('#upload_preview').append('<div class="w3-col m2 "><img onclick="onClick(this)" src="' + images[i]['img_name'] + '" style="width:120px; height:120px;" class=" w3-row-padding w3-margin-bottom"></div>');
 }
 
 

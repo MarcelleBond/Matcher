@@ -64,7 +64,7 @@ $(document).ready(function () {
 				if (Ajax('user_status.php', 'POST', "action=p.p", false) == 0) {
 					$('#middle_column').load("includes/UI/loggedin.php #preference", function () {
 						$('#error_spot').html('<p>Please upload an image before you can continue</p>');
-						window.location.href = "#update";
+						window.location.href = "#profile";
 						managescript('profile.js', 'add')
 					})
 				} else {
@@ -81,8 +81,7 @@ $(document).ready(function () {
 		$.post("user_status.php?action=login",
 			function (data) {
 				if (data != 1 && (last_page() != 'login' && last_page() != 'register' && last_page() != 'forgotpassword'))
-				{
-					// alert('fuck Im logged out');					
+				{				
 					location.reload();
 				}
 			}

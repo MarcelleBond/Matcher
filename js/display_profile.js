@@ -13,7 +13,7 @@ $('#display_dob').append(profile.DOB);
 $('#display_loca').append(profile.location);
 $('#bio_text').html(profile.bio);
 for (var i = 0; i < images.length; i++)
-	$('#display_images').append('<div class="w3-half"><img src="' + images[i]['img_name'] + '" style="width:100%" class="w3-margin-bottom"></div>');
+	$('#display_images').append('<div class="w3-half"><img src="' + images[i]['img_name'] + '" style="max-width:100%" class="w3-margin-bottom"></div>');
 for (const key in profile.interest) {
 	if (profile.interest.hasOwnProperty(key)) {
 		const element = profile.interest[key];

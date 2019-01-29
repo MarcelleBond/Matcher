@@ -11,8 +11,8 @@ function profiles() {
 }
 
 
-function build_profile(name) {
 
+function build_profile(name) {
 	Ajax('notifications.php', 'POST', 'addnotes=viewed you page&name=' + name.innerHTML, true);
 	$('#middle_content').fadeOut('slow', function () {
 		$('#middle_content').load("includes/UI/loggedin.php #person_profile", function () {
@@ -28,7 +28,6 @@ function build_profile(name) {
 			$('#persons_location').html(data.location);
 			$('#persons_age').html('Age: ' + Age(data.DOB));
 			$('#persons_fame').html('Fame: ' + data.fame + " pts");
-			$('#persons_birthday').html('Birthday: ' + data.DOB);
 			$('#persons_bio').html(data.bio);
 			for (const key in data.interest) {
 				if (data.interest.hasOwnProperty(key)) {
@@ -42,6 +41,5 @@ function build_profile(name) {
 			}
 		});
 	}).fadeIn('slow');
-
 
 }

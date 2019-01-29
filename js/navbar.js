@@ -34,9 +34,9 @@ $('#logout_link').click(function () {
 	}
 });
 
-$('#views_and_likes').click(function(){
+$('#stats').click(function(){
 	managescript(last_page() + ".js", 'remove');
-	managescript('views.js');
+	managescript('stats.js');
 })
 
 $('#Notifications_icon').hover(function () {

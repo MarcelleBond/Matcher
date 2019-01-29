@@ -79,7 +79,6 @@
 		<div class="w3-row w3-section">
 			<div class="w3-col" style="width:50px"><i class="w3-xxlarge fa fa-calendar"></i></div>
 			<div class="w3-rest">
-			<!-- <input class="w3-input w3-border" id="Birthdate" type="text" placeholder="Birthdate" required> -->
 			<input class="w3-input w3-border" type='date' name='age' id="age" max="2002-01-01" min="1940-01-01"  required>
 			</div>
 		</div>
@@ -93,22 +92,7 @@
 		<div class="w3-row w3-section">
 			<div class="w3-col" style="width:50px"><i class="w3-xxlarge fa fa-female"></i></div>
 			<div class="w3-rest">
-				<input id="female" class="w3-radio" type="radio" name="gender" value="Female"> FEMALE
-			</div>
-		</div>
-
-		<div class="w3-row w3-section">
-			<div class="w3-col" style="width:50px"><i class="w3-xxlarge fa fa-transgender-alt"></i></div>
-			<div class="w3-rest">
-				<input id="transgender" class="w3-radio" type="radio" name="gender" value="Transgender"> TRANSGENDER
-			</div>
-		</div>
-
-		<div class="w3-row w3-section">
-			<div class="w3-col" style="width:50px"><i class="w3-xxlarge fa fa-genderless"></i></div>
-			<div class="w3-rest">
-				<input id="genderless" class="w3-radio" type="radio" name="gender" value="Genderless" checked>
-				GENDERLESS
+				<input id="female" class="w3-radio" type="radio" name="gender" value="Female" checked> FEMALE
 			</div>
 		</div>
 		<p class="w3-center">
