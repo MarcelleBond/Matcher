@@ -2,7 +2,7 @@ $(document).ready(function () {
 	// LoadChat();
 	/* setInterval(function () {
 		LoadChat();
-	}, 100); */
+	}, 10000); */
 	/* function LoadChat() {
 		$.post('message.php?action=getMessages', function (response) {
 
@@ -35,4 +35,5 @@ $(document).ready(function () {
 		});
 		return false;
 	});
+
 });

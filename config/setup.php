@@ -29,15 +29,6 @@
             `time_stamp` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
             PRIMARY KEY(`img_id`)
         )");
-       /*  $dbh->exec("CREATE TABLE IF NOT EXISTS `matcha`.`comments`(
-            `comment_id` INT(255) NOT NULL AUTO_INCREMENT,
-            `user_img_id` INT(255) NOT NULL,
-            `friend_id` INT(255) NOT NULL,
-            `comment` VARCHAR(255) NOT NULL,
-            `time_stamp` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-            `img_id` INT(255) NOT NULL,
-            PRIMARY KEY(`comment_id`)
-        )"); */
         $dbh->exec("CREATE TABLE IF NOT EXISTS `matcha`.`likes`(
             `likie` INT NOT NULL,
             `likers_id` INT NOT NULL,
@@ -46,10 +37,6 @@
         )");
         $dbh->exec("ALTER TABLE
         `matcha`.`likes` ADD UNIQUE(`likie`, `likers_id`)");
-       /*  $dbh->exec("ALTER TABLE
-        `matcha`.`comments` ADD CONSTRAINT `del_com` FOREIGN KEY(`img_id`) REFERENCES `matcha`.`gallery`(`img_id`) ON DELETE CASCADE ON UPDATE NO ACTION"); */
-       /*  $dbh->exec("ALTER TABLE
-        `matcha`.`likes` ADD CONSTRAINT `del_likes` FOREIGN KEY(`img_id`) REFERENCES `matcha`.`gallery`(`img_id`) ON DELETE CASCADE ON UPDATE NO ACTION"); */
         
         // header('Location: ../index.php');
     } catch (PDOException $e) {

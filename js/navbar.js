@@ -12,7 +12,6 @@ $('#home').click(function () {
 
 });
 
-
 $('#profile').click(function () {
 	if (last_page() != 'profile') {
 		$('#middle_content').fadeOut('slow', function () {
@@ -57,8 +56,6 @@ $('#NotificationsBtn').click(function () {
 	Ajax('notifications.php', 'POST', 'removenotes=removenotes', true);
 	$("#Notifications p").remove();
 })
-
-
 
 setInterval(function () {
 	checknotes();

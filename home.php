@@ -5,10 +5,8 @@ $user = new user;
 if (input::exists('request')) {
 	if (input::get('all'))
 	{
-		$db->query('SELECT * FROM `users` WHERE `user_id` != ?', array('user_id' => $user->data()->user_id));
+	$db->query('SELECT * FROM `users` WHERE `user_id` != ? AND json_unquote(json_extract(`blocked`, "$.blocker")) !='. $user->data()->username.'', array('user_id' => $user->data()->user_id));
 		$people = $db->results();
-		// var_dump ($people[0]->username);
-		// exit();
 		$profiles = "";
 		foreach ($people as $person => $details) {
 			$info = json_decode($details->profile);
@@ -57,6 +55,18 @@ if (input::exists('request')) {
 		$db->query("SELECT users.*, gallery.img_name FROM `users` JOIN gallery ON gallery.user_id = users.user_id WHERE username = ?", array('username' => input::get('profile')));
 		$data = $db->results();
 		echo json_encode($data);
+	}
+	else if (input::get('block')) {
+		$user2 = new user(input::get('block'));
+		$blockee = json_decode($user2->data()->blocked);
+		$blockee->blocker[] = $user->data()->username;
+		$user2->update(array('blocked' => json_encode($blockee)), $user2->data()->user_id);
+		$blocker = json_decode($user->data()->blocked);
+		$blocker->blockee[] = input::get('block');
+		$user->update(array('blocked' => json_encode($blocker)));
+		echo 1;
+
+
 	}
 }
 

@@ -43,3 +43,8 @@ function build_profile(name) {
 	}).fadeIn('slow');
 
 }
+function block () {
+	person = $('#persons_username').html();
+	check = Ajax('home.php','POST','block='+person,false);
+	console.log(check);
+}
