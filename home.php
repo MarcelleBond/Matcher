@@ -5,7 +5,7 @@ $user = new user;
 if (input::exists('request')) {
 	if (input::get('all'))
 	{
-	$db->query('SELECT * FROM `users` WHERE `user_id` != ? AND json_unquote(json_extract(`blocked`, "$.blocker")) !='. $user->data()->username.'', array('user_id' => $user->data()->user_id));
+	$db->query('SELECT * FROM `users` WHERE `user_id` != ?', array('user_id' => $user->data()->user_id));
 		$people = $db->results();
 		$profiles = "";
 		foreach ($people as $person => $details) {
