@@ -384,7 +384,7 @@
 	<div class="w3-container w3-right ">
 		<h4 id="persons_location"></h4>
 		<h5 id="persons_fame"></h5>
-		<button id="blockBtn" type="button" class="w3-button w3-theme-d1" onclick="block();"><i class="fa fa-remove"></i>
+		<button id="blockBtn" type="button" class="w3-button w3-theme-d1" onclick="block();" data-blkstat="block"><i class="fa fa-remove"></i>
 		 Block</button>
 	</div>
 	<h4 id="persons_names"></h4>

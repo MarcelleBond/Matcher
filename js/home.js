@@ -45,6 +45,20 @@ function build_profile(name) {
 }
 function block () {
 	person = $('#persons_username').html();
-	check = Ajax('home.php','POST','block='+person,false);
-	console.log(check);
+	blockstatus = $('#blockBtn').attr('data-blkstat');
+	if (blockstatus == 'block')
+	{
+		check = Ajax('home.php','POST','block='+person,false);
+		console.log(check);
+		$('#blockbtn').attr('data-blkstat', 'unblock');
+		$('#blockbtn').html('<i class="fa fa-remove"></i>Unblock');
+
+	}
+	else if (blockstatus == 'unblock')
+	{
+		check = Ajax('home.php','POST','unblock='+person,false);
+		console.log(check);
+		$('#blockbtn').attr('data-blkstat', 'unblock');
+		$('#blockbtn').html('<i class="fa fa-remove"></i>Block');
+	}
 }
