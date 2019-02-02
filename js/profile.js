@@ -148,8 +148,8 @@ $(document).ready(function () {
     ////////DELETE PICTURES//////////
     $('#delete_pic').click(function () {
         value = $("#img01").attr('src');
-        n = value.indexOf("images");
-        value = value.substring(n);
+        // n = value.indexOf("images");
+        // value = value.substring(n);
         check = Ajax('profile.php', 'POST', 'delete_pic=' + value, true);
         if ($('#propic').attr('src') == $("#img01").attr('src')) {
             $('#propic').attr('src', 'images/site_images/p_placeholder.jpeg');
