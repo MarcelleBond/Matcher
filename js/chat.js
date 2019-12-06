@@ -1,10 +1,13 @@
 $(document).ready(function () {
-	// LoadChat();
+	user = friend_id;
+
+	LoadChat(user);
 	/* setInterval(function () {
 		LoadChat();
 	}, 10000); */
-	/* function LoadChat() {
-		$.post('message.php?action=getMessages', function (response) {
+	 function LoadChat(user_id) {
+		 user = user_id
+		$.post('message.php?action=getMessages&user=' + user_id, function (response) {
 
 			var scrollpos = $('#chat').scrollTop();
 			var scrollpos = parseInt(scrollpos) + 520;
@@ -16,7 +19,7 @@ $(document).ready(function () {
 				$('#chat').scrollTop($('#chat').prop('scrollHeight'));
 			}
 		});
-	} */
+	} 
 
 	$('#textarea').keyup(function (e) {
 		if (e.which == 13) {
@@ -26,7 +29,7 @@ $(document).ready(function () {
 
 	$('form').submit(function () {
 		var message = $('#textarea').val();
-		$.post('message.php?action=sendMessage&message=' + message, function (response) {
+		$.post('message.php?action=sendMessage&message=' + message+'&person=' + user , function (response) {
 			alert(response);
 			if (response == 1) {
 				LoadChat();

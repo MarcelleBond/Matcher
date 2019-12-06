@@ -1,10 +1,13 @@
-
+// import { LoadChat } from "chat.js";
+friend_id = null; 
 details = Ajax('profile.php', 'POST', 'action=display_info', false);
 details = JSON.parse(details);
 profile = JSON.parse(details['profile']);
 images = Ajax('profile.php', 'POST', 'images=images', false)
 images = JSON.parse(images);
-
+friends = Ajax('profile.php', 'POST', 'friends=friends', false)
+friends = JSON.parse(friends);
+console.log(friends);
 $("#propic").attr('src', profile.dp);
 $('#display_username').append(details.username);
 $('#display_name').append(details.first_name + ' ' + details.last_name);
@@ -19,4 +22,18 @@ for (const key in profile.interest) {
 		const element = profile.interest[key];
 		$('#display_interest').append('<span class="w3-tag w3-small w3-theme-l1 w3-margin-right-16">' + element + '</span>  ');
 	}
+}
+for (var i = 0; i < friends.length; i++)
+	$('#display_friends').append('<div class="w3-quarter"><a href="#chat"><p style="max-width:100%" class="w3-margin-bottom" onclick="startchat(' + friends[i]['user_id'] + ')">' + friends[i]['username'] + '</p></a></div>');
+
+
+
+function startchat(user_id) {
+	$('#middle_content').fadeOut('slow', function () {
+		$('#middle_content').load("includes/UI/loggedin.php #chatRoom", function () {
+			friend_id = user_id;
+			managescript(last_page() + ".js", 'remove');
+			managescript('chat.js', 'add');
+		});
+	}).fadeIn('slow');
 }

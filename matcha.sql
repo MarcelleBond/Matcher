@@ -21,7 +21,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `matcha`
 --
-
+CREATE DATABASE IF NOT EXISTS `matcha` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE `matcha`;
 -- --------------------------------------------------------
 
 --
@@ -78,9 +79,11 @@ INSERT INTO `gallery` (`img_id`, `img_name`, `user_id`, `time_stamp`) VALUES
 --
 
 CREATE TABLE `likes` (
-  `likie` int(11) NOT NULL,
-  `likers_id` int(11) NOT NULL,
-  `like_status` int(11) NOT NULL
+  `liker_id` int(11) NOT NULL,
+  `likee_id` int(11) NOT NULL,
+  `liker_stat` int(11) NOT NULL,
+  `likee_stat` int(11) NOT NULL,
+  `chat` json NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -153,7 +156,7 @@ ALTER TABLE `gallery`
 -- Indexes for table `likes`
 --
 ALTER TABLE `likes`
-  ADD UNIQUE KEY `likie` (`likie`,`likers_id`);
+  ADD UNIQUE KEY `liker_id` (`liker_id`,`likee_id`);
 
 --
 -- Indexes for table `users`

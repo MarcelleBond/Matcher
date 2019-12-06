@@ -2,14 +2,13 @@
 require_once 'core/init.php';
 
 $db = DB::getInstance();
+$user = new user;
 
-switch ($_REQUEST['action']) {
+switch (input::get('action')) {
     case 'sendMessage':
-    echo $_REQUEST['message'];
-        /* if ($db->insert('messages', array('user' => 'Tyler', 'message' => escape($_REQUEST['message'])))) {
-            echo 1;
-            exit;
-        } */
+        $db->query('UPDATE likes SET chat = ? WHERE `liker_id`= ' . $user->data()->user_id . ' AND `likee_id` = ? OR `likee_id`= ' . $user->data()->user_id . ' AND `liker_id`= ?', array('chat' => input::get('message'), 'likee_id' => input::get('person'), 'liker_id' => input::get('person') ));
+        echo 1;
+        exit;
         break;
     case 'getMessages':
         $db->query('SELECT * FROM messages');

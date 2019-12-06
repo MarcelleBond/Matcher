@@ -69,14 +69,16 @@
 					<button onclick="myFunction('Demo3')" class="w3-button w3-block w3-theme-l1 w3-left-align"><i class="fa fa-users fa-fw w3-margin-right"></i>
 						My Photos</button>
 					<div id="Demo3" class="w3-hide w3-container">
-						<div id="display_images" class="w3-row-padding" style="amx-width: 100%">
+						<div id="display_images" class="w3-row-padding" style="max-width: 100%">
 							<br>
 						</div>
 					</div>
 					<button onclick="myFunction('Demo2')" class="w3-button w3-block w3-theme-l1 w3-left-align"><i class="fa fa-calendar-check-o fa-fw w3-margin-right"></i>
 						My Friends</button>
 					<div id="Demo2" class="w3-hide w3-container">
-						<p>Some other text..</p>
+					<div id="display_friends" class="w3-row-padding" style="max-width: 100%">
+							<br>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -386,10 +388,12 @@
 		<h5 id="persons_fame"></h5>
 		<button id="blockBtn" type="button" class="w3-button w3-theme-d1" onclick="block();" data-blkstat="block"><i class="fa fa-remove"></i>
 		 Block</button>
+		<button id="Report"  type="button" class="w3-button w3-theme-d1" onclick="document.getElementById('id01').style.display='block'"><i class="fa fa-warning"></i>
+		 Report</button>
 	</div>
 	<h4 id="persons_names"></h4>
 	<h5 id="persons_age"></h5>
-	<button id="likeBtn" type="button" class="w3-button w3-theme-d1 "><i class="fa fa-thumbs-up"></i>
+	<button id="likeBtn" type="button" class="w3-button w3-theme-d1 ">
 		 Like</button>
 
 	<hr class="w3-clear">
@@ -404,4 +408,41 @@
 	<h4>Images</h4>
 	<div id="persons_pics" class="w3-row-padding" style="margin:0 -16px">
 	   
+	<div id="id01" class="w3-modal">
+    <div class="w3-modal-content w3-animate-zoom">
+      <div class="w3-container">
+        <span onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+        <p><b>REPORT</b></p>
+        <p>ARE YOU SURE YOU WANT TO REPORT THIS USER AS A FAKE ACCOUNT</p>
+        <button class="w3-button w3-theme-d1 w3-margin" style="text-shadow:1px 1px 0 #444" onclick="document.getElementById('id01').style.display='none'; document.getElementById('id02').style.display='Block'; report(document.getElementById('persons_username').innerhtml)" id="Report"><b>YES</b></button>
+        <button class="w3-button w3-theme-d1 w3-margin" style="text-shadow:1px 1px 0 #444" onclick="document.getElementById('id01').style.display='none'" id="Report"><b>NO</b></button>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="id02" class="w3-modal">
+    <div class="w3-modal-content w3-animate-zoom">
+      <div class="w3-container">
+        <span onclick="document.getElementById('id02').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+        <p><b>REPORT</b></p>
+        <p>USER SUCCESSFULLY REPORTED</p>
+        <button class="w3-button w3-theme-d1 w3-margin" style="text-shadow:1px 1px 0 #444" onclick="document.getElementById('id02').style.display='none'" id="Report"><b>OK</b></button>
+      </div>
+    </div>
+  </div>
+
 	</div>
+
+
+<!-- ////////////////////////////////////////////////// ChatRoom ////////////////////////////////////////////////////// -->
+
+<div id="chatRoom">
+<div class="chat_wrapper" id="chat_wrapper" style="float:right;margin-right:60%">
+        <div id="chat" style="border:solid 1px black"></div>
+            <form method="POST" id="messageFrm">
+                <textarea name="message" cols="50" rows="2" class="textarea" id="textarea" placeholder="Please Type a message to send"></textarea>
+            </form>
+        </div>
+        
+    </div>
+</div>

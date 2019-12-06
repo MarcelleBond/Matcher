@@ -1,27 +1,10 @@
-$(document).ready(function () {
-	
-loadpeople();
-
-});
-
-function profiles() {
-	people = Ajax('home.php', 'POST', 'all=all', false)
-	return people
-}
 
 
-function loadpeople() {
-	$('#middle_content').fadeOut('slow', function () {
-		$('#middle_content').html(profiles());
-	}).fadeIn('slow');
-}
 
-
-function build_profile(name) {
 	Ajax('notifications.php', 'POST', 'addnotes=viewed you page&name=' + name.innerHTML, true);
 	$('#middle_content').fadeOut('slow', function () {
 		$('#middle_content').load("includes/UI/loggedin.php #person_profile", function () {
-			person = Ajax('home.php', 'POST', 'profile=' + name.innerHTML, false);
+			person = Ajax('view_profile.php', 'POST', 'profile=' + name.innerHTML, false);
 			person = JSON.parse(person)
 			data = person[0].profile;
 			data = JSON.parse(data);
@@ -57,52 +40,34 @@ function build_profile(name) {
 				const element = person[i].img_name;
 				$('#persons_pics').append('<div class="w3-half"><img src="' + element + '" style="width:100%" alt="' + element + '" class="w3-margin-bottom"></div>');
 			}
-
-			$('#likeBtn').click(function (e) {
+			
+			$('#likeBtn').click(function(e){
 				e.preventDefault();
 				var status = $('#likeBtn').html();
-				status = status.substring(status.lastIndexOf(' ') + 1, status.length);
+				status = status.substring(status.lastIndexOf(' ') + 1 , status.length);
 				var me = person[0].liker_id == person[0].user_id ? 'likee' : 'liker';
-				var response = Ajax('home.php', 'POST', 'likestatus=' + status + '&me=' + me + '&them=' + person[0].user_id, false)
-				response = JSON.parse(response);
-				// alert()
-				if (status == "Unlike") {
-					if (Object.keys(response[0]) == 'likee_stat') {
-						if (response[0].likee_stat == 1) {
-							$('#likeBtn').html("<i class='fa fa-thumbs-up'></i> Like Back");
-						}
-						else {
-							$('#likeBtn').html("<i class='fa fa-thumbs-up'></i> Like");
-						}
-					}
-					else {
-						if (response[0].liker_stat == 1) {
-							$('#likeBtn').html("<i class='fa fa-thumbs-up'></i> Like Back");
-						}
-						else {
-							$('#likeBtn').html("<i class='fa fa-thumbs-up'></i> Like");
-						}
-					}
-				}
-				else {
-					$('#likeBtn').html("<i class='fa fa-thumbs-down'></i> Unlike");
-				}
+				Ajax('view_profile.php', 'POST', 'all=all', true)				
+
 			});
 		});
 	}).fadeIn('slow');
-
-
-}
 
 
 
 function block() {
 	person = $('#persons_username').html();
 	blockstatus = $('#blockBtn').attr('data-blkstat');
-	check = Ajax('home.php', 'POST', 'block=' + person, true);
-	loadpeople();	
-}
+	if (blockstatus == 'block') {
+		check = Ajax('view_profile.php', 'POST', 'block=' + person, false);
+		console.log(check);
+		$('#blockBtn').attr('data-blkstat', 'unblock');
+		$('#blockBtn').html('<i class="fa fa-remove"></i>Unblock');
 
-function report(params) {
-	Ajax('view_profile.php', 'POST' ,"report=" + params, true);
+	}
+	else if (blockstatus == 'unblock') {
+		check = Ajax('view_profile.php', 'POST', 'unblock=' + person, false);
+		console.log(check);
+		$('#blockBtn').attr('data-blkstat', 'block');
+		$('#blockBtn').html('<i class="fa fa-remove"></i>Block');
+	}
 }
