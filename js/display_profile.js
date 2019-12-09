@@ -2,13 +2,13 @@
 $(document).ready(function () {
 	
 friend_id = null; 
-details = Ajax('profile.php', 'POST', 'action=display_info', true);
+details = Ajax('profile.php', 'POST', 'action=display_info', false);
 details = JSON.parse(details);
 console.log(details);
 profile = JSON.parse(details['profile']);
-images = Ajax('profile.php', 'POST', 'images=images', true)
+images = Ajax('profile.php', 'POST', 'images=images', false)
 images = JSON.parse(images);
-friends = Ajax('profile.php', 'POST', 'friends=friends', true)
+friends = Ajax('profile.php', 'POST', 'friends=friends', false)
 friends = JSON.parse(friends);
 console.log(friends);
 $("#propic").attr('src', profile.dp);

@@ -1,5 +1,7 @@
 $(document).ready(function () {
-	if ((check = Ajax('user_status.php', 'POST', 'action=login', false)) != 1) {
+	check = Ajax('user_status.php', 'POST', 'action=login', false)
+	console.log(check)
+	if (check != 1) {
 		$('body').fadeOut('slow', function () {
 			$('#nav').load("includes/UI/loggedout.php #nav_bar", function () {
 				$('#login_link').click(function () {
@@ -102,34 +104,13 @@ function checknotes() {
 		$('#notes_count').html('0');
 }
 
-function Ajax(sendto, method, value, AsyncOrSync) {
+async function Ajax(sendto, method, value, AsyncOrSync) {
 
 	// request = "";
 	promiseData = null;
 	if (AsyncOrSync == false) {
-		var value  = promiseAjax(sendto, method, value)
-		value.then(data => {
-			promiseData = data;
-			console.log ("THEN: " + data);
-			return promiseData;
-		})
 
-	}
-	else {
-		promiseData = $.ajax({
-			url: sendto,
-			type: method,
-			data: value,
-			async: true,
-		})
-		return promiseData.responseText;
-	}
-}
-
-function promiseAjax(sendto, method, value, AsyncOrSync)
-{
-	return promise = new Promise((resolve, reject) => {
-		$.ajax({
+		promiseData = await $.ajax({
 			url: sendto,
 			type: method,
 			data: value,
@@ -141,8 +122,36 @@ function promiseAjax(sendto, method, value, AsyncOrSync)
 				reject(error)
 			},
 		})
-	})
+	}
+	else {
+		promiseData = $.ajax({
+			url: sendto,
+			type: method,
+			data: value,
+			async: true,
+		})
+	}
+	return promiseData.responseText;
 }
+
+// function getPromiseValue(){
+// 	return promiseAjax(sendto, method, value, AsyncOrSync).then(function (data){
+// 		return data;
+// 	})
+// }
+
+// function promiseAjax(sendto, method, value, AsyncOrSync)
+// {
+// 	return promise = new Promise((resolve, reject) => {
+// 		$.ajax({
+// 			url: sendto,
+// 			type: method,
+// 			data: value,
+// 			async: true,
+// 			
+// 		})
+// 	})
+// }
 
 function managescript(script, task) {
 	if (task == 'remove')
