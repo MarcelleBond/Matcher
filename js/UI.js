@@ -75,13 +75,11 @@ $(document).ready(function () {
 
 		}).fadeIn('slow');
 	}
-	
-	setInterval(function()
-	{
+
+	setInterval(function () {
 		$.post("user_status.php?action=login",
 			function (data) {
-				if (data != 1 && (last_page() != 'login' && last_page() != 'register' && last_page() != 'forgotpassword'))
-				{				
+				if (data != 1 && (last_page() != 'login' && last_page() != 'register' && last_page() != 'forgotpassword')) {
 					location.reload();
 				}
 			}
@@ -93,7 +91,8 @@ $(document).ready(function () {
 
 function checknotes() {
 	notes = Ajax('notifications.php', 'POST', 'getnotes=getnotes', false);
-	notes = JSON.parse(notes);
+	console.log("notes: " + notes)
+	// notes = JSON.parse(notes);
 	if (notes && notes != "0") {
 		var result = Object.keys(notes).map(function (key) {
 			return [Number(key), notes[key]];
@@ -104,14 +103,45 @@ function checknotes() {
 }
 
 function Ajax(sendto, method, value, AsyncOrSync) {
-	request = "";
-	request = $.ajax({
-		url: sendto,
-		type: method,
-		data: value,
-		async: AsyncOrSync,
+
+	// request = "";
+	promiseData = null;
+	if (AsyncOrSync == false) {
+		var value  = promiseAjax(sendto, method, value)
+		value.then(data => {
+			promiseData = data;
+			console.log ("THEN: " + data);
+			return promiseData;
+		})
+
+	}
+	else {
+		promiseData = $.ajax({
+			url: sendto,
+			type: method,
+			data: value,
+			async: true,
+		})
+		return promiseData.responseText;
+	}
+}
+
+function promiseAjax(sendto, method, value, AsyncOrSync)
+{
+	return promise = new Promise((resolve, reject) => {
+		$.ajax({
+			url: sendto,
+			type: method,
+			data: value,
+			async: true,
+			success: function (data) {
+				resolve(data)
+			},
+			error: function (error) {
+				reject(error)
+			},
+		})
 	})
-	return request.responseText;
 }
 
 function managescript(script, task) {
@@ -156,7 +186,7 @@ function Age(dob) {
 	var today = new Date();
 	var age = today.getFullYear() - year;
 	if (today.getMonth() < month || (today.getMonth() == month && today.getDate() < day)) {
-	  age--;
+		age--;
 	}
 	return age;
 }
