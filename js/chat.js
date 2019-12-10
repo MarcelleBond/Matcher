@@ -1,18 +1,23 @@
 $(document).ready(function () {
 	user = friend_id;
+	my_name = details.username
 
 	LoadChat(user);
-	/* setInterval(function () {
-		LoadChat();
-	}, 10000); */
+	setInterval(function () {
+		LoadChat(user);
+	}, 1000); 
 	 function LoadChat(user_id) {
-		 user = user_id
+		// var user = user_id
 		$.post('message.php?action=getMessages&user=' + user_id, function (response) {
-
+			
 			var scrollpos = $('#chat').scrollTop();
 			var scrollpos = parseInt(scrollpos) + 520;
 			var scrollHeight = $('#chat').prop('scrollHeight');
-			$('#chat').html(response);
+			// alert(response);
+			//  console.log(JSON.parse(response)[0][]);
+
+			// console.log(user + " users id");
+			$('#chat').html(JSON.parse(response)[0]["chat"]);
 			if (scrollpos < scrollHeight) {
 
 			} else {
@@ -28,11 +33,18 @@ $(document).ready(function () {
 	});
 
 	$('form').submit(function () {
+	
 		var message = $('#textarea').val();
-		$.post('message.php?action=sendMessage&message=' + message+'&person=' + user , function (response) {
+		// var fullChat = "<p>"+$('#chat').html()+"</p>";
+		var fullChat = $('#chat').html()+ "<div class='w3-container w3-card w3-white w3-round w3-margin-bottom w3-margin-top' ><h5>"+my_name+"</h5><p>"+message+"</p></div>";
+
+		console.log(fullChat);
+		console.log(JSON.stringify( fullChat));
+		//console.log(message);
+		$.post('message.php?action=sendMessage&message=' + JSON.stringify( fullChat) +'&person=' + user , function (response) {
 			alert(response);
 			if (response == 1) {
-				LoadChat();
+				LoadChat(user);
 				$('#messageFrm')[0].reset();
 			}
 		});

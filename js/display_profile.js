@@ -40,3 +40,4 @@ function startchat(user_id) {
 		});
 	}).fadeIn('slow');
 }
+

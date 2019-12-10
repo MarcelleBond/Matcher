@@ -436,13 +436,13 @@
 
 <!-- ////////////////////////////////////////////////// ChatRoom ////////////////////////////////////////////////////// -->
 
-<div id="chatRoom">
-<div class="chat_wrapper" id="chat_wrapper" style="float:right;margin-right:60%">
-        <div id="chat" style="border:solid 1px black"></div>
+<!-- <div id="chatRoom" class="w3-container w3-card w3-white w3-round w3-margin"> -->
+	<div class="w3-container w3-card w3-white w3-round w3-margin" id="chatRoom" >
+        <div id="chat"></div>
             <form method="POST" id="messageFrm">
-                <textarea name="message" cols="50" rows="2" class="textarea" id="textarea" placeholder="Please Type a message to send"></textarea>
+                <textarea name="message" class="w3-input w3-border w3-round w3-margin-bottom w3-margin-top" id="textarea" placeholder="Please Type a message to send"></textarea>
             </form>
         </div>
         
     </div>
-</div>
+<!-- </div> -->

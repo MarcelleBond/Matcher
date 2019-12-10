@@ -1,7 +1,5 @@
 $(document).ready(function () {
-	check = Ajax('user_status.php', 'POST', 'action=login', false)
-	console.log(check)
-	if (check != 1) {
+	if ((check = Ajax('user_status.php', 'POST', 'action=login', false)) != 1) {
 		$('body').fadeOut('slow', function () {
 			$('#nav').load("includes/UI/loggedout.php #nav_bar", function () {
 				$('#login_link').click(function () {
@@ -77,11 +75,13 @@ $(document).ready(function () {
 
 		}).fadeIn('slow');
 	}
-
-	setInterval(function () {
+	
+	setInterval(function()
+	{
 		$.post("user_status.php?action=login",
 			function (data) {
-				if (data != 1 && (last_page() != 'login' && last_page() != 'register' && last_page() != 'forgotpassword')) {
+				if (data != 1 && (last_page() != 'login' && last_page() != 'register' && last_page() != 'forgotpassword'))
+				{				
 					location.reload();
 				}
 			}
@@ -93,8 +93,7 @@ $(document).ready(function () {
 
 function checknotes() {
 	notes = Ajax('notifications.php', 'POST', 'getnotes=getnotes', false);
-	console.log("notes: " + notes)
-	// notes = JSON.parse(notes);
+	notes = JSON.parse(notes);
 	if (notes && notes != "0") {
 		var result = Object.keys(notes).map(function (key) {
 			return [Number(key), notes[key]];
@@ -104,54 +103,16 @@ function checknotes() {
 		$('#notes_count').html('0');
 }
 
-async function Ajax(sendto, method, value, AsyncOrSync) {
-
-	// request = "";
-	promiseData = null;
-	if (AsyncOrSync == false) {
-
-		promiseData = await $.ajax({
-			url: sendto,
-			type: method,
-			data: value,
-			async: true,
-			success: function (data) {
-				resolve(data)
-			},
-			error: function (error) {
-				reject(error)
-			},
-		})
-	}
-	else {
-		promiseData = $.ajax({
-			url: sendto,
-			type: method,
-			data: value,
-			async: true,
-		})
-	}
-	return promiseData.responseText;
+function Ajax(sendto, method, value, AsyncOrSync) {
+	request = "";
+	request = $.ajax({
+		url: sendto,
+		type: method,
+		data: value,
+		async: AsyncOrSync,
+	})
+	return request.responseText;
 }
-
-// function getPromiseValue(){
-// 	return promiseAjax(sendto, method, value, AsyncOrSync).then(function (data){
-// 		return data;
-// 	})
-// }
-
-// function promiseAjax(sendto, method, value, AsyncOrSync)
-// {
-// 	return promise = new Promise((resolve, reject) => {
-// 		$.ajax({
-// 			url: sendto,
-// 			type: method,
-// 			data: value,
-// 			async: true,
-// 			
-// 		})
-// 	})
-// }
 
 function managescript(script, task) {
 	if (task == 'remove')
@@ -195,7 +156,7 @@ function Age(dob) {
 	var today = new Date();
 	var age = today.getFullYear() - year;
 	if (today.getMonth() < month || (today.getMonth() == month && today.getDate() < day)) {
-		age--;
+	  age--;
 	}
 	return age;
 }
