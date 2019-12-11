@@ -5,13 +5,13 @@ $(document).ready(function()
     getLocation();
 })
 
-$('form').submit(function (event) {
+$('form').submit(async function (event) {
     event.preventDefault();
     value = $('form').serializeArray();
     value.push({name: 'location', value: where_i_stay});
     console.log('form submition');
     console.log(value);
-    check = register(value)
+    check = await register(value)
     if (check == 1) {
         $('#content').fadeOut('slow', function () {
             $('#content').load("includes/UI/loggedout.php #login", function () {
@@ -32,8 +32,8 @@ $('form').submit(function (event) {
     return false;
 });
 
-function register(value) {
-    request = Ajax('register.php', 'POST', value, false);
+async function register(value) {
+    request = await Ajax('register.php', 'POST', value, false);
     return request;
 }
 

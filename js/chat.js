@@ -1,6 +1,6 @@
 $(document).ready(function () {
-	user = friend_id;
 	my_name = details.username
+	user = friend_id;
 
 	LoadChat(user);
 	setInterval(function () {
@@ -35,14 +35,16 @@ $(document).ready(function () {
 	$('form').submit(function () {
 	
 		var message = $('#textarea').val();
+		Ajax('notifications.php', 'POST', 'addnotes=sent you a message&name=' + user, true);
+
 		// var fullChat = "<p>"+$('#chat').html()+"</p>";
 		var fullChat = $('#chat').html()+ "<div class='w3-container w3-card w3-white w3-round w3-margin-bottom w3-margin-top' ><h5>"+my_name+"</h5><p>"+message+"</p></div>";
 
-		console.log(fullChat);
-		console.log(JSON.stringify( fullChat));
+		// console.log(fullChat);
+		// console.log(JSON.stringify( fullChat));
 		//console.log(message);
 		$.post('message.php?action=sendMessage&message=' + JSON.stringify( fullChat) +'&person=' + user , function (response) {
-			alert(response);
+			// alert(response);
 			if (response == 1) {
 				LoadChat(user);
 				$('#messageFrm')[0].reset();

@@ -18,6 +18,7 @@
 		}
 		else if (input::get('addnotes'))
 		{
+			
 			$user2 = new user(input::get('name'));
 			$profile2 = json_decode($user2->data()->profile);
 			if ($profile2->notifications){

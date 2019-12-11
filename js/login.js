@@ -8,16 +8,17 @@ $('#ForgotButton').click(function (e) {
 	managescript('login.js', 'remove');
 })
 
-$('form').submit(function (event) {
+$('form').submit(async function (event) {
 	event.preventDefault();
 	value = $('form').serialize();
-	check = login(value)
+	check = await login(value)
 	if (check == 1) {
 			managescript('UI.js', 'remove');
 			managescript('UI.js', 'add');
 			managescript('login.js', 'remove');
 	}
 	else {
+		console.log("CHECK: " +check);
 		if (document.getElementById('error'))
 			$('#error').html(check);
 		else {
@@ -28,8 +29,8 @@ $('form').submit(function (event) {
 	return false;
 });
 
-function login(value) {
-	request = Ajax('login.php', 'POST', value, false);
+async function login(value) {
+	request = await Ajax('login.php', 'POST', value, false);
 	return request;
 
 }

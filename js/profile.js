@@ -7,19 +7,26 @@ $(document).ready(function () {
     });
     $('#error_spot').addClass('error w3-card w3-round w3-padding-16 w3-center');
     ////////DISPLAY CURRENT INFO//////////
+
+    /* var details = async function(){
+        details = await Ajax('profile.php', 'POST', 'action=display_info', false);
+    } */
     details = Ajax('profile.php', 'POST', 'action=display_info', false);
-    details = JSON.parse(details);
-    profile = JSON.parse(details['profile']);
-    $('#bio-textarea').val(profile.bio);
-    for (const key in profile.interest) {
-        if (profile.interest.hasOwnProperty(key)) {
-            const element = profile.interest[key];
-            $('#interest_select').find('option[value="' + element + '"]').prop('selected', true);
+    details.then(function(data){
+        details = data;
+        details = JSON.parse(details);
+        profile = JSON.parse(details['profile']);
+        $('#bio-textarea').val(profile.bio);
+        for (const key in profile.interest) {
+            if (profile.interest.hasOwnProperty(key)) {
+                const element = profile.interest[key];
+                $('#interest_select').find('option[value="' + element + '"]').prop('selected', true);
+            }
         }
-    }
-    $('input:radio[id="' + profile.preference.toLowerCase() + '"]').attr('checked', true);
-    display_pics();
-    checkcheck();
+        $('input:radio[id="' + profile.preference.toLowerCase() + '"]').attr('checked', true);
+        display_pics();
+        checkcheck();
+    })
 
 
     ///////////PREVIEW PROFILE/////////////

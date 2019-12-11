@@ -44,9 +44,7 @@ if (input::exists('request')) {
 		unset($blocker->blockee[input::get('unblock')]);
 		$user->update(array('blocked' => json_encode($blocker)));
 		echo 1;
-	}else if (input::get('likestatus')){
-		
-	} else if (input::get('blockstat')){
+	}else if (input::get('blockstat')){
 		$user2 = new user(input::get('blockstat'));
 		$blockee = json_decode($user2->data()->blocked);
 		if (in_array($user->data()->username, $blockee->blockee) || in_array($user->data()->username, $blockee->blocker)){
@@ -58,6 +56,32 @@ if (input::exists('request')) {
 	}
 	elseif (input::get('report')) {
 		Email("report@mailinator.com", "Reported user", $user->data()->username . " has reported " . input::get('report') . " as a fake user");
+	}
+	else if (input::get('likestatus')){
+		if (input::get('me') == "liker"){
+
+			$db->query("INSERT INTO `likes` (`liker_id`, `likee_id`, `chat` ) VALUES (?, ?,'{}') ON DUPLICATE KEY UPDATE `liker_stat` = NOT `liker_stat`", array('liker_id' => intval($user->data()->user_id), 'likee' => intval(input::get('them'))));
+			$db->query("SELECT `likee_stat` FROM `likes` WHERE `liker_id` = ? AND `likee_id` = ?", array('liker_id' => intval($user->data()->user_id), 'likee_id' => intval( input::get('them'))));	
+		}	
+		else{
+			$db->query("UPDATE `likes` SET `likee_stat` = NOT `likee_stat` WHERE `liker_id` = ? AND `likee_id` = ?", array('liker_id' => intval( input::get('them')), 'likee_id' => intval($user->data()->user_id)));
+		    $db->query("SELECT `liker_stat` FROM `likes` WHERE `liker_id` = ? AND `likee_id` = ?", array('liker_id' => intval( input::get('them')), 'likee_id' => intval($user->data()->user_id)));
+		}
+		$test = $db->results();
+		echo json_encode($test);
+	} else if (input::get('blockstat')){
+		$user2 = new user(input::get('blockstat'));
+		$blockee = json_decode($user2->data()->blocked);
+		if (in_array($user->data()->username, $blockee->blockee) || in_array($user->data()->username, $blockee->blocker)){
+			echo 'unblock';
+		}
+		else {
+			echo 'block';
+		}
+	}
+	elseif (input::get('likecheck')) {
+		$db->query("SELECT * FROM `likes` WHERE (`liker_id` = ". intval($user->data()->user_id)." AND `likee_id` = ?) OR (`liker_id` = ? AND `likee_id` = ". intval($user->data()->user_id).")", array('liker_id' => intval( input::get('them')), 'likee_id' => intval( input::get('them'))));
+		echo json_encode($db->results());
 	}
 
 }

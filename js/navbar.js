@@ -23,8 +23,8 @@ $('#profile').click(function () {
 	}
 });
 
-$('#logout_link').click(function () {
-	response = Ajax('logout.php', 'POST', null, false);
+$('#logout_link').click(async function () {
+	response = await Ajax('logout.php', 'POST', null, false);
 	if (response == 1) {
 		managescript(last_page() + ".js", 'remove');
 		managescript('UI.js', 'remove');
@@ -38,8 +38,8 @@ $('#stats').click(function(){
 	managescript('stats.js');
 })
 
-$('#Notifications_icon').hover(function () {
-	notes = Ajax('notifications.php', 'POST', 'getnotes=getnotes', false);
+$('#Notifications_icon').hover(async function () {
+	notes = await Ajax('notifications.php', 'POST', 'getnotes=getnotes', false);
 	if (notes && notes != "0") {
 		notes = JSON.parse(notes);
 		$("#Notifications p").remove();

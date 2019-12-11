@@ -1,5 +1,5 @@
-$(document).ready(function () {
-	if ((check = Ajax('user_status.php', 'POST', 'action=login', false)) != 1) {
+$(document).ready(async function () {
+	if ((check = await Ajax('user_status.php', 'POST', 'action=login', false)) != 1) {
 		$('body').fadeOut('slow', function () {
 			$('#nav').load("includes/UI/loggedout.php #nav_bar", function () {
 				$('#login_link').click(function () {
@@ -75,13 +75,11 @@ $(document).ready(function () {
 
 		}).fadeIn('slow');
 	}
-	
-	setInterval(function()
-	{
+
+	setInterval(function () {
 		$.post("user_status.php?action=login",
 			function (data) {
-				if (data != 1 && (last_page() != 'login' && last_page() != 'register' && last_page() != 'forgotpassword'))
-				{				
+				if (data != 1 && (last_page() != 'login' && last_page() != 'register' && last_page() != 'forgotpassword')) {
 					location.reload();
 				}
 			}
@@ -91,8 +89,9 @@ $(document).ready(function () {
 });
 
 
-function checknotes() {
-	notes = Ajax('notifications.php', 'POST', 'getnotes=getnotes', false);
+async function checknotes() {
+	notes = await Ajax('notifications.php', 'POST', 'getnotes=getnotes', false);
+	// console.log("NOTES: " + notes);
 	notes = JSON.parse(notes);
 	if (notes && notes != "0") {
 		var result = Object.keys(notes).map(function (key) {
@@ -103,16 +102,51 @@ function checknotes() {
 		$('#notes_count').html('0');
 }
 
-function Ajax(sendto, method, value, AsyncOrSync) {
+
+async function promise(sendto, method, value) {
+	PromiseResponse = null;
+	testResponse = await new Promise(function (resolve) {
+
+		request = "";
+		request =  $.ajax({
+			url: sendto,
+			type: method,
+			data: value,
+			async: true,
+			success: function (data) {
+				PromiseResponse = data;
+				resolve(data);
+				return "1";
+			},
+			error: function () {
+				alert('Error occured');
+			}
+		})
+		return request;	
+	});
+	return await PromiseResponse;
+}
+
+
+async function Ajax(sendto, method, value, AsyncOrSync) {
 	request = "";
-	request = $.ajax({
-		url: sendto,
-		type: method,
-		data: value,
-		async: AsyncOrSync,
-	})
+	if (AsyncOrSync == false) {
+		request = await promise(sendto, method, value);
+		// console.log("REQUEST: "+ request);
+		return request;
+	}
+	else {
+
+		request = $.ajax({
+			url: sendto,
+			type: method,
+			data: value,
+			async: true,
+		})
+	}
 	return request.responseText;
 }
+
 
 function managescript(script, task) {
 	if (task == 'remove')
@@ -156,7 +190,7 @@ function Age(dob) {
 	var today = new Date();
 	var age = today.getFullYear() - year;
 	if (today.getMonth() < month || (today.getMonth() == month && today.getDate() < day)) {
-	  age--;
+		age--;
 	}
 	return age;
 }

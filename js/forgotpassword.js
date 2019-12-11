@@ -1,10 +1,10 @@
 
 window.location.href = "#forgorpassword";
 
-$('form').submit(function (event) {
+$('form').submit(async function (event) {
     event.preventDefault();
     value = $('form').serialize();
-    check = forgotpassword(value)
+    check = await forgotpassword(value)
     if (check == 1) {
         $('#content').fadeOut('slow', function(){
 			$('#content').load("includes/UI/loggedout.php #login",function()
@@ -28,9 +28,8 @@ $('form').submit(function (event) {
 });
 
 
-function forgotpassword(value)
+async function forgotpassword(value)
 {
-	request = Ajax('forgot.php', 'POST',value, false);
+    request = await Ajax('forgot.php', 'POST',value, false);
 	return request;
-    
 }

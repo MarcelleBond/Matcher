@@ -1,32 +1,43 @@
-$(document).ready(function () {
-	
-loadpeople();
+$(document).ready(async function () {
+	$('#middle_content').fadeOut('slow', async function () {
+		$('#middle_content').html(await profiles());
+	}).fadeIn('slow');
 
 });
 
-function profiles() {
-	people = Ajax('home.php', 'POST', 'all=all', false)
+
+async function profiles() {
+	people = await Ajax('home.php', 'POST', 'all=all', false)
+	// console.log("PEOPLE: "+ people);
 	return people
 }
 
 
-function loadpeople() {
-	$('#middle_content').fadeOut('slow', function () {
-		$('#middle_content').html(profiles());
-	}).fadeIn('slow');
-}
 
-
-function build_profile(name) {
+async function build_profile(name) {
 	Ajax('notifications.php', 'POST', 'addnotes=viewed you page&name=' + name.innerHTML, true);
 	$('#middle_content').fadeOut('slow', function () {
-		$('#middle_content').load("includes/UI/loggedin.php #person_profile", function () {
-			person = Ajax('home.php', 'POST', 'profile=' + name.innerHTML, false);
+		$('#middle_content').load("includes/UI/loggedin.php #person_profile", async function () {
+			person = await Ajax('home.php', 'POST', 'profile=' + name.innerHTML, false);
 			person = JSON.parse(person)
 			data = person[0].profile;
 			data = JSON.parse(data);
-			console.log(person);
-
+			// var status = $('#likeBtn').html();
+			// status = status.substring(status.lastIndexOf(' ') + 1, status.length);
+			me = person[0].liker_id == person[0].user_id ? 'likee' : 'liker';
+			response = await Ajax('view_profile.php', 'POST', 'likecheck=likecheck&me=' + me + '&them=' + person[0].user_id, false)
+			response = JSON.parse(response);
+			console.log(response);
+			// alert()
+			if (response[0].liker_stat == 1 && response[0].liker_id == person[0].user_id && response[0].likee_stat == 0) {
+				$('#likeBtn').html("<i class='fa fa-thumbs-up'></i> Like Back");
+			}
+			else if(response[0].liker_stat == 1 && response[0].likee_stat == 1) {
+				$('#likeBtn').html("<i class='fa fa-thumbs-down'></i> UnLike");
+			}
+			else{
+				$('#likeBtn').html("<i class='fa fa-thumbs-up'></i> Like");
+			}
 			$("#persons_dp").attr('src', data.dp);
 			$('#last_seen').html(data.last_login);
 			$('#persons_username').html(person[0].username);
@@ -35,18 +46,6 @@ function build_profile(name) {
 			$('#persons_age').html('Age: ' + Age(data.DOB));
 			$('#persons_fame').html('Fame: ' + data.fame + " pts");
 			$('#persons_bio').html(data.bio);
-			if ((person[0].liker_id == person[0].user_id && person[0].liker_stat == 1 && person[0].likee_stat == 0) || (person[0].likee_id == person[0].user_id && person[0].likee_stat == 1 && person[0].liker_stat == 0)) {
-				//like back
-				$('#likeBtn').html("<i class='fa fa-thumbs-up'></i> Like Back");
-			}
-			else if ((person[0].liker_id == person[0].user_id && person[0].liker_stat == 0 && person[0].likee_stat == 1) || (person[0].likee_id == person[0].user_id && person[0].likee_stat == 0 && person[0].liker_stat == 1)) {
-				//unlike
-				$('#likeBtn').html("<i class='fa fa-thumbs-down'></i> Unlike");
-			}
-			else {
-				//like
-				$('#likeBtn').html("<i class='fa fa-thumbs-up'></i> Like");
-			}
 			for (const key in data.interest) {
 				if (data.interest.hasOwnProperty(key)) {
 					const element = data.interest[key];
@@ -58,15 +57,15 @@ function build_profile(name) {
 				$('#persons_pics').append('<div class="w3-half"><img src="' + element + '" style="width:100%" alt="' + element + '" class="w3-margin-bottom"></div>');
 			}
 
-			$('#likeBtn').click(function (e) {
+			$('#likeBtn').click(async function (e) {
 				e.preventDefault();
 				var status = $('#likeBtn').html();
 				status = status.substring(status.lastIndexOf(' ') + 1, status.length);
-				var me = person[0].liker_id == person[0].user_id ? 'likee' : 'liker';
-				var response = Ajax('home.php', 'POST', 'likestatus=' + status + '&me=' + me + '&them=' + person[0].user_id, false)
-				response = JSON.parse(response);
+
+				// var response = await Ajax('home.php', 'POST', 'likestatus=' + status + '&me=' + me + '&them=' + person[0].user_id, false)
+				// response = JSON.parse(response);
 				// alert()
-				if (status == "Unlike") {
+				if (status == "UnLike") {
 					if (Object.keys(response[0]) == 'likee_stat') {
 						if (response[0].likee_stat == 1) {
 							$('#likeBtn').html("<i class='fa fa-thumbs-up'></i> Like Back");
@@ -85,12 +84,11 @@ function build_profile(name) {
 					}
 				}
 				else {
-					$('#likeBtn').html("<i class='fa fa-thumbs-down'></i> Unlike");
+					$('#likeBtn').html("<i class='fa fa-thumbs-down'></i> UnLike");
 				}
 			});
 		});
 	}).fadeIn('slow');
-
 
 }
 
@@ -100,9 +98,9 @@ function block() {
 	person = $('#persons_username').html();
 	blockstatus = $('#blockBtn').attr('data-blkstat');
 	check = Ajax('home.php', 'POST', 'block=' + person, true);
-	loadpeople();	
+	loadpeople();
 }
 
 function report(params) {
-	Ajax('view_profile.php', 'POST' ,"report=" + params, true);
+	Ajax('view_profile.php', 'POST', "report=" + params, true);
 }
