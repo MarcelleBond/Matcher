@@ -20,7 +20,8 @@ if (input::exists('request')) {
 			$views[] = $user->data()->username;
 			$user2->update(array('views' => json_encode($views)), $user2->data()->user_id);
 		}
-		$db->query("SELECT users.*, gallery.img_name, likes.* FROM `users` LEFT JOIN gallery ON gallery.user_id = users.user_id Left JOIN likes ON likes.liker_id = users.user_id OR likes.likee_id = users.user_id WHERE username =  ?", array('username' => input::get('profile')));
+		// $sqluser = $user->data()->user_id;
+		$db->query("SELECT users.*, gallery.img_name, likes.* FROM `users` LEFT JOIN gallery ON gallery.user_id = users.user_id Left JOIN likes ON (likes.liker_id = users.user_id AND likes.likee_id = ? ) OR (likes.likee_id = users.user_id AND likes.liker_id = ? ) WHERE username =  ?", array( 'likes.likee_id'=> intval($user->data()->user_id), 'likes.liker_id'=> intval($user->data()->user_id), 'username' => input::get('profile')));
 		$data = $db->results();
 		echo json_encode($data);
 	}
@@ -59,12 +60,12 @@ if (input::exists('request')) {
 	}
 	else if (input::get('likestatus')){
 		if (input::get('me') == "liker"){
-			echo "LIKER";
+			// echo "LIKER";
 			$db->query("INSERT INTO `likes` (`liker_id`, `likee_id`, `chat` ) VALUES (?, ?,'{}') ON DUPLICATE KEY UPDATE `liker_stat` = NOT `liker_stat`", array('liker_id' => intval($user->data()->user_id), 'likee' => intval(input::get('them'))));
 			$db->query("SELECT `likee_stat` FROM `likes` WHERE `liker_id` = ? AND `likee_id` = ?", array('liker_id' => intval($user->data()->user_id), 'likee_id' => intval( input::get('them'))));	
 		}	
 		else{
-			echo "LIKEE";
+			// echo "LIKEE";
 			$db->query("UPDATE `likes` SET `likee_stat` = NOT `likee_stat` WHERE `liker_id` = ? AND `likee_id` = ?", array('liker_id' => intval( input::get('them')), 'likee_id' => intval($user->data()->user_id)));
 			$db->query("SELECT `liker_stat` FROM `likes` WHERE `liker_id` = ? AND `likee_id` = ?", array('liker_id' => intval( input::get('them')), 'likee_id' => intval($user->data()->user_id)));
 		}
