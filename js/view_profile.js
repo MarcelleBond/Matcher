@@ -46,7 +46,7 @@
 				var status = $('#likeBtn').html();
 				status = status.substring(status.lastIndexOf(' ') + 1 , status.length);
 				var me = person[0].liker_id == person[0].user_id ? 'likee' : 'liker';
-				Ajax('view_profile.php', 'POST', 'all=all', true)				
+				Ajax('view_profile.php', 'POST', 'all=all', true)						
 
 			});
 		});

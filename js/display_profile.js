@@ -35,12 +35,12 @@ details =  Ajax('profile.php', 'POST', 'action=display_info', false);
 	})
 	friends = Ajax('profile.php', 'POST', 'friends=friends', false)
 	friends.then(function(data){
+		
 		friends = data;
 		friends = JSON.parse(friends);
 		// console.log(friends)
 		for (var i = 0; i < friends.length; i++)
 			$('#display_friends').append('<div class="w3-quarter"><a href="#chat"><p style="max-width:100%" class="w3-margin-bottom" onclick="startchat(' + friends[i]['user_id'] + ')">' + friends[i]['username'] + '</p></a></div>');
-		
 	})
 
 });
