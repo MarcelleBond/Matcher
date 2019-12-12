@@ -15,16 +15,17 @@ async function profiles() {
 
 
 async function build_profile(name) {
-	Ajax('notifications.php', 'POST', 'addnotes=viewed you page&name=' + name.innerHTML, true);
 	$('#middle_content').fadeOut('slow', function () {
 		$('#middle_content').load("includes/UI/loggedin.php #person_profile", async function () {
+			tset = await Ajax('notifications.php', 'POST', 'addnotes=viewed you page&name=' + name.innerHTML, false);
 			person = await Ajax('view_profile.php', 'POST', 'profile=' + name.innerHTML, false);
 			person = JSON.parse(person)
+			console.log("Person: "+ person[0]);
 			data = person[0].profile;
 			data = JSON.parse(data);
 			// var status = $('#likeBtn').html();
 			// status = status.substring(status.lastIndexOf(' ') + 1, status.length);
-			alert(person[0].user_id);
+			alert(person[0].user_id + " "+ person[0].liker_id);
 			me = person[0].liker_id == person[0].user_id ? 'likee' : 'liker';
 			response = await Ajax('view_profile.php', 'POST', 'likecheck=likecheck&me=' + me + '&them=' + person[0].user_id, false)
 			if (response.trim() == 0) {
@@ -34,7 +35,7 @@ async function build_profile(name) {
 				response = JSON.parse(response);
 				console.log(response);
 				if ((response[0].liker_stat == 1 && response[0].liker_id == person[0].user_id && response[0].likee_stat == 0)
-					|| (response[0].likee_stat == 1 && response[0].likee_id == person[0].user_id && response[0].liker_stat == 0)) {
+					|| (response[0].likee_stat == 1 && response[0].liker_id == person[0].user_id && response[0].liker_stat == 0)) {
 					$('#likeBtn').html("<i class='fa fa-thumbs-up'></i> Like Back");
 				}
 				else if (response[0].liker_stat == 1 && response[0].likee_stat == 1) {
