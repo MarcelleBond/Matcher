@@ -91,7 +91,7 @@ $(document).ready(async function () {
 
 async function checknotes() {
 	notes = await Ajax('notifications.php', 'POST', 'getnotes=getnotes', false);
-	// console.log("NOTES: " + notes);
+	//  console.log("NOTES: " + notes);
 	notes = JSON.parse(notes);
 	if (notes && notes != "0") {
 		var result = Object.keys(notes).map(function (key) {

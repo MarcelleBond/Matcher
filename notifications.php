@@ -25,6 +25,11 @@
 				if (!in_array($user->data()->username. " " .input::get('addnotes'), $profile2->notifications)){
 					$profile2->notifications[] = $user->data()->username. " " .input::get('addnotes');
 					$user2->update(array('profile' => json_encode($profile2)), $user2->data()->user_id);
+
+					$db->insert('notif_hist', array(
+                        'usersid' => $user2->data()->user_id,
+                        'notification' => $user->data()->username. " " .input::get('addnotes')
+                    ));
 				}
 			}
 			else {

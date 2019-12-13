@@ -25,11 +25,13 @@ $('#profile').click(function () {
 
 $('#logout_link').click(async function () {
 	response = await Ajax('logout.php', 'POST', null, false);
+	// console.log("RESPONSE: "+response);
 	if (response == 1) {
-		managescript(last_page() + ".js", 'remove');
-		managescript('UI.js', 'remove');
-		managescript('UI.js', 'add');
-		managescript('navbar.js', "remove");
+		// managescript(last_page() + ".js", 'remove');
+		// managescript('UI.js', 'remove');
+		// managescript('UI.js', 'add');
+		// // managescript('navbar.js', "remove");
+		location.reload();
 	}
 });
 
@@ -58,5 +60,6 @@ $('#NotificationsBtn').click(function () {
 })
 
 setInterval(function () {
+	console.log("GODDAMNT");
 	checknotes();
 }, 1000);

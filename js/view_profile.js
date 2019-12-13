@@ -56,18 +56,18 @@
 
 function block() {
 	person = $('#persons_username').html();
-	blockstatus = $('#blockBtn').attr('data-blkstat');
-	if (blockstatus == 'block') {
+	// blockstatus = $('#blockBtn').attr('data-blkstat');
+	// if (blockstatus == 'block') {
 		check = Ajax('view_profile.php', 'POST', 'block=' + person, false);
 		console.log(check);
-		$('#blockBtn').attr('data-blkstat', 'unblock');
-		$('#blockBtn').html('<i class="fa fa-remove"></i>Unblock');
+		// $('#blockBtn').attr('data-blkstat', 'unblock');
+		// $('#blockBtn').html('<i class="fa fa-remove"></i>Unblock');
 
-	}
-	else if (blockstatus == 'unblock') {
-		check = Ajax('view_profile.php', 'POST', 'unblock=' + person, false);
-		console.log(check);
-		$('#blockBtn').attr('data-blkstat', 'block');
-		$('#blockBtn').html('<i class="fa fa-remove"></i>Block');
-	}
+	// }
+	// else if (blockstatus == 'unblock') {
+	// 	check = Ajax('view_profile.php', 'POST', 'unblock=' + person, false);
+	// 	console.log(check);
+	// 	$('#blockBtn').attr('data-blkstat', 'block');
+	// 	$('#blockBtn').html('<i class="fa fa-remove"></i>Block');
+	// }
 }

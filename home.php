@@ -8,7 +8,14 @@ if (input::exists('request')) {
 	{
 //tshiamo
 		//check if people isset
-	$db->query('SELECT * FROM `users` WHERE `user_id` != ?', array('user_id' => $user->data()->user_id));
+		$blocked = json_decode($user->data()->blocked);
+		$blockee = $blocked->blockee;
+		$blocker = $blocked->blocker;
+		$blockee = implode("', '", $blockee);
+		$blockee = "'".$blockee."'";
+		$blocker = implode("', '",$blocker);
+		$blocker = "'".$blocker."'";
+	$db->query("SELECT * FROM `users` WHERE (`user_id` != ?) AND (`username` NOT IN ($blockee) AND `username` NOT IN ($blocker))", array('user_id' => $user->data()->user_id));
 		$people = $db->results();
 		$profiles = "";
 		//filter people according to prefs/interests blahblah then print them

@@ -39,7 +39,6 @@ async function register(value) {
 
 
 function getLocation() {
-
     if (navigator.geolocation) {
         // alert("it works");
          navigator.geolocation.getCurrentPosition(showPosition, showError);
@@ -50,19 +49,22 @@ function getLocation() {
     }
 }
 function showPosition(position) {
-    url = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + position.coords.latitude + "," + position.coords.longitude + "&key=AIzaSyDwMhLbkQbBk7091NEYpSx9T_ykXnwgPuI";
-    $.post(url, function (response) {
+    console.log(position);
+    console.log("we in showpos");
+   // alert('pos logged');
+   newURL = "https://eu1.locationiq.com/v1/reverse.php?key=8e4472c0e891f7&lat=" + position.coords.latitude + "&lon=" + position.coords.longitude + "&format=json";
+   // url = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + position.coords.latitude + "," + position.coords.longitude + "&key=AIzaSyDwMhLbkQbBk7091NEYpSx9T_ykXnwgPuI";
+    $.post(newURL, function (response) {
         console.log(response)
-        console.log("G API START");
-        console.log(response.results[4]["geometry"]["location"]["lat"] + " , " + response.results[4]["geometry"]["location"]["lng"]);
-        console.log("G API END");
-        console.log(response.results[4]['formatted_address'])
-        where_i_stay = response.results[4]['formatted_address'];
-        // alert(where_i_stay)
+       // console.log(response['display_name']);
+        // console.log("G API START");
+        // console.log(response.results[4]["geometry"]["location"]["lat"] + " , " + response.results[4]["geometry"]["location"]["lng"]);
+        // console.log("G API END");
+        // console.log(response.results[4]['formatted_address'])
+         where_i_stay = response['display_name'];
+         alert(where_i_stay);
     });
-
 }
-
 function showError(error) {
     //run IP geoloc on failure
   switch(error.code) {
@@ -84,11 +86,8 @@ function showError(error) {
       break;
   }
 }
-
 function ipFetch() {
-
     ///////////IP search start
-
     url = "http://api.ipstack.com/check?access_key=d115280486eb2f2f8ebb6038c3dd4423";
     //  url = "https://geoip-db.com/jsonp/";
     $.post(url, function (response) {
@@ -102,7 +101,6 @@ function ipFetch() {
        // gMapSrch(response);
     });
 }
-
 
   function gMapSrch(res){
 

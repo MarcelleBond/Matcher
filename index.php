@@ -18,7 +18,7 @@ require_once 'core/init.php'
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<script src="js/jquery-3.3.1.min.js"></script>
 	<script src="js/select2.min.js"></script>
-	<!-- <script src="js/UI.js"></script> -->
+	<script src="js/UI.js"></script>
 	<style>
 		.error {
 			position: fixed;
@@ -56,14 +56,14 @@ require_once 'core/init.php'
 	<div id='foot'></div>
 </body>
 <script>
-function managescript(script, task) {
-	if (task == 'remove')
-		$("script[src='js/" + script + "']").remove();
-	if (task == 'add')
-		$.getScript("js/" + script);
-}
+// function managescript(script, task) {
+// 	if (task == 'remove')
+// 		$("script[src='js/" + script + "']").remove();
+// 	if (task == 'add')
+// 		$.getScript("js/" + script);
+// }
 
-managescript('UI.js', 'add')
+// managescript('UI.js', 'add')
 // managescript('chat.js', 'add')
 
 </script>
