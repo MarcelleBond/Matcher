@@ -113,8 +113,8 @@
 					<div class="w3-card w3-round w3-white">
 						<div class="w3-container w3-padding">
 							<h6 class="w3-opacity">Search for user</h6>
-							<p contenteditable="true" class="w3-border w3-padding"></p>
-							<button type="button" class="w3-button w3-theme"><i class="fa fa-search"></i>  Search</button>
+							<p contenteditable="true" class="w3-border w3-padding" id="search"></p>
+							<button type="button" class="w3-button w3-theme" onclick="search()"><i class="fa fa-search"></i>  Search</button>
 						</div>
 					</div>
 				</div>
@@ -143,7 +143,7 @@
 					<span id="requsters_id">requesters name</span>
 					<div class="w3-row w3-opacity">
 						<div class="w3-half">
-							<button class="w3-button w3-block w3-green w3-section" title="Accept"><i class="fa fa-check"></i></button>
+							<button class="w3-button w3-block w3-green w3-section" title="Accept" onclick='managescript("test.js", "remove")'><i class="fa fa-check"></i></button>
 						</div>
 						<div class="w3-half">
 							<button class="w3-button w3-block w3-red w3-section" title="Decline"><i class="fa fa-remove"></i></button>
@@ -445,4 +445,11 @@
         </div>
         
     </div>
+<!-- </div> -->
+<!-- ////////////////////////////////////////////////// NOTIFICATION HISTORY ////////////////////////////////////////////////////// -->
+
+<!-- <div id="chatRoom" class="w3-container w3-card w3-white w3-round w3-margin"> -->
+	<div class="w3-container w3-card w3-white w3-round w3-margin" id="notify_hist" >
+        <div id="notify"></div>
+        </div>
 <!-- </div> -->

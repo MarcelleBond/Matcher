@@ -19,7 +19,7 @@ $('form').submit(async function (event) {
                 managescript('login.js', 'add');
                 managescript('register.js', 'remove');
             }).fadeIn('slow');
-        });
+        });haha 
     }
     else {
         if (document.getElementById('error'))

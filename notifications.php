@@ -43,6 +43,11 @@
 			unset($profile->notifications);
 			$user->update(array('profile' => json_encode($profile)));
 		}
+		else if(input::get('stats'))
+		{
+			$db->query('SELECT `notification` FROM notif_hist  WHERE `usersid`= ' . $user->data()->user_id);
+			echo json_encode($db->results());
+		}
 	}
 ?>
 

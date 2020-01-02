@@ -1,14 +1,16 @@
 $('#middle_content').fadeOut('slow', async function () {
-   
-    person = await Ajax('view_profile.php', 'POST', 'stats=getstats', false);
+	$('#middle_content').load("includes/UI/loggedin.php #notify_hist", async function () {
+	person = await Ajax('notifications.php', 'POST', 'stats=getstats', false);
+	console.log("stat before parse " + person)
     person = JSON.parse(person)
     console.log(person);
     statsElem = "";
     person.forEach(element => {
-        statsElem += "<p>"+element.notification+"</p>";
+        statsElem += "<div class='w3-container w3-card w3-white w3-round w3-margin-bottom w3-margin-top'><p>"+element.notification+"</p></div>";
     });
     // data = person[0].profile;
     // data = JSON.parse(data);
     // console.log(person);
-    $('#middle_content').html(statsElem);
+    $('#notify').html(statsElem);
+	})
 }).fadeIn('slow');

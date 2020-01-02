@@ -85,7 +85,6 @@ $(document).ready(async function () {
 			}
 		);
 	}, 3000);
-
 });
 
 
@@ -195,3 +194,12 @@ function Age(dob) {
 	return age;
 }
 
+function search() {
+	var name  = $("#search").html();
+	alert(name)
+	$('#middle_content').fadeOut('slow', async function () {
+		var person = await Ajax('home.php', 'POST', 'search=' + name, false)
+		alert(person)
+		$('#middle_content').html(person );
+	}).fadeIn('slow');
+}

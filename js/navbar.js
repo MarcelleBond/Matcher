@@ -37,7 +37,7 @@ $('#logout_link').click(async function () {
 
 $('#stats').click(function(){
 	managescript(last_page() + ".js", 'remove');
-	managescript('stats.js');
+	managescript('stats.js', 'add');
 })
 
 $('#Notifications_icon').hover(async function () {
@@ -60,6 +60,6 @@ $('#NotificationsBtn').click(function () {
 })
 
 setInterval(function () {
-	console.log("GODDAMNT");
+	// console.log("GODDAMNT");
 	checknotes();
 }, 1000);
