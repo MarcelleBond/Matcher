@@ -71,6 +71,11 @@ $(document).ready(async function () {
 					managescript('home.js', 'add');
 					window.location.href = "#home";
 				}
+				$('#search').keyup(function (e) {
+					if (e.which == 13) {
+						search();
+					}
+				});
 			});
 
 		}).fadeIn('slow');
@@ -195,10 +200,10 @@ function Age(dob) {
 }
 
 function search() {
-	var name  = $("#search").html();
-	alert(name)
+	var name  = $("#search").val();
+	alert(name);
 	$('#middle_content').fadeOut('slow', async function () {
-		var person = await Ajax('home.php', 'POST', 'search=' + name, false)
+		var person = await Ajax('home.php', 'POST', 'search=' + name.trim(), false)
 		alert(person)
 		$('#middle_content').html(person );
 	}).fadeIn('slow');

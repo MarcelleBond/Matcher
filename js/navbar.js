@@ -4,7 +4,7 @@ $('#home').click(function () {
 		managescript('display_profile.js', 'remove');
 		managescript('UI.js', 'remove');
 		managescript('UI.js', 'add');
-		managescript('navbar.js', 'remove');
+		managescript('navbar.js', 'remove');	
 	} else if (last_page() == 'home') {} else {
 		managescript(last_page() + ".js", 'remove');
 		managescript('home.js', 'add');

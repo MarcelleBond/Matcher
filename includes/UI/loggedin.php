@@ -95,13 +95,13 @@
 			<br>
 
 			<!-- Alert Box -->
-			<div class="w3-container w3-display-container w3-round w3-theme-l4 w3-border w3-theme-border w3-margin-bottom w3-hide-small">
+			<!-- <div class="w3-container w3-display-container w3-round w3-theme-l4 w3-border w3-theme-border w3-margin-bottom w3-hide-small">
 				<span onclick="this.parentElement.style.display='none'" class="w3-button w3-theme-l3 w3-display-topright">
 					<i class="fa fa-remove"></i>
 				</span>
 				<p><strong>Hey!</strong></p>
 				<p>People are looking at your profile. Find out who.</p>
-			</div>
+			</div> -->
 
 			<!-- End Left Column -->
 		</div>
@@ -112,8 +112,10 @@
 				<div class="w3-col m12">
 					<div class="w3-card w3-round w3-white">
 						<div class="w3-container w3-padding">
-							<h6 class="w3-opacity">Search for user</h6>
-							<p contenteditable="true" class="w3-border w3-padding" id="search"></p>
+							<!-- <h6 class="w3-opacity">Search for user</h6> -->
+							<input type="text"  style="resize: none;" class="w3-input w3-border w3-round w3-margin-bottom w3-margin-top" id="search" placeholder="Search for users"></input>
+							<!-- <textarea style="resize: none;" class="w3-input w3-border w3-round w3-margin-bottom w3-margin-top" id="search" placeholder="Search for users"></textarea> -->
+							<!-- <p contenteditable="true" class="w3-border w3-padding" id="search"></p> -->
 							<button type="button" class="w3-button w3-theme" onclick="search()"><i class="fa fa-search"></i>  Search</button>
 						</div>
 					</div>

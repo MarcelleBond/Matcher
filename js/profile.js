@@ -171,9 +171,9 @@ $(document).ready(function () {
 });
 
 ///////////// IMAGE WORK ////////////
-function display_pics() {
+async function display_pics() {
     $('#upload_preview').empty();
-    images = Ajax('profile.php', 'POST', 'images=images', false)
+	images = await Ajax('profile.php', 'POST', 'images=images', false)
     images = JSON.parse(images);
     for (var i = 0; i < images.length; i++)
         $('#upload_preview').append('<div class="w3-col m2 "><img onclick="onClick(this)" src="' + images[i]['img_name'] + '" style="width:120px; height:120px;" class=" w3-row-padding w3-margin-bottom"></div>');
