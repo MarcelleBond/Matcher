@@ -1,4 +1,7 @@
 $(document).ready(async function () {
+	
+
+
 	if ((check = await Ajax('user_status.php', 'POST', 'action=login', false)) != 1) {
 		$('body').fadeOut('slow', function () {
 			$('#nav').load("includes/UI/loggedout.php #nav_bar", function () {
@@ -75,6 +78,9 @@ $(document).ready(async function () {
 					if (e.which == 13) {
 						search();
 					}
+				});
+				$('.tags').select2({
+					placeholder: "select your interests"
 				});
 			});
 

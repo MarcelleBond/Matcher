@@ -7,7 +7,8 @@ $user = new user;
 
 function build_list($people)
 {
-	$db = DB::getInstance();
+	global $db;
+	//$db = DB::getInstance();
 	$profiles = "";
 	foreach ($people as $person => $details) {
 		$info = json_decode($details->profile);
@@ -61,6 +62,30 @@ if (input::exists('request')) {
 		else
 			echo build_list($people);
 	}
+
+	if (input::get('sortNfil'))
+	{
+//tshiamo
+		//check if people isset
+		$blocked = json_decode($user->data()->blocked);
+		$blockee = $blocked->blockee;
+		$blocker = $blocked->blocker;
+		$blockee = implode("', '", $blockee);
+		$blockee = "'".$blockee."'";
+		$blocker = implode("', '",$blocker);
+		$blocker = "'".$blocker."'";
+	$db->query("SELECT * FROM `users` WHERE (`user_id` != ?) AND (`username` NOT IN ($blockee) AND `username` NOT IN ($blocker))", array('user_id' => $user->data()->user_id));
+		$people = $db->results();
+		//filter people according to prefs/interests blahblah then print them
+		if (empty($people))
+		{
+			echo '<div class="w3-container w3-card w3-white w3-round w3-margin">
+			<h1> <strong> NO RESAULTS </strong> </h1>
+			</div>';
+		}
+		else
+			echo build_list($people);
+	}
 	
 else if (input::get('search')) {
 	$blocked = json_decode($user->data()->blocked);
@@ -91,6 +116,12 @@ else if (input::get('search')) {
 	
 
 	
+	
+// get all users
+// SELECT * FROM `users` WHERE (`user_id` != ?) AND (SELECT JSON_SEARCH(`blocked`, 'all', 'Black_Cupid')) IS NULL AND JSON_EXTRACT(`profile`, '$.gender') = 'Female' AND (JSON_EXTRACT(`profile`, '$.preference') = 'Male' OR JSON_EXTRACT(`profile`, '$.preference') = 'BI-SEXUAL')
+// SELECT * FROM `users` WHERE JSON_CONTAINS(`profile`, '{"GAMING":"GAMING"}' ,"$.interest") = 1 ORDER BY JSON_LENGTH(`profile`, '$.interest') DESC	
+	
+// (SELECT SUM(JSON_CONTAINS(`profile`, '{"GAMING":"GAMING"}' ,"$.interest") + JSON_CONTAINS(`profile`, '{"ART":"ART"}' ,"$.interest")) AS test FROM users
 	
 	
 	
