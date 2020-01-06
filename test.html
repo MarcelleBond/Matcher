@@ -53,21 +53,30 @@
                 <!-- Middle Column -->
                 <!-- <div id="middle_column" class="w3-col m7"> -->
                     <div id="forgot_password" class="w3-container w3-content" style="max-width:60%;margin-top:80px; margin-bottom: 80px">
-                        <form class="w3-container w3-card-40  w3-light-grey w3-text-black w3-margin">
-                            <h2 class="w3-center">FORGOT PASSWORD</h2>
-
-                            <div class="w3-row w3-section">
-                                <div class="w3-col" style="width:50px"><i class="w3-xxlarge fa fa-user"></i></div>
-                                <div class="w3-rest">
-                                    <input class="w3-input w3-border" name="email" type="email" placeholder="example@host.com"
-                                        required>
-                                </div>
-                            </div>
-
-                            <p class="w3-center">
-                                <button id="SendButton" class="w3-button w3-section w3-black w3-ripple"> Send </button>
-                            </p>
-                        </form>
+						<form id="inter_form" class="w3-container w3-card-4 w3-light-grey w3-text-black w3-margin-top">
+							<h4 class="w3-center">INTEREST</h4>
+							<div class="w3-row w3-section">
+								<div class="w3-col" style="width:50px"><i class="w3-xxlarge fa fa-hand-pointer-o"></i></div>
+								<div class="w3-rest">
+									<select id="interest_select" class="tags" name="tags[]" multiple style="width: 100%">
+										<option value="GAMING">GAMING</option>
+										<option value="DANCING">DANCING</option>
+										<option value="ART">ART</option>
+										<option value="PHOTOGRAPHY">PHOTOGRAPHY</option>
+										<option value="GETING STONED">GETING STONED</option>
+										<option value="READING">READING</option>
+										<option value="CODING">CODING</option>
+										<option value="FOOD">FOOD</option>
+										<option value="SPORTS">SPORTS</option>
+										<option value="FRIENDS">FRIENDS</option>
+									</select>
+								</div>
+							</div>
+							<p class="w3-center">
+								<button id="interButton" class="w3-button w3-section w3-black w3-ripple"> Submit </button>
+					
+							</p>
+						</form>
                     </div>
                 <!-- </div> -->
 
@@ -83,7 +92,64 @@
         <!-- Footer -->
         <div id='foot'></div>
 </body>
+<script> 
 
+async function promise(sendto, method, value) {
+	PromiseResponse = null;
+	testResponse = await new Promise(function (resolve) {
+
+		request = "";
+		request =  $.ajax({
+			url: sendto,
+			type: method,
+			data: value,
+			async: true,
+			success: function (data) {
+				PromiseResponse = data;
+				resolve(data);
+				return "1";
+			},
+			error: function () {
+				alert('Error occured');
+			}
+		})
+		return request;	
+	});
+	return await PromiseResponse;
+}
+
+async function Ajax(sendto, method, value, AsyncOrSync) {
+	request = "";
+	if (AsyncOrSync == false) {
+		request = await promise(sendto, method, value);
+		// console.log("REQUEST: "+ request);
+		return request;
+	}
+	else {
+
+		request = $.ajax({
+			url: sendto,
+			type: method,
+			data: value,
+			async: true,
+		})
+	}
+	return request.responseText;
+}
+
+$('.tags').select2({
+        placeholder: "select your interests"
+	});
+	
+$('#inter_form').submit(async function (e) {
+        e.preventDefault();
+        value = $('#inter_form').serializeArray();
+		check = await Ajax('updateDB.php', "POST", value, false)
+		console.log(check);
+        // $('#error_spot').html('<p>Interest updated successful</p>');
+
+    });
+</script>
 </html>
 
 

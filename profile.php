@@ -26,6 +26,7 @@ if (Input::exists('request')) {
 	///////UPDATE BIRTHDAY////////////
 	else if (input::get('age')) {
 		$profile->DOB = input::get('age');
+		$profile->age = age(input::get('age'));
 		$user->update(array('profile' => json_encode($profile)));
 		echo 1;
 	}
