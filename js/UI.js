@@ -1,4 +1,7 @@
 $(document).ready(async function () {
+	
+
+
 	if ((check = await Ajax('user_status.php', 'POST', 'action=login', false)) != 1) {
 		$('body').fadeOut('slow', function () {
 			$('#nav').load("includes/UI/loggedout.php #nav_bar", function () {
@@ -76,6 +79,23 @@ $(document).ready(async function () {
 						search();
 					}
 				});
+
+				$('.tags').select2({
+					placeholder: "select your interests"
+				});
+
+				    ////////SUBMIT interest//////////
+					$('#inter_form').submit(function (e) {
+						e.preventDefault();
+						value = $('#sofil_form').serializeArray();
+						check = Ajax('home.php', "POST", value, false)
+
+
+						
+						$('#error_spot').html('<p>Interest updated successful</p>');
+				
+					});
+
 			});
 
 		}).fadeIn('slow');

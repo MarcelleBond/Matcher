@@ -59,4 +59,5 @@ function startchat(user_id) {
 			managescript('chat.js', 'add');
 		});
 	}).fadeIn('slow');
+	$("#sofilButton").attr("disabled", true);
 }

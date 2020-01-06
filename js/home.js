@@ -12,6 +12,13 @@ async function profiles() {
 	return people
 }
 
+async function sortNfilter(interests) {
+	
+	people = await Ajax('home.php', 'POST', 'sortNfilter=1&'+interests, false)
+	// console.log("PEOPLE: "+ people);
+	return people
+}
+
 
 async function build_profile(profile) {
 	name = profile.innerHTML;

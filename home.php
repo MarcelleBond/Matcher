@@ -6,7 +6,8 @@ $user = new user;
 
 function build_list($people)
 {
-	$db = DB::getInstance();
+	global $db;
+	//$db = DB::getInstance();
 	$profiles = "";
 	foreach ($people as $person => $details) {
 		$info = json_decode($details->profile);
@@ -33,6 +34,30 @@ function build_list($people)
 
 if (input::exists('request')) {
 	if (input::get('all'))
+	{
+//tshiamo
+		//check if people isset
+		$blocked = json_decode($user->data()->blocked);
+		$blockee = $blocked->blockee;
+		$blocker = $blocked->blocker;
+		$blockee = implode("', '", $blockee);
+		$blockee = "'".$blockee."'";
+		$blocker = implode("', '",$blocker);
+		$blocker = "'".$blocker."'";
+	$db->query("SELECT * FROM `users` WHERE (`user_id` != ?) AND (`username` NOT IN ($blockee) AND `username` NOT IN ($blocker))", array('user_id' => $user->data()->user_id));
+		$people = $db->results();
+		//filter people according to prefs/interests blahblah then print them
+		if (empty($people))
+		{
+			echo '<div class="w3-container w3-card w3-white w3-round w3-margin">
+			<h1> <strong> NO RESAULTS </strong> </h1>
+			</div>';
+		}
+		else
+			echo build_list($people);
+	}
+
+	if (input::get('sortNfil'))
 	{
 //tshiamo
 		//check if people isset
