@@ -12,12 +12,28 @@ async function profiles() {
 	return people
 }
 
-async function sortNfilter(interests) {
+//// this is Filtering!!!!!!!
+$("#sofilButton").click(function (event) {
+	event.preventDefault();
+	var theForm = $("#sofil_form").serializeArray();
+	$('#middle_content').fadeOut('slow', async function () {
+		$('#middle_content').html(await Ajax('home.php', 'POST', 'filter=1&'+interests, false)
+		);
+	}).fadeIn('slow');
 	
-	people = await Ajax('home.php', 'POST', 'sortNfilter=1&'+interests, false)
-	// console.log("PEOPLE: "+ people);
-	return people
-}
+})
+
+//// this is sorting!!!!!
+$("#sortingBtn").click(function (event) {
+
+	event.preventDefault();
+	var theForm = $("#sorting").serializeArray();
+	$('#middle_content').fadeOut('slow', async function () {
+		$('#middle_content').html(await Ajax('home.php', 'POST', 'sort=1&'+interests, false)
+		);
+	}).fadeIn('slow');
+	
+})
 
 
 async function build_profile(profile) {
@@ -25,5 +41,9 @@ async function build_profile(profile) {
 	managescript('view_profile.js', 'remove')
 	managescript('view_profile.js', 'add')
 }
+
+
+
+
 
 

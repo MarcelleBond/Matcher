@@ -60,4 +60,5 @@ function startchat(user_id) {
 		});
 	}).fadeIn('slow');
 	$("#sofilButton").attr("disabled", true);
+	$("#sortingBtn").attr("disabled", true);
 }

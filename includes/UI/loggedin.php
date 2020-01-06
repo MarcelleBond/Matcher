@@ -127,17 +127,31 @@
 
 
 
-			<!-- filtering sorting -->
+			<!-- filtering -->
 			<div class="w3-card w3-round w3-white w3-center">
 				<div class="w3-container" sytle="padding: 50px;">
-					<form id="sofil_form" class="w3-container w3-card-4 w3-light-grey w3-text-black w3-margin-top" name="sofilform">
+					<form id="sofil_form" class="w3-container w3-card-4 w3-light-grey w3-text-black w3-margin-top w3-margin-bottom" name="sofilform" method="post">
+						<h5>Filtering</h5>
+						<!-- Age  -->
 
-						<input type="number" min=18 max=100>
-						<input type="number" min=18 max=100>
-
-						<h4 class="w3-center">INTEREST</h4>
+						
+						<label for="">minimum Age</label>
+						<input name="minAge" type="number" min=18 max=100>
+						<br>
+						<label for="">maximum age</label>
+						<input name="maxAge" type="number" min=19 max=100>
+						<!-- Location  -->
+						<br>
+						<label label for="locChkBox">Same Location</label>
+						<input type="checkbox" name="locChkBox" id="locChkBox">
+						<!-- fame  -->
+						<label for="">Fame Greater than</label>
+						<input type="number" name="fame_greater" >
+						<!-- interests  -->
+						<h5 class="w3-center">INTERESTS</h5>
 						<div class="w3-row w3-section">
-							<div class="w3-col" style="width:50px"><i class="w3-xxlarge fa fa-hand-pointer-o"></i></div>
+							<div class="w3-col" style="width:50px">
+								<!--<i class="w3-xxlarge fa fa-hand-pointer-o">--> </i></div>
 							<div class="w3-rest">
 								<select id="sofil_select" class="tags" name="tags[]" multiple style="width: 100%">
 									<option value="GAMING">GAMING</option>
@@ -162,23 +176,45 @@
 				</div>
 
 			</div>
-			<!-- filtering sorting -->
+			<!-- filtering  -->
 
 			<br>
-
+			<!-- ///////////////////////////////////////////// sorting  -->
 			<div class="w3-card w3-round w3-white w3-center">
 				<div class="w3-container">
-					<p>Friend Request</p>
-					<img id="requsters_img" src="" alt="requesters image" style="width:50%"><br>
-					<span id="requsters_id">requesters name</span>
-					<div class="w3-row w3-opacity">
-						<div class="w3-half">
-							<button class="w3-button w3-block w3-green w3-section" title="Accept" onclick='managescript("test.js", "remove")'><i class="fa fa-check"></i></button>
-						</div>
-						<div class="w3-half">
-							<button class="w3-button w3-block w3-red w3-section" title="Decline"><i class="fa fa-remove"></i></button>
-						</div>
-					</div>
+					<form id="sorting" class="w3-container w3-card-4 w3-light-grey w3-text-black w3-margin-top w3-margin-bottom" name="sorting" method="post">
+						<h5>SORTING</h5>
+						<!-- Age  -->
+						<label label for="">Age</label>
+						<select name="sortAge" id="sortAge">
+							<option value="ascending">ascending</option>
+							<option value="descending">descending</option>
+						</select>
+						<!-- Location  -->
+						<br>
+						<label label for="locChkBox">Location</label>
+						<select name="sortLoc">
+							<option value="ascending">ascending</option>
+							<option value="descending">descending</option>
+						</select>
+						<!-- fame  -->
+						<label for="">Fame</label>
+						<select name="sortFame" >
+							<option value="ascending">ascending</option>
+							<option value="descending">descending</option>
+						</select>
+						<!-- interests sorting -->
+						<h5 class="w3-center">INTERESTS</h5>
+						<label for="">Fame</label>
+						<select name="sortFame">
+							<option value="ascending">ascending</option>
+							<option value="descending">descending</option>
+						</select>
+						<p class="w3-center">
+							<button id="sortingBtn" class="w3-button w3-section w3-black w3-ripple"> Submit </button>
+
+						</p>
+					</form>
 				</div>
 			</div>
 			<br>

@@ -10,6 +10,7 @@ $('#home').click(function () {
 		managescript('home.js', 'add');
 	}
 	$("#sofilButton").attr("disabled", false); 
+	$("#sortingBtn").attr("disabled", false);
 
 });
 
@@ -22,7 +23,8 @@ $('#profile').click(function () {
 			});
 		}).fadeIn('slow');
 	}
-	$("#sofilButton").attr("disabled", false); 
+	$("#sofilButton").attr("disabled", true); 
+	$("#sortingBtn").attr("disabled", true);
 });
 
 $('#logout_link').click(async function () {
@@ -41,6 +43,7 @@ $('#stats').click(function(){
 	managescript(last_page() + ".js", 'remove');
 	managescript('stats.js', 'add');
 	$("#sofilButton").attr("disabled", true); 
+	$("#sortingBtn").attr("disabled", true);
 })
 
 $('#Notifications_icon').hover(async function () {
