@@ -57,13 +57,27 @@ if (input::get('tags')){
 	echo json_encode($people); */
 }
 	// echo interest(input::get('tags'));
+$min = 51;
+$max = 100;
 
+
+/*sort age, loacation, fame, interest, */
+// all query 
+
+
+// filter 
 $db->query("SELECT users.*, GROUP_CONCAT(gallery.img_name) AS 'images'
 			FROM `users` JOIN gallery ON gallery.user_id = users.user_id  
 			WHERE users.user_id != ?
 			AND (SELECT JSON_SEARCH(`blocked`, 'all', '".$user->data()->username ."')) IS NULL 
-			AND " .preference(json_decode($user->data()->profile)) . interest(input::get('tags')). "
-			AND JSON_EXTRACT(`profile`, '$.age') >=". $min." AND JSON_EXTRACT(`profile`, '$.age') <= ". $max."
-			GROUP BY users.user_id", array('users.user_id' => $user->data()->user_id));
-// var_dump($db->results());
+			AND " .preference(json_decode($user->data()->profile)) . interest(input::get('tags')). " 
+			AND CAST(JSON_EXTRACT(`profile`, '$.age') AS int) BETWEEN ".$min." AND ".$max." 
+			GROUP BY users.user_id, ", array('users.user_id' => $user->data()->user_id));
+var_dump($db->results());
 
+	
+// get all users
+// SELECT * FROM `users` WHERE (`user_id` != ?) AND (SELECT JSON_SEARCH(`blocked`, 'all', 'Black_Cupid')) IS NULL AND JSON_EXTRACT(`profile`, '$.gender') = 'Female' AND (JSON_EXTRACT(`profile`, '$.preference') = 'Male' OR JSON_EXTRACT(`profile`, '$.preference') = 'BI-SEXUAL')
+// SELECT * FROM `users` WHERE JSON_CONTAINS(`profile`, '{"GAMING":"GAMING"}' ,"$.interest") = 1 ORDER BY JSON_LENGTH(`profile`, '$.interest') DESC	   
+// SUM(JSON_CONTAINS(`profile`, '{"GAMING":"GAMING"}' ,"$.interest") + JSON_CONTAINS(`profile`, '{"ART":"ART"}' ,"$.interest") + JSON_CONTAINS(`profile`, '{"FOOD":"FOOD"}' ,"$.interest") + JSON_CONTAINS(`profile`, '{"CODING":"CODING"}' ,"$.interest"))
+	
