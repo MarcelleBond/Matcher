@@ -430,6 +430,11 @@
 
 		</p>
 	</form>
+
+	<input id="locSearch" type='text' name="locSearch" placeholder="search Location"><br>
+    <select id="loc" class="loc" name="opt[]" multiple style="width: 50%">
+                </select>
+    <button id="locupd">Update Location</button>
 </div>
 
 
