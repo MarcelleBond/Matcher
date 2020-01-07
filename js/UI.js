@@ -209,7 +209,10 @@ function search() {
 	var name  = $("#search").val();
 	alert(name);
 	$('#middle_content').fadeOut('slow', async function () {
-		var person = await Ajax('home.php', 'POST', 'search=' + name.trim(), false)
+		if (name.trim().length == 0)
+			var person = await Ajax('home.php', 'POST', 'all=all', false)
+		else
+			var person = await Ajax('home.php', 'POST', 'search=' + name.trim(), false)
 		alert(person)
 		$('#middle_content').html(person );
 	}).fadeIn('slow');

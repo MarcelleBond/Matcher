@@ -61,32 +61,41 @@ function tagCount($tags)
 		return ", ". substr($interest, 0 , strlen($interest) - 2) ." AS tagCount";
 }
 
-if (input::get('tags')){
-	/* $db->query("SELECT * FROM `users`");
-	$people = $db->results();
-	foreach ($people as $person => $details) {
-		$info = json_decode($details->profile);
-		$info->age = intval(age($info->DOB));
-		$db->update('users', $details->user_id, array('profile' => json_encode($info)));
+function distance($lat1, $lon1, $lat2, $lon2, $unit) {
+
+	$theta = $lon1 - $lon2;
+	$dist = sin(deg2rad($lat1)) * sin(deg2rad($lat2)) +  cos(deg2rad($lat1)) * cos(deg2rad($lat2)) * cos(deg2rad($theta));
+	$dist = acos($dist);
+	$dist = rad2deg($dist);
+	$miles = $dist * 60 * 1.1515;
+	$unit = strtoupper($unit);
+  
+	if ($unit == "K") {
+		return ($miles * 1.609344);
+	} else if ($unit == "N") {
+		return ($miles * 0.8684);
+	} else {
+		return $miles;
 	}
-	echo json_encode($people); */
-}
-	// echo interest(input::get('tags'));
+  }
+
 $min = 51;
 $max = 100;
 
 
 /*sort age, loacation, fame, interest, */
 // all query 
-$db->query("SELECT users.*, GROUP_CONCAT(gallery.img_name) AS 'images', 
+$db->query("DROP TABLE IF EXISTS " . $user->data()->username . "; 
+			CREATE TABLE " . $user->data()->username . " SELECT users.*, 
+			GROUP_CONCAT(gallery.img_name) AS 'images', 
 			CAST(JSON_EXTRACT(`profile`, '$.age') AS int) AS 'age',
-			CAST(JSON_EXTRACT(`profile`, '$.fame') AS int) AS 'fame' " . tagCount(input::get('tags')) . " 
-			INTO #".$user->data()->username."
+			CAST(JSON_EXTRACT(`profile`, '$.fame') AS int) AS 'fame' " . tagCount(input::get('tags')) . ",
+			CAST('0' AS int) AS 'distance'
 			FROM `users` JOIN gallery ON gallery.user_id = users.user_id  
 			WHERE `users`.`user_id` != ?
 			AND (SELECT JSON_SEARCH(`blocked`, 'all', '".$user->data()->username ."')) IS NULL 
 			AND " .preference(json_decode($user->data()->profile)) ."  
-			GROUP BY users.user_id, ", array('users.user_id' => $user->data()->user_id));
+			GROUP BY users.user_id", array('users.user_id' => $user->data()->user_id));
 
 // filter 
 /* $db->query("SELECT users.*, GROUP_CONCAT(gallery.img_name) AS 'images'
