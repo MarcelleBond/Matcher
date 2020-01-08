@@ -79,13 +79,15 @@ function distance($lat1, $lon1, $lat2, $lon2, $unit) {
 	}
   }
 
-$min = 51;
+$min = 18;
 $max = 100;
+$location = "Johannesburg";
+$userpro = json_decode($user->data()->profile);
 
 
 /*sort age, loacation, fame, interest, */
 // all query 
-$db->query("DROP TABLE IF EXISTS " . $user->data()->username . "; 
+ /* $db->query("DROP TABLE IF EXISTS " . $user->data()->username . "; 
 			CREATE TABLE " . $user->data()->username . " SELECT users.*, 
 			GROUP_CONCAT(gallery.img_name) AS 'images', 
 			CAST(JSON_EXTRACT(`profile`, '$.age') AS int) AS 'age',
@@ -95,17 +97,55 @@ $db->query("DROP TABLE IF EXISTS " . $user->data()->username . ";
 			WHERE `users`.`user_id` != ?
 			AND (SELECT JSON_SEARCH(`blocked`, 'all', '".$user->data()->username ."')) IS NULL 
 			AND " .preference(json_decode($user->data()->profile)) ."  
-			GROUP BY users.user_id", array('users.user_id' => $user->data()->user_id));
+			GROUP BY users.user_id;", array('users.user_id' => $user->data()->user_id));
+			
+			
+			
+			
+			$db->query("SELECT * FROM " . $user->data()->username); 
+			var_dump($db->results()); */
+			/*
+			foreach ($people as $person => $details) {
+				$info = json_decode($details->profile);
+				$info->age = intval(age($info->DOB));
+				$db->update('users', $details->user_id, array('distance' => distance($userpro->lat,$userpro->lng,$info->lat,$info->lng,'K'));
+			}
+			$db->query("SELECT * FROM " . $user->data()->username); 
+			$people = $db->results(); */
+
 
 // filter 
-/* $db->query("SELECT users.*, GROUP_CONCAT(gallery.img_name) AS 'images'
+/* echo "DROP TABLE IF EXISTS " . $user->data()->username . "; 
+CREATE TABLE " . $user->data()->username . " SELECT users.*, 
+GROUP_CONCAT(gallery.img_name) AS 'images', 
+CAST(JSON_EXTRACT(`profile`, '$.age') AS int) AS 'age',
+CAST(JSON_EXTRACT(`profile`, '$.fame') AS int) AS 'fame' " . tagCount(input::get('tags')) . ",
+CAST('0' AS int) AS 'distance'
+FROM `users` JOIN gallery ON gallery.user_id = users.user_id  
+WHERE `users`.`user_id` != ?
+AND (SELECT JSON_SEARCH(`blocked`, 'all', '".$user->data()->username ."')) IS NULL 
+AND " .preference(json_decode($user->data()->profile)) . interest(input::get('tags')). " 
+AND JSON_EXTRACT(`profile`, '$.location') = ".$userpro->location."
+AND CAST(JSON_EXTRACT(`profile`, '$.age') AS int) BETWEEN ".$min." AND ".$max."  
+GROUP BY users.user_id;";
+ */
+
+ 
+ $db->query("DROP TABLE IF EXISTS " . $user->data()->username . "; 
+			CREATE TABLE " . $user->data()->username . " SELECT users.*, 
+			GROUP_CONCAT(gallery.img_name) AS 'images', 
+			CAST(JSON_EXTRACT(`profile`, '$.age') AS int) AS 'age',
+			CAST(JSON_EXTRACT(`profile`, '$.fame') AS int) AS 'fame' " . tagCount(input::get('tags')) . ",
+			CAST('0' AS int) AS 'distance'
 			FROM `users` JOIN gallery ON gallery.user_id = users.user_id  
-			WHERE users.user_id != ?
+			WHERE `users`.`user_id` != ?
 			AND (SELECT JSON_SEARCH(`blocked`, 'all', '".$user->data()->username ."')) IS NULL 
+			AND JSON_EXTRACT(`profile`, '$.location') = ".$userpro->location."
 			AND " .preference(json_decode($user->data()->profile)) . interest(input::get('tags')). " 
 			AND CAST(JSON_EXTRACT(`profile`, '$.age') AS int) BETWEEN ".$min." AND ".$max." 
-			GROUP BY users.user_id, ", array('users.user_id' => $user->data()->user_id));*/
-var_dump($db->results()); 
+			GROUP BY users.user_id;", array('users.user_id' => $user->data()->user_id));
+			$db->query("SELECT * FROM " . $user->data()->username); 
+			var_dump($db->results());  
 
 	
 // get all users
