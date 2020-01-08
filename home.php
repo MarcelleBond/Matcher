@@ -43,16 +43,15 @@ if (input::exists('request')) {
 				OR JSON_EXTRACT(`profile`, '$.preference') = 'BI-SEXUAL')", 
 				array('user_id' => $user->data()->user_id)); */
 				$db->query("DROP TABLE IF EXISTS " . $user->data()->username . "; 
-			CREATE TABLE " . $user->data()->username . " SELECT users.*, 
-			GROUP_CONCAT(gallery.img_name) AS 'images', 
-			CAST(JSON_EXTRACT(`profile`, '$.age') AS int) AS 'age',
-			CAST(JSON_EXTRACT(`profile`, '$.fame') AS int) AS 'fame' " . tagCount(input::get('tags')) . ",
-			CAST('0' AS int) AS 'distance'
-			FROM `users` JOIN gallery ON gallery.user_id = users.user_id  
-			WHERE `users`.`user_id` != ?
-			AND (SELECT JSON_SEARCH(`blocked`, 'all', '".$user->data()->username ."')) IS NULL 
-			AND " .preference(json_decode($user->data()->profile)) ."  
-			GROUP BY users.user_id;", array('users.user_id' => $user->data()->user_id));
+				CREATE TABLE " . $user->data()->username . " AS (SELECT users.*, GROUP_CONCAT(gallery.img_name) AS 'images', 
+				CAST(JSON_EXTRACT(`profile`, '$.age') AS unsigned) AS 'age',
+				CAST(JSON_EXTRACT(`profile`, '$.fame') AS unsigned) AS 'fame' " . tagCount(input::get('tags')) . ",
+				CAST('0' AS unsigned) AS 'distance'
+				FROM `users` JOIN gallery ON gallery.user_id = users.user_id  
+				WHERE `users`.`user_id` != ?
+				AND (SELECT JSON_SEARCH(`blocked`, 'all', '".$user->data()->username ."')) IS NULL 
+				AND " .preference(json_decode($user->data()->profile)) ." 
+				GROUP BY users.user_id);", array('users.user_id' => $user->data()->user_id));
 			
 			
 			

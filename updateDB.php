@@ -87,23 +87,48 @@ $userpro = json_decode($user->data()->profile);
 
 /*sort age, loacation, fame, interest, */
 // all query 
- /* $db->query("DROP TABLE IF EXISTS " . $user->data()->username . "; 
-			CREATE TABLE " . $user->data()->username . " SELECT users.*, 
-			GROUP_CONCAT(gallery.img_name) AS 'images', 
-			CAST(JSON_EXTRACT(`profile`, '$.age') AS int) AS 'age',
-			CAST(JSON_EXTRACT(`profile`, '$.fame') AS int) AS 'fame' " . tagCount(input::get('tags')) . ",
-			CAST('0' AS int) AS 'distance'
-			FROM `users` JOIN gallery ON gallery.user_id = users.user_id  
-			WHERE `users`.`user_id` != ?
-			AND (SELECT JSON_SEARCH(`blocked`, 'all', '".$user->data()->username ."')) IS NULL 
-			AND " .preference(json_decode($user->data()->profile)) ."  
-			GROUP BY users.user_id;", array('users.user_id' => $user->data()->user_id));
+$thestring = "DROP TABLE IF EXISTS " . $user->data()->username . "; 
+CREATE TABLE " . $user->data()->username . " SELECT users.*, 
+GROUP_CONCAT(gallery.img_name) AS 'images', 
+CAST(JSON_EXTRACT(`profile`, '$.age') AS unsigned) AS 'age',
+CAST(JSON_EXTRACT(`profile`, '$.fame') AS unsigned) AS 'fame' " . tagCount(input::get('tags')) . ",
+CAST('0' AS int) AS 'distance'
+FROM `users` JOIN gallery ON gallery.user_id = users.user_id  
+WHERE `users`.`user_id` != ?
+AND (SELECT JSON_SEARCH(`blocked`, 'all', '".$user->data()->username ."')) IS NULL 
+AND " .preference(json_decode($user->data()->profile)) ."  
+GROUP BY users.user_id;";
+// echo $thestring;
+// echo "QUERY ends";
+// (SELECT JSON_SEARCH(`blocked`, 'all', 'Black_Cupid')) IS NULL 
+// AND JSON_EXTRACT(`profile`, '$.gender') = 'Female' AND (JSON_EXTRACT(`profile`, '$.preference') = 'Male' OR JSON_EXTRACT(`profile`, '$.preference') = 'BI-SEXUAL')
+// AND (JSON_EXTRACT(`profile`, '$.preference') = 'Male' OR JSON_EXTRACT(`profile`, '$.preference') = 'BI-SEXUAL')
+// , CAST(JSON_EXTRACT(`profile`, '$.age') AS unsigned) AS 'age', CAST(JSON_EXTRACT(`profile`, '$.fame') AS unsigned) AS 'fame' , CAST('0' AS unsined) AS 'distance' 
+
+
+ /* $db->query("DROP TABLE IF EXISTS Black_Cupid; CREATE TABLE Black_Cupid AS (SELECT users.*, GROUP_CONCAT(gallery.img_name) AS 'images' , CAST(JSON_EXTRACT(`profile`, '$.age') AS unsigned) AS 'age' FROM `users` JOIN gallery ON gallery.user_id = users.user_id WHERE `users`.`user_id` != 10 AND  (SELECT JSON_SEARCH(`blocked`, 'all', '".$user->data()->username ."')) IS NULL = 1 AND " .preference(json_decode($user->data()->profile)) ."  GROUP BY users.user_id;)", array('users.user_id' => $user->data()->user_id)); */
+
+
+
+
+
+ $db->query("DROP TABLE IF EXISTS " . $user->data()->username . "; 
+ CREATE TABLE " . $user->data()->username . " AS (SELECT users.*, GROUP_CONCAT(gallery.img_name) AS 'images', 
+ CAST(JSON_EXTRACT(`profile`, '$.age') AS unsigned) AS 'age',
+ CAST(JSON_EXTRACT(`profile`, '$.fame') AS unsigned) AS 'fame' " . tagCount(input::get('tags')) . ",
+ CAST('0' AS unsigned) AS 'distance'
+ FROM `users` JOIN gallery ON gallery.user_id = users.user_id  
+ WHERE `users`.`user_id` != ?
+ AND (SELECT JSON_SEARCH(`blocked`, 'all', '".$user->data()->username ."')) IS NULL 
+ AND " .preference(json_decode($user->data()->profile)) ." 
+ GROUP BY users.user_id);", array('users.user_id' => $user->data()->user_id));
+			 var_dump($db->results());  
 			
 			
 			
-			
-			$db->query("SELECT * FROM " . $user->data()->username); 
-			var_dump($db->results()); */
+			// var_dump($db->results()); 
+			// $db->query("SELECT * FROM " . $user->data()->username); 
+			// var_dump($db->results()); 
 			/*
 			foreach ($people as $person => $details) {
 				$info = json_decode($details->profile);
@@ -131,20 +156,19 @@ GROUP BY users.user_id;";
  */
 
  
- $db->query("DROP TABLE IF EXISTS " . $user->data()->username . "; 
-			CREATE TABLE " . $user->data()->username . " SELECT users.*, 
-			GROUP_CONCAT(gallery.img_name) AS 'images', 
-			CAST(JSON_EXTRACT(`profile`, '$.age') AS int) AS 'age',
-			CAST(JSON_EXTRACT(`profile`, '$.fame') AS int) AS 'fame' " . tagCount(input::get('tags')) . ",
-			CAST('0' AS int) AS 'distance'
-			FROM `users` JOIN gallery ON gallery.user_id = users.user_id  
-			WHERE `users`.`user_id` != ?
-			AND (SELECT JSON_SEARCH(`blocked`, 'all', '".$user->data()->username ."')) IS NULL 
-			AND JSON_EXTRACT(`profile`, '$.location') = ".$userpro->location."
-			AND " .preference(json_decode($user->data()->profile)) . interest(input::get('tags')). " 
-			AND CAST(JSON_EXTRACT(`profile`, '$.age') AS int) BETWEEN ".$min." AND ".$max." 
-			GROUP BY users.user_id;", array('users.user_id' => $user->data()->user_id));
-			$db->query("SELECT * FROM " . $user->data()->username); 
+
+$db->query("DROP TABLE IF EXISTS " . $user->data()->username . "; 
+CREATE TABLE " . $user->data()->username . " AS (SELECT users.*, GROUP_CONCAT(gallery.img_name) AS 'images', 
+CAST(JSON_EXTRACT(`profile`, '$.age') AS unsigned) AS 'age',
+CAST(JSON_EXTRACT(`profile`, '$.fame') AS unsigned) AS 'fame' " . tagCount(input::get('tags')) . ",
+CAST('0' AS unsigned) AS 'distance'
+FROM `users` JOIN gallery ON gallery.user_id = users.user_id  
+WHERE `users`.`user_id` != ?
+AND (SELECT JSON_SEARCH(`blocked`, 'all', '".$user->data()->username ."')) IS NULL 
+AND JSON_CONTAINS(`profile`, '\"".$userpro->location."\"','$.location') = 1
+AND " .preference(json_decode($user->data()->profile)) . interest(input::get('tags')). " 
+AND CAST(JSON_EXTRACT(`profile`, '$.age') AS unsigned) BETWEEN ".$min." AND ".$max." 
+GROUP BY users.user_id);", array('users.user_id' => $user->data()->user_id));
 			var_dump($db->results());  
 
 	
@@ -160,13 +184,13 @@ CREATE TABLE test SELECT
     users.*,
     GROUP_CONCAT(gallery.img_name) AS 'images',
     CAST(
-        JSON_EXTRACT(`profile`, '$.age') AS INT
+        JSON_EXTRACT(`profile`, '$.age') AS unsigned
     ) AS 'age',
     CAST(
-        JSON_EXTRACT(`profile`, '$.fame') AS INT
+        JSON_EXTRACT(`profile`, '$.fame') AS unsigned
     ) AS 'fame',
-    CAST('0' AS INT) AS 'interestCount',
-    CAST('0' AS INT) AS 'distance'
+    CAST('0' AS unsigned) AS 'interestCount',
+    CAST('0' AS unsigned) AS 'distance'
 FROM
     `users`
 JOIN gallery ON gallery.user_id = users.user_id
@@ -177,7 +201,7 @@ WHERE
 ) IS NULL AND JSON_EXTRACT(`profile`, '$.location') = "Johannesburg" AND JSON_EXTRACT(`profile`, '$.gender') = 'Male' AND(
     JSON_EXTRACT(`profile`, '$.preference') = 'Male' OR JSON_EXTRACT(`profile`, '$.preference') = 'BI-SEXUAL'
 ) AND CAST(
-    JSON_EXTRACT(`profile`, '$.age') AS INT
+    JSON_EXTRACT(`profile`, '$.age') AS unsigned
 ) BETWEEN 18 AND 100
 GROUP BY
     users.user_id */
