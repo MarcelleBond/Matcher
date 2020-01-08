@@ -134,7 +134,7 @@
 						<h5>Filtering</h5>
 						<!-- Age  -->
 
-						
+
 						<label for="">minimum Age</label>
 						<input name="minAge" type="number" min=18 max=100>
 						<br>
