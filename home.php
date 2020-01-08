@@ -20,11 +20,11 @@ function build_list($people)
 			<h5>Age: '. age($info->DOB) .'</h5>
 			<hr class="w3-clear">
 			<div class="w3-row-padding" style="margin:0 -16px">';
-		$db->query('SELECT * FROM `gallery` WHERE `user_id` = ? LIMIT 2', array('user_id' => $details->user_id));
-		$images = $db->results();
+		// $db->query('SELECT * FROM `gallery` WHERE `user_id` = ? LIMIT 2', array('user_id' => $details->user_id));
+		$images = explode(",", $details->images);
 		foreach ($images as $image => $pic) {
 			$profiles .= '<div class="w3-half">
-				<img src="' . $pic->img_name . '" style="max-width:100%" alt="' . $pic->img_name . '" class="w3-margin-bottom">
+				<img src="' . $pic . '" style="max-width:100%" alt="' . $pic . '" class="w3-margin-bottom">
 				</div>';
 		}
 		$profiles .= '</div>
@@ -36,21 +36,28 @@ function build_list($people)
 if (input::exists('request')) {
 	if (input::get('all'))
 	{
-//tshiamo
-		//check if people isset
-		/* $blocked = json_decode($user->data()->blocked);
-		$blockee = $blocked->blockee;
-		$blocker = $blocked->blocker;
-		$blockee = implode("', '", $blockee);
-		$blockee = "'".$blockee."'";
-		$blocker = implode("', '",$blocker);
-		$blocker = "'".$blocker."'"; */
-	$db->query("SELECT * FROM `users` WHERE (`user_id` != ?) 
+	/* $db->query("SELECT * FROM `users` WHERE (`user_id` != ?) 
 				AND (SELECT JSON_SEARCH(`blocked`, 'all', 'Black_Cupid')) IS NULL 
 				AND JSON_EXTRACT(`profile`, '$.gender') = 'Female' 
 				AND (JSON_EXTRACT(`profile`, '$.preference') = 'Male' 
 				OR JSON_EXTRACT(`profile`, '$.preference') = 'BI-SEXUAL')", 
-				array('user_id' => $user->data()->user_id));
+				array('user_id' => $user->data()->user_id)); */
+				$db->query("DROP TABLE IF EXISTS " . $user->data()->username . "; 
+			CREATE TABLE " . $user->data()->username . " SELECT users.*, 
+			GROUP_CONCAT(gallery.img_name) AS 'images', 
+			CAST(JSON_EXTRACT(`profile`, '$.age') AS int) AS 'age',
+			CAST(JSON_EXTRACT(`profile`, '$.fame') AS int) AS 'fame' " . tagCount(input::get('tags')) . ",
+			CAST('0' AS int) AS 'distance'
+			FROM `users` JOIN gallery ON gallery.user_id = users.user_id  
+			WHERE `users`.`user_id` != ?
+			AND (SELECT JSON_SEARCH(`blocked`, 'all', '".$user->data()->username ."')) IS NULL 
+			AND " .preference(json_decode($user->data()->profile)) ."  
+			GROUP BY users.user_id;", array('users.user_id' => $user->data()->user_id));
+			
+			
+			
+			
+		$db->query("SELECT * FROM " . $user->data()->username); 
 		$people = $db->results();
 		//filter people according to prefs/interests blahblah then print them
 		if (empty($people))
@@ -115,6 +122,81 @@ else if (input::get('search')) {
 }
 	
 
+function preference($profile)
+{
+	$gender = '';
+	if ($profile->preference == "Female")
+	{
+		$gender = "JSON_EXTRACT(`profile`, '$.gender') = 'Female' AND 
+					(JSON_EXTRACT(`profile`, '$.preference') = 'Male' OR 
+					JSON_EXTRACT(`profile`, '$.preference') = 'BI-SEXUAL')";
+	}
+	elseif ($profile->preference == "Male") 
+	{	
+		$gender = "JSON_EXTRACT(`profile`, '$.gender') = 'Male' AND 
+					(JSON_EXTRACT(`profile`, '$.preference') = 'Male' OR 
+					JSON_EXTRACT(`profile`, '$.preference') = 'BI-SEXUAL')";
+	}
+	else
+	{
+		$gender = "(JSON_EXTRACT(`profile`, '$.gender') = 'Female' OR 
+					JSON_EXTRACT(`profile`, '$.gender') = 'Male')";
+		if ($profile->gender == "Male") {
+			$gender .= " AND (JSON_EXTRACT(`profile`, '$.preference') = 'Male' OR 
+							JSON_EXTRACT(`profile`, '$.preference') = 'BI-SEXUAL')";
+		} else {
+			$gender .= " AND (JSON_EXTRACT(`profile`, '$.preference') = 'Female' OR 
+							JSON_EXTRACT(`profile`, '$.preference') = 'BI-SEXUAL')";
+		}	
+	}	
+	return $gender;
+}
+function interest($tags) {
+	$interest = '';
+	if (empty($tags))
+		return $interest;
+ 	foreach ($tags as $key => $value) {
+		$interest .= "JSON_CONTAINS(`profile`, '{\"".$value."\":\"".$value."\"}' ,'$.interest') = 1 OR ";
+	}
+	$interest = trim($interest);
+	if ($interest == '')
+		return $interest;
+	else
+		return "AND (". substr($interest, 0 , strlen($interest) - 3) .")";
+}
+
+function tagCount($tags)
+{
+	$interest = '';
+	if (empty($tags))
+		return $interest;
+ 	foreach ($tags as $key => $value) {
+		$interest .= "JSON_CONTAINS(`profile`, '{\"".$value."\":\"".$value."\"}' ,'$.interest') +";
+	}
+	$interest = trim($interest);
+	if ($interest == '')
+		return $interest;
+	else
+		return ", ". substr($interest, 0 , strlen($interest) - 2) ." AS tagCount";
+}
+
+function distance($lat1, $lon1, $lat2, $lon2, $unit) {
+
+	$theta = $lon1 - $lon2;
+	$dist = sin(deg2rad($lat1)) * sin(deg2rad($lat2)) +  cos(deg2rad($lat1)) * cos(deg2rad($lat2)) * cos(deg2rad($theta));
+	$dist = acos($dist);
+	$dist = rad2deg($dist);
+	$miles = $dist * 60 * 1.1515;
+	$unit = strtoupper($unit);
+  
+	if ($unit == "K") {
+		return ($miles * 1.609344);
+	} else if ($unit == "N") {
+		return ($miles * 0.8684);
+	} else {
+		return $miles;
+	}
+  }
 	
 	
 // get all users
