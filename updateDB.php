@@ -153,3 +153,31 @@ GROUP BY users.user_id;";
 // SELECT * FROM `users` WHERE JSON_CONTAINS(`profile`, '{"GAMING":"GAMING"}' ,"$.interest") = 1 ORDER BY JSON_LENGTH(`profile`, '$.interest') DESC	   
 // SUM(JSON_CONTAINS(`profile`, '{"GAMING":"GAMING"}' ,"$.interest") + JSON_CONTAINS(`profile`, '{"ART":"ART"}' ,"$.interest") + JSON_CONTAINS(`profile`, '{"FOOD":"FOOD"}' ,"$.interest") + JSON_CONTAINS(`profile`, '{"CODING":"CODING"}' ,"$.interest"))
 	
+
+/* DROP TABLE IF EXISTS
+    test;
+CREATE TABLE test SELECT
+    users.*,
+    GROUP_CONCAT(gallery.img_name) AS 'images',
+    CAST(
+        JSON_EXTRACT(`profile`, '$.age') AS INT
+    ) AS 'age',
+    CAST(
+        JSON_EXTRACT(`profile`, '$.fame') AS INT
+    ) AS 'fame',
+    CAST('0' AS INT) AS 'interestCount',
+    CAST('0' AS INT) AS 'distance'
+FROM
+    `users`
+JOIN gallery ON gallery.user_id = users.user_id
+WHERE
+    `users`.`user_id` != 10 AND(
+    SELECT
+        JSON_SEARCH(`blocked`, 'all', 'Black_Cupid')
+) IS NULL AND JSON_EXTRACT(`profile`, '$.location') = "Johannesburg" AND JSON_EXTRACT(`profile`, '$.gender') = 'Male' AND(
+    JSON_EXTRACT(`profile`, '$.preference') = 'Male' OR JSON_EXTRACT(`profile`, '$.preference') = 'BI-SEXUAL'
+) AND CAST(
+    JSON_EXTRACT(`profile`, '$.age') AS INT
+) BETWEEN 18 AND 100
+GROUP BY
+    users.user_id */
