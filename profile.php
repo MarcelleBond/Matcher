@@ -94,6 +94,15 @@ if (Input::exists('request')) {
 		checknotify();
 	}
 
+	///////UPDATE LOCATION////////////  
+	else if (input::get('lat')) {
+		$profile->lat = escape(trim(input::get('lat')));
+		$profile->lng = escape(trim(input::get('lng')));
+		$profile->location = escape(trim(input::get('location')));
+		$user->update(array('profile' => json_encode($profile)));
+		echo 1;
+	}
+
 }
 
 ////////////////////////////////////UPLOAD OF IMAGE///////////////////////////
@@ -267,6 +276,29 @@ function emailupdate2()
 				echo $error, "<br>";
 			}
 		}
+
+	}
+}
+
+
+function locationUpdate()
+{
+	global $user;
+	if (input::exists()) {
+
+
+
+		try {
+			$user->update(array(
+				'lat' => escape(trim(input::get('lat'))),
+				'lng' => escape(trim(input::get('lng'))),
+			));
+			echo "location update successfully";
+		} catch (Exception $e) {
+			die($e->getMessage());
+		}
+
+		
 
 	}
 }

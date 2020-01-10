@@ -11,7 +11,7 @@ $('#home').click(function () {
 	}
 	$("#sofilButton").attr("disabled", false); 
 	$("#sortingBtn").attr("disabled", false);
-	$("#search").attr("disabled", false);
+	$("#searchBtn").attr("disabled", false);
 	
 
 });
@@ -27,7 +27,7 @@ $('#profile').click(function () {
 	}
 	$("#sofilButton").attr("disabled", true); 
 	$("#sortingBtn").attr("disabled", true);
-	$("#search").attr("disabled", true);
+	$("#searchBtn").attr("disabled", true);
 });
 
 $('#logout_link').click(async function () {
@@ -47,7 +47,7 @@ $('#stats').click(function(){
 	managescript('stats.js', 'add');
 	$("#sofilButton").attr("disabled", true); 
 	$("#sortingBtn").attr("disabled", true);
-	$("#search").attr("disabled", true);
+	$("#searchBtn").attr("disabled", true);
 })
 
 $('#Notifications_icon').hover(async function () {

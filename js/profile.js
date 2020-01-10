@@ -170,8 +170,7 @@ $(document).ready(function () {
     })
 
 
-    //GEOLOC EDIT SHIT
-
+    //location search
     $("#locSearch").keyup(function (e) {
         $("select").html('');
     e.preventDefault();
@@ -191,11 +190,33 @@ $(document).ready(function () {
     });
     });
 
-    $('#locupd').click(function (e){
+
+    //update location
+    $('#locupd').click(async function (e){
 
         newData = $("#loc").val();
-        // console.log(newData);
-        Ajax('profile.php', 'POST', 'newGeo=' + newData, true);
+        lat = "";
+        lng = "";
+        nicename = "";
+        // run geloc call with addy 
+
+        url = " https://maps.googleapis.com/maps/api/geocode/json?address="+newData+"&key=AIzaSyBYnoXVRD46cmI0jzrp_PvFtRNTm5p-SW8";
+        $.post(url, function (response) {
+          //  console.log(response.results[0]['address_components'][2].long_name);  
+            lat = response.results[0].geometry.location.lat;
+            lng = response.results[0].geometry.location.lng;
+            nicename = response.results[0]['address_components'][2].long_name;
+            Ajax('profile.php', 'POST', 'updateAddy=1&location=' +nicename+ '&lat=' + lat + '&lng=' + lng, false);
+       });
+ 
+
+        // send lat lng for saving to db
+       
+
+
+       // chek = await Ajax('profile.php', 'POST', 'updateAddy=1&location=' +nicename+ '&lat=' + lat + '&lng=' + lng, false);
+       //  console.log(chek);
+        
     })
 
 
