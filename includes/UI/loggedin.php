@@ -205,8 +205,8 @@
 						</select>
 						<!-- interests sorting -->
 						<h5 class="w3-center">INTERESTS</h5>
-						<label for="">Fame</label>
-						<select name="sortFame">
+						<label for="">Interests</label>
+						<select name="sortInter">
 							<option value="ascending">ascending</option>
 							<option value="descending">descending</option>
 						</select>

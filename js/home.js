@@ -16,8 +16,10 @@ async function profiles() {
 $("#sofilButton").click(function (event) {
 	event.preventDefault();
 	var theForm = $("#sofil_form").serializeArray();
+    theForm.push({name: 'filter', value: 1});
+
 	$('#middle_content').fadeOut('slow', async function () {
-		$('#middle_content').html(await Ajax('home.php', 'POST', 'filter=1&'+interests, false)
+		$('#middle_content').html(await Ajax('home.php', 'POST', theForm, false)
 		);
 	}).fadeIn('slow');
 	
@@ -28,8 +30,10 @@ $("#sortingBtn").click(function (event) {
 
 	event.preventDefault();
 	var theForm = $("#sorting").serializeArray();
+    theForm.push({name: 'sort', value: 1});
+
 	$('#middle_content').fadeOut('slow', async function () {
-		$('#middle_content').html(await Ajax('home.php', 'POST', 'sort=1&'+interests, false)
+		$('#middle_content').html(await Ajax('home.php', 'POST', theForm, false)
 		);
 	}).fadeIn('slow');
 	

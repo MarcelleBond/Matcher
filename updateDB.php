@@ -2,6 +2,7 @@
 require_once 'core/init.php';
 $db = DB::getInstance();
 $user = new user;
+$userProfile = json_decode($user->data()->profile);
 
 function preference($profile)
 {
@@ -81,8 +82,8 @@ function distance($lat1, $lon1, $lat2, $lon2, $unit) {
 
 $min = 18;
 $max = 100;
-$location = "Johannesburg";
-$userpro = json_decode($user->data()->profile);
+$fame = 0;
+$location = "AND JSON_CONTAINS(`profile`, '\"".$profile->location."\"','$.location') = 1";
 
 
 /*sort age, loacation, fame, interest, */
@@ -112,7 +113,7 @@ GROUP BY users.user_id;";
 
 
 
- $db->query("DROP TABLE IF EXISTS " . $user->data()->username . "; 
+ /* $db->query("DROP TABLE IF EXISTS " . $user->data()->username . "; 
  CREATE TABLE " . $user->data()->username . " AS (SELECT users.*, GROUP_CONCAT(gallery.img_name) AS 'images', 
  CAST(JSON_EXTRACT(`profile`, '$.age') AS unsigned) AS 'age',
  CAST(JSON_EXTRACT(`profile`, '$.fame') AS unsigned) AS 'fame' " . tagCount(input::get('tags')) . ",
@@ -122,8 +123,9 @@ GROUP BY users.user_id;";
  AND (SELECT JSON_SEARCH(`blocked`, 'all', '".$user->data()->username ."')) IS NULL 
  AND " .preference(json_decode($user->data()->profile)) ." 
  GROUP BY users.user_id);", array('users.user_id' => $user->data()->user_id));
-			 var_dump($db->results());  
-			
+ $db->query("SELECT * FROM " . $user->data()->username); 
+ var_dump($db->results());  
+ */			
 			
 			
 			// var_dump($db->results()); 
@@ -165,10 +167,12 @@ CAST('0' AS unsigned) AS 'distance'
 FROM `users` JOIN gallery ON gallery.user_id = users.user_id  
 WHERE `users`.`user_id` != ?
 AND (SELECT JSON_SEARCH(`blocked`, 'all', '".$user->data()->username ."')) IS NULL 
-AND JSON_CONTAINS(`profile`, '\"".$userpro->location."\"','$.location') = 1
-AND " .preference(json_decode($user->data()->profile)) . interest(input::get('tags')). " 
+AND " .preference(json_decode($user->data()->profile)) . interest(input::get('tags')). $location ." 
 AND CAST(JSON_EXTRACT(`profile`, '$.age') AS unsigned) BETWEEN ".$min." AND ".$max." 
+AND CAST(JSON_EXTRACT(`profile`, '$.fame') AS unsigned) >= ".$fame."
 GROUP BY users.user_id);", array('users.user_id' => $user->data()->user_id));
+$db->query("SELECT * FROM " . $user->data()->username); 
+
 			var_dump($db->results());  
 
 	

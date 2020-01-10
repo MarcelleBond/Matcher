@@ -2,13 +2,11 @@
 require_once 'core/init.php';
 $db = DB::getInstance();
 $user = new user;
-
-
+$userProfile = json_decode($user->data()->profile);
 
 function build_list($people)
 {
 	global $db;
-	//$db = DB::getInstance();
 	$profiles = "";
 	foreach ($people as $person => $details) {
 		$info = json_decode($details->profile);
@@ -20,7 +18,6 @@ function build_list($people)
 			<h5>Age: '. age($info->DOB) .'</h5>
 			<hr class="w3-clear">
 			<div class="w3-row-padding" style="margin:0 -16px">';
-		// $db->query('SELECT * FROM `gallery` WHERE `user_id` = ? LIMIT 2', array('user_id' => $details->user_id));
 		$images = explode(",", $details->images);
 		foreach ($images as $image => $pic) {
 			$profiles .= '<div class="w3-half">
@@ -36,26 +33,16 @@ function build_list($people)
 if (input::exists('request')) {
 	if (input::get('all'))
 	{
-	/* $db->query("SELECT * FROM `users` WHERE (`user_id` != ?) 
-				AND (SELECT JSON_SEARCH(`blocked`, 'all', 'Black_Cupid')) IS NULL 
-				AND JSON_EXTRACT(`profile`, '$.gender') = 'Female' 
-				AND (JSON_EXTRACT(`profile`, '$.preference') = 'Male' 
-				OR JSON_EXTRACT(`profile`, '$.preference') = 'BI-SEXUAL')", 
-				array('user_id' => $user->data()->user_id)); */
-				$db->query("DROP TABLE IF EXISTS " . $user->data()->username . "; 
-				CREATE TABLE " . $user->data()->username . " AS (SELECT users.*, GROUP_CONCAT(gallery.img_name) AS 'images', 
-				CAST(JSON_EXTRACT(`profile`, '$.age') AS unsigned) AS 'age',
-				CAST(JSON_EXTRACT(`profile`, '$.fame') AS unsigned) AS 'fame' " . tagCount(input::get('tags')) . ",
-				CAST('0' AS unsigned) AS 'distance'
-				FROM `users` JOIN gallery ON gallery.user_id = users.user_id  
-				WHERE `users`.`user_id` != ?
-				AND (SELECT JSON_SEARCH(`blocked`, 'all', '".$user->data()->username ."')) IS NULL 
-				AND " .preference(json_decode($user->data()->profile)) ." 
-				GROUP BY users.user_id);", array('users.user_id' => $user->data()->user_id));
-			
-			
-			
-			
+		$db->query("DROP TABLE IF EXISTS " . $user->data()->username . "; 
+		CREATE TABLE " . $user->data()->username . " AS (SELECT users.*, GROUP_CONCAT(gallery.img_name) AS 'images', 
+		CAST(JSON_EXTRACT(`profile`, '$.age') AS unsigned) AS 'age',
+		CAST(JSON_EXTRACT(`profile`, '$.fame') AS unsigned) AS 'fame' " . tagCount(input::get('tags')) . ",
+		CAST('0' AS unsigned) AS 'distance'
+		FROM `users` JOIN gallery ON gallery.user_id = users.user_id  
+		WHERE `users`.`user_id` != ?
+		AND (SELECT JSON_SEARCH(`blocked`, 'all', '".$user->data()->username ."')) IS NULL 
+		AND " .preference(json_decode($user->data()->profile)) ." 
+		GROUP BY users.user_id);", array('users.user_id' => $user->data()->user_id));	
 		$db->query("SELECT * FROM " . $user->data()->username); 
 		$people = $db->results();
 		//filter people according to prefs/interests blahblah then print them
@@ -68,19 +55,36 @@ if (input::exists('request')) {
 		else
 			echo build_list($people);
 	}
-
-	if (input::get('sortNfil'))
+	else if (input::get("filter"))
 	{
-//tshiamo
-		//check if people isset
-		$blocked = json_decode($user->data()->blocked);
-		$blockee = $blocked->blockee;
-		$blocker = $blocked->blocker;
-		$blockee = implode("', '", $blockee);
-		$blockee = "'".$blockee."'";
-		$blocker = implode("', '",$blocker);
-		$blocker = "'".$blocker."'";
-	$db->query("SELECT * FROM `users` WHERE (`user_id` != ?) AND (`username` NOT IN ($blockee) AND `username` NOT IN ($blocker))", array('user_id' => $user->data()->user_id));
+		$min = 18;
+		$max = 100;
+		$fame = 0;
+		$location = "";
+
+		if (input::get("minAge") != "")
+			$min = intval(input::get("minAge"));
+		if (input::get("maxAge") != "")
+			$max = intval(input::get("maxAge"));
+		if (input::get("fame_greater") != "")
+			$fame = intval(input::get("fame_greater"));
+		if (input::get("locChkBox"))
+			$location = "AND JSON_CONTAINS(`profile`, '\"".$userProfile->location."\"','$.location') = 1";
+		
+		$db->query("DROP TABLE IF EXISTS " . $user->data()->username . "; 
+		CREATE TABLE " . $user->data()->username . " AS (SELECT users.*, GROUP_CONCAT(gallery.img_name) AS 'images', 
+		CAST(JSON_EXTRACT(`profile`, '$.age') AS unsigned) AS 'age',
+		CAST(JSON_EXTRACT(`profile`, '$.fame') AS unsigned) AS 'fame' " . tagCount(input::get('tags')) . ",
+		CAST('0' AS unsigned) AS 'distance'
+		FROM `users` JOIN gallery ON gallery.user_id = users.user_id  
+		WHERE `users`.`user_id` != ?
+		AND (SELECT JSON_SEARCH(`blocked`, 'all', '".$user->data()->username ."')) IS NULL 
+		AND " .preference(json_decode($user->data()->profile)) . interest(input::get('tags')). $location ." 
+		AND CAST(JSON_EXTRACT(`profile`, '$.age') AS unsigned) BETWEEN ".$min." AND ".$max." 
+		AND CAST(JSON_EXTRACT(`profile`, '$.fame') AS unsigned) >= ".$fame."
+		GROUP BY users.user_id);", array('users.user_id' => $user->data()->user_id));
+		
+		$db->query("SELECT * FROM " . $user->data()->username); 
 		$people = $db->results();
 		//filter people according to prefs/interests blahblah then print them
 		if (empty($people))
@@ -91,32 +95,51 @@ if (input::exists('request')) {
 		}
 		else
 			echo build_list($people);
+		
 	}
-	
-else if (input::get('search')) {
-	$blocked = json_decode($user->data()->blocked);
-	$blockee = $blocked->blockee;
-	$blocker = $blocked->blocker;
-	$blockee = implode("', '", $blockee);
-	$blockee = "'".$blockee."'";
-	$blocker = implode("', '",$blocker);
-	$blocker = "'".$blocker."'";
-	$db->query("SELECT * FROM `users` WHERE (`user_id` != ?) 
-				AND (`username` NOT IN ($blockee) 
-				AND `username` NOT IN ($blocker)) 
-				AND `username` LIKE ?",
-				array('user_id' => $user->data()->user_id, 
-					  'username' => "%" . input::get('search') . "%"));
-	$people = $db->results();
-	if (empty($people))
-	{
-		echo '<div class="w3-container w3-card w3-white w3-round w3-margin">
-		<h1> <strong> NO RESAULTS </strong> </h1>
-		</div>';
+	else if (input::get('search')) {
+
+		$db->query("DROP TABLE IF EXISTS " . $user->data()->username . "; 
+		CREATE TABLE " . $user->data()->username . " AS (SELECT users.*, GROUP_CONCAT(gallery.img_name) AS 'images', 
+		CAST(JSON_EXTRACT(`profile`, '$.age') AS unsigned) AS 'age',
+		CAST(JSON_EXTRACT(`profile`, '$.fame') AS unsigned) AS 'fame' " . tagCount(input::get('tags')) . ",
+		CAST('0' AS unsigned) AS 'distance'
+		FROM `users` JOIN gallery ON gallery.user_id = users.user_id  
+		WHERE `users`.`user_id` != ?
+		AND (SELECT JSON_SEARCH(`blocked`, 'all', '".$user->data()->username ."')) IS NULL 
+		AND " .preference(json_decode($user->data()->profile)) ." AND `username` LIKE ? GROUP BY users.user_id);",
+		array('user_id' => $user->data()->user_id, 'username' => "%" . input::get('search') . "%"));
+
+		$db->query("SELECT * FROM " . $user->data()->username); 
+		$people = $db->results();
+		if (empty($people))
+		{
+			echo '<div class="w3-container w3-card w3-white w3-round w3-margin">
+			<h1> <strong> NO RESAULTS </strong> </h1>
+			</div>';
+		}
+		else
+			echo build_list($people);
 	}
-	else
-		echo build_list($people);
-}
+	elseif (input::get('sort')) {
+		$age = input::get('sortAge') == "ascending" ? "ASC" : "DESC";
+		$distance = input::get('sortLoc') == "ascending" ? "ASC" : "DESC";
+		$fame = input::get('sortFame') == "ascending" ? "ASC" : "DESC";
+		$tagCount = input::get('sortInter') == "ascending" ? "ASC" : "DESC";
+		$order = " ORDER BY `age` " . $age .", `distance` " . $distance . ", `fame` " . $fame . ", `tagCount` " . $tagCount ;
+		// echo $order;
+		$db->query("SELECT * FROM " . $user->data()->username . $order); 
+		$people = $db->results();
+		if (empty($people))
+		{
+			echo '<div class="w3-container w3-card w3-white w3-round w3-margin">
+			<h1> <strong> NO RESAULTS </strong> </h1>
+			</div>';
+		}
+		else
+			echo build_list($people);
+		// var_dump($_REQUEST);
+	}
 	
 }
 	
@@ -168,13 +191,13 @@ function tagCount($tags)
 {
 	$interest = '';
 	if (empty($tags))
-		return $interest;
+		return ", 0 AS tagCount";;
  	foreach ($tags as $key => $value) {
 		$interest .= "JSON_CONTAINS(`profile`, '{\"".$value."\":\"".$value."\"}' ,'$.interest') +";
 	}
 	$interest = trim($interest);
 	if ($interest == '')
-		return $interest;
+		return ", 0 AS tagCount";
 	else
 		return ", ". substr($interest, 0 , strlen($interest) - 2) ." AS tagCount";
 }
