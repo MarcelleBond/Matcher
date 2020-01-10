@@ -444,18 +444,16 @@
 			<div class="w3-col"><input class="w3-input w3-border"  id="locSearch" type='text' name="locSearch" placeholder="search Location"></div>
 			<div class="w3-col">
 			<button class="w3-button w3-section w3-black w3-ripple" id="locupd" type="submit" value="Update"> Submit</button>
-
 			</div>
-			<!-- <div class="w3-col">
-			<select id="loc" class="loc" name="opt[]" multiple style="width: 100%">
-			<div class="w3-col"> -->
+			<div id='locSelect' class="w3-col">
+			<select id="loc" class="loc" name="opt[]" multiple style="width: 100%"></select>
+			</div>
 			
 		</div>
 
 		<!-- <p class="w3-center">
 		</p> -->
 	</div>
-
 
 
 </div>

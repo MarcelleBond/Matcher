@@ -43,6 +43,8 @@ if (input::exists('request')) {
 		AND (SELECT JSON_SEARCH(`blocked`, 'all', '".$user->data()->username ."')) IS NULL 
 		AND " .preference(json_decode($user->data()->profile)) ." 
 		GROUP BY users.user_id);", array('users.user_id' => $user->data()->user_id));	
+		// distanceUpdate();
+		
 		$db->query("SELECT * FROM " . $user->data()->username); 
 		$people = $db->results();
 		//filter people according to prefs/interests blahblah then print them

@@ -172,7 +172,7 @@ $(document).ready(function () {
 
     //location search
     $("#locSearch").keyup(function (e) {
-        $("select").html('');
+        $("loc").html('');
     e.preventDefault();
     searchVal = e.target.value;
     url = "https://maps.googleapis.com/maps/api/place/autocomplete/json?input="+searchVal+"&language=en_ZA&key=AIzaSyBYnoXVRD46cmI0jzrp_PvFtRNTm5p-SW8";
@@ -185,7 +185,7 @@ $(document).ready(function () {
             opt.value = response.predictions[index]['description']+"|"+response.predictions[index]['description'];
             opt.innerHTML = response.predictions[index]['description'] ;
            // select.appendChild(opt);
-            $("select").append(opt);
+            $("loc").append(opt);
        }
     });
     });
