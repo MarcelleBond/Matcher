@@ -237,7 +237,7 @@ function distance($lat1, $lon1, $lat2, $lon2, $unit) {
 	global $user;
 	foreach ($people as $person => $details) {
 		$info = json_decode($details->profile);
-		$db->update($user->data()->username, $details->user_id, array('distance' => distance($userProfile->lat,$userProfile->lng,$info->lat,$info->lng,'K')));
+		$db->update($user->data()->username, $details->user_id, array('distance' => distance(floatval($userProfile->lat),floatval($userProfile->lng),floatval($info->lat),floatval($info->lng),'K')));
 	}
 }
 	
