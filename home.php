@@ -43,8 +43,10 @@ if (input::exists('request')) {
 		AND (SELECT JSON_SEARCH(`blocked`, 'all', '".$user->data()->username ."')) IS NULL 
 		AND " .preference(json_decode($user->data()->profile)) ." 
 		GROUP BY users.user_id);", array('users.user_id' => $user->data()->user_id));	
-		// distanceUpdate();
 		
+		$db->query("SELECT * FROM " . $user->data()->username); 
+		$people = $db->results();
+		distanceUpdate($people);
 		$db->query("SELECT * FROM " . $user->data()->username); 
 		$people = $db->results();
 		//filter people according to prefs/interests blahblah then print them
@@ -88,6 +90,9 @@ if (input::exists('request')) {
 		
 		$db->query("SELECT * FROM " . $user->data()->username); 
 		$people = $db->results();
+		distanceUpdate($people);
+		$db->query("SELECT * FROM " . $user->data()->username); 
+		$people = $db->results();
 		//filter people according to prefs/interests blahblah then print them
 		if (empty($people))
 		{
@@ -112,6 +117,9 @@ if (input::exists('request')) {
 		AND " .preference(json_decode($user->data()->profile)) ." AND `username` LIKE ? GROUP BY users.user_id);",
 		array('user_id' => $user->data()->user_id, 'username' => "%" . input::get('search') . "%"));
 
+		$db->query("SELECT * FROM " . $user->data()->username); 
+		$people = $db->results();
+		distanceUpdate($people);
 		$db->query("SELECT * FROM " . $user->data()->username); 
 		$people = $db->results();
 		if (empty($people))
@@ -221,6 +229,17 @@ function distance($lat1, $lon1, $lat2, $lon2, $unit) {
 		return $miles;
 	}
   }
+
+  function distanceUpdate($people)
+{
+	global $userProfile;
+	global $db;
+	global $user;
+	foreach ($people as $person => $details) {
+		$info = json_decode($details->profile);
+		$db->update($user->data()->username, $details->user_id, array('distance' => distance($userProfile->lat,$userProfile->lng,$info->lat,$info->lng,'K')));
+	}
+}
 	
 	
 // get all users

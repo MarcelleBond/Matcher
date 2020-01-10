@@ -152,7 +152,7 @@
 						<h5 class="w3-center">INTERESTS</h5>
 						<div class="w3-row w3-section">
 							<div class="w3-col" style="width:50px">
-								<!--<i class="w3-xxlarge fa fa-hand-pointer-o">--> </i></div>
+								<!--<i class="w3-xxlarge fa fa-hand-pointer-o"> </i>--></div>
 							<div class="w3-rest">
 								<select id="sofil_select" class="tags" name="tags[]" multiple style="width: 100%">
 									<option value="GAMING">GAMING</option>

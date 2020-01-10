@@ -4,6 +4,16 @@ $db = DB::getInstance();
 $user = new user;
 $userProfile = json_decode($user->data()->profile);
 
+
+function distanceUpdate($people)
+{
+	foreach ($people as $person => $details) {
+		$info = json_decode($details->profile);
+		$info->age = intval(age($info->DOB));
+		$db->update('users', $details->user_id, array('distance' => distance($userProfile->lat,$userProfile->lng,$info->lat,$info->lng,'K'));
+	}
+}
+
 function preference($profile)
 {
 	$gender = '';
@@ -132,11 +142,7 @@ GROUP BY users.user_id;";
 			// $db->query("SELECT * FROM " . $user->data()->username); 
 			// var_dump($db->results()); 
 			/*
-			foreach ($people as $person => $details) {
-				$info = json_decode($details->profile);
-				$info->age = intval(age($info->DOB));
-				$db->update('users', $details->user_id, array('distance' => distance($userpro->lat,$userpro->lng,$info->lat,$info->lng,'K'));
-			}
+			
 			$db->query("SELECT * FROM " . $user->data()->username); 
 			$people = $db->results(); */
 

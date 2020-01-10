@@ -4,7 +4,10 @@ $(document).ready(function () {
 
     $('.tags').select2({
         placeholder: "select your interests"
-    });
+	});
+	/* $('#loc').select2({
+		placeholder: "select your your location"
+	}); */
     $('#error_spot').addClass('error w3-card w3-round w3-padding-16 w3-center');
     ////////DISPLAY CURRENT INFO//////////
 
@@ -172,7 +175,7 @@ $(document).ready(function () {
 
     //location search
     $("#locSearch").keyup(function (e) {
-        $("loc").html('');
+        $("#loc").html('');
     e.preventDefault();
     searchVal = e.target.value;
     url = "https://maps.googleapis.com/maps/api/place/autocomplete/json?input="+searchVal+"&language=en_ZA&key=AIzaSyBYnoXVRD46cmI0jzrp_PvFtRNTm5p-SW8";
@@ -185,7 +188,7 @@ $(document).ready(function () {
             opt.value = response.predictions[index]['description']+"|"+response.predictions[index]['description'];
             opt.innerHTML = response.predictions[index]['description'] ;
            // select.appendChild(opt);
-            $("loc").append(opt);
+            $("#loc").append(opt);
        }
     });
     });
