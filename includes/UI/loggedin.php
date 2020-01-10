@@ -446,14 +446,14 @@
 			<button class="w3-button w3-section w3-black w3-ripple" id="locupd" type="submit" value="Update"> Submit</button>
 
 			</div>
-			<div class="w3-col">
+			<!-- <div class="w3-col">
 			<select id="loc" class="loc" name="opt[]" multiple style="width: 100%">
-			<div class="w3-col">
+			<div class="w3-col"> -->
 			
 		</div>
 
-		<p class="w3-center">
-		</p>
+		<!-- <p class="w3-center">
+		</p> -->
 	</div>
 
 
