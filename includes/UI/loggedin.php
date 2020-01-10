@@ -110,7 +110,7 @@
 							<input type="text" style="resize: none;" class="w3-input w3-border w3-round w3-margin-bottom w3-margin-top" id="search" placeholder="Search for users"></input>
 							<!-- <textarea style="resize: none;" class="w3-input w3-border w3-round w3-margin-bottom w3-margin-top" id="search" placeholder="Search for users"></textarea> -->
 							<!-- <p contenteditable="true" class="w3-border w3-padding" id="search"></p> -->
-							<button type="button" class="w3-button w3-theme" onclick="search()"><i class="fa fa-search"></i>  Search</button>
+							<button id="searchBtn" type="button" class="w3-button w3-theme" onclick="search()"><i class="fa fa-search"></i>  Search</button>
 						</div>
 					</div>
 				</div>
@@ -136,17 +136,18 @@
 
 
 						<label for="">minimum Age</label>
-						<input name="minAge" type="number" min=18 max=100>
+						<input name="minAge" type="number" min=18 max=100 onKeyDown="return false">
 						<br>
 						<label for="">maximum age</label>
-						<input name="maxAge" type="number" min=19 max=100>
+						<input name="maxAge" type="number" min=19 max=100 onKeyDown="return false"> 
 						<!-- Location  -->
 						<br>
 						<label label for="locChkBox">Same Location</label>
-						<input type="checkbox" name="locChkBox" id="locChkBox">
+						<input type="checkbox" name="locChkBox" id="locChkBox"><br>
 						<!-- fame  -->
 						<label for="">Fame Greater than</label>
-						<input type="number" name="fame_greater" >
+						<br>
+						<input type="number" name="fame_greater" onKeyDown="return false">
 						<!-- interests  -->
 						<h5 class="w3-center">INTERESTS</h5>
 						<div class="w3-row w3-section">
@@ -431,10 +432,32 @@
 		</p>
 	</form>
 
-	<input id="locSearch" type='text' name="locSearch" placeholder="search Location"><br>
+	<!-- <input id="locSearch" type='text' name="locSearch" placeholder="search Location"><br>
     <select id="loc" class="loc" name="opt[]" multiple style="width: 50%">
                 </select>
-    <button id="locupd">Update Location</button>
+	<button id="locupd">Update Location</button> -->
+	
+
+	<div class="w3-container w3-card-4 w3-light-grey w3-text-black w3-margin-top">
+		<h4 class="w3-center">LOCATION</h4>
+		<div class="w3-row w3-section">
+			<div class="w3-col"><input class="w3-input w3-border"  id="locSearch" type='text' name="locSearch" placeholder="search Location"></div>
+			<div class="w3-col">
+			<button class="w3-button w3-section w3-black w3-ripple" id="locupd" type="submit" value="Update"> Submit</button>
+
+			</div>
+			<div class="w3-col">
+			<select id="loc" class="loc" name="opt[]" multiple style="width: 100%">
+			<div class="w3-col">
+			
+		</div>
+
+		<p class="w3-center">
+		</p>
+	</div>
+
+
+
 </div>
 
 
