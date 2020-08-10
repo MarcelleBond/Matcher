@@ -4,7 +4,10 @@ $(document).ready(function () {
 
     $('.tags').select2({
         placeholder: "select your interests"
-    });
+	});
+	/* $('#loc').select2({
+		placeholder: "select your your location"
+	}); */
     $('#error_spot').addClass('error w3-card w3-round w3-padding-16 w3-center');
     ////////DISPLAY CURRENT INFO//////////
 
@@ -168,12 +171,65 @@ $(document).ready(function () {
     $('#chbx').click(function (event) {
         testfunc();
     })
+
+
+    //location search
+    $("#locSearch").keyup(function (e) {
+        $("#loc").html('');
+    e.preventDefault();
+    searchVal = e.target.value;
+    url = "https://maps.googleapis.com/maps/api/place/autocomplete/json?input="+searchVal+"&language=en_ZA&key=AIzaSyBYnoXVRD46cmI0jzrp_PvFtRNTm5p-SW8";
+    $.post(url, function (response) {
+         console.log(response.predictions);
+        var count = Object.keys(response.predictions).length;
+        for (let index = 0; index < count; index++) {
+             console.log(response.predictions[index]['description']);
+            var opt = document.createElement('option');
+            opt.value = response.predictions[index]['description']+"|"+response.predictions[index]['description'];
+            opt.innerHTML = response.predictions[index]['description'] ;
+           // select.appendChild(opt);
+            $("#loc").append(opt);
+       }
+    });
+    });
+
+
+    //update location
+    $('#locupd').click(async function (e){
+
+        newData = $("#loc").val();
+        lat = "";
+        lng = "";
+        nicename = "";
+        // run geloc call with addy 
+
+        url = " https://maps.googleapis.com/maps/api/geocode/json?address="+newData+"&key=AIzaSyBYnoXVRD46cmI0jzrp_PvFtRNTm5p-SW8";
+        $.post(url, function (response) {
+          //  console.log(response.results[0]['address_components'][2].long_name);  
+            lat = response.results[0].geometry.location.lat;
+            lng = response.results[0].geometry.location.lng;
+            nicename = response.results[0]['address_components'][2].long_name;
+            Ajax('profile.php', 'POST', 'updateAddy=1&location=' +nicename+ '&lat=' + lat + '&lng=' + lng, false);
+       });
+ 
+
+        // send lat lng for saving to db
+       
+
+
+       // chek = await Ajax('profile.php', 'POST', 'updateAddy=1&location=' +nicename+ '&lat=' + lat + '&lng=' + lng, false);
+       //  console.log(chek);
+        
+    })
+
+
+
 });
 
 ///////////// IMAGE WORK ////////////
-function display_pics() {
+async function display_pics() {
     $('#upload_preview').empty();
-    images = Ajax('profile.php', 'POST', 'images=images', false)
+	images = await Ajax('profile.php', 'POST', 'images=images', false)
     images = JSON.parse(images);
     for (var i = 0; i < images.length; i++)
         $('#upload_preview').append('<div class="w3-col m2 "><img onclick="onClick(this)" src="' + images[i]['img_name'] + '" style="width:120px; height:120px;" class=" w3-row-padding w3-margin-bottom"></div>');
@@ -297,6 +353,11 @@ function checkcheck() {
     };
     xhr.send(newvars);
 
+
+
+    
 }
+
+
 
 

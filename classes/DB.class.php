@@ -48,7 +48,7 @@
 					}
 				}
 				if ($this->_query->execute()) {
-					if (strpos($sql, "SELECT") !== false) {
+					if (strpos($sql, "SELECT") !== false && strpos($sql, "CREATE") === false) {
 				
 					$this->_results = $this->_query->fetchALL(PDO::FETCH_OBJ);
 					}

@@ -1,4 +1,7 @@
 $(document).ready(async function () {
+	
+
+
 	if ((check = await Ajax('user_status.php', 'POST', 'action=login', false)) != 1) {
 		$('body').fadeOut('slow', function () {
 			$('#nav').load("includes/UI/loggedout.php #nav_bar", function () {
@@ -71,6 +74,14 @@ $(document).ready(async function () {
 					managescript('home.js', 'add');
 					window.location.href = "#home";
 				}
+				$('#search').keyup(function (e) {
+					if (e.which == 13) {
+						search();
+					}
+				});
+				$('.tags').select2({
+					placeholder: "select your interests"
+				});
 			});
 
 		}).fadeIn('slow');
@@ -85,13 +96,12 @@ $(document).ready(async function () {
 			}
 		);
 	}, 3000);
-
 });
 
 
 async function checknotes() {
 	notes = await Ajax('notifications.php', 'POST', 'getnotes=getnotes', false);
-	console.log("NOTES: " + notes);
+	//  console.log("NOTES: " + notes);
 	notes = JSON.parse(notes);
 	if (notes && notes != "0") {
 		var result = Object.keys(notes).map(function (key) {
@@ -132,7 +142,7 @@ async function Ajax(sendto, method, value, AsyncOrSync) {
 	request = "";
 	if (AsyncOrSync == false) {
 		request = await promise(sendto, method, value);
-		console.log("REQUEST: "+ request);
+		// console.log("REQUEST: "+ request);
 		return request;
 	}
 	else {
@@ -195,3 +205,13 @@ function Age(dob) {
 	return age;
 }
 
+function search() {
+	var name  = $("#search").val();
+	$('#middle_content').fadeOut('slow', async function () {
+		if (name.trim().length == 0)
+			var person = await Ajax('home.php', 'POST', 'all=all', false)
+		else
+			var person = await Ajax('home.php', 'POST', 'search=' + name.trim(), false)
+		$('#middle_content').html(person);
+	}).fadeIn('slow');
+}

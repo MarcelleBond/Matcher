@@ -18,12 +18,18 @@
 		}
 		else if (input::get('addnotes'))
 		{
+			// echo ("NAME: ". input::get('name'));
 			$user2 = new user(input::get('name'));
 			$profile2 = json_decode($user2->data()->profile);
 			if ($profile2->notifications){
 				if (!in_array($user->data()->username. " " .input::get('addnotes'), $profile2->notifications)){
 					$profile2->notifications[] = $user->data()->username. " " .input::get('addnotes');
 					$user2->update(array('profile' => json_encode($profile2)), $user2->data()->user_id);
+
+					$db->insert('notif_hist', array(
+                        'usersid' => $user2->data()->user_id,
+                        'notification' => $user->data()->username. " " .input::get('addnotes')
+                    ));
 				}
 			}
 			else {
@@ -36,6 +42,11 @@
 		{
 			unset($profile->notifications);
 			$user->update(array('profile' => json_encode($profile)));
+		}
+		else if(input::get('stats'))
+		{
+			$db->query('SELECT `notification` FROM notif_hist  WHERE `usersid`= ' . $user->data()->user_id);
+			echo json_encode($db->results());
 		}
 	}
 ?>

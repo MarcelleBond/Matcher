@@ -1,18 +1,12 @@
-details = null;
-images = null;
-test = null
+// import { LoadChat } from "chat.js";
+$(document).ready(function () {
+	
+friend_id = null; 
 
-
-function getdata(data){
-	test = data
-	console.log("TEST: "+ test);
-}
-
-	details =  Ajax('profile.php', 'POST', 'action=display_info', false);
+details =  Ajax('profile.php', 'POST', 'action=display_info', false);
 	details.then(function(data){
-		console.log("IN FUNCTION : "+ data)
+		// console.log("IN FUNCTION : "+ data)
 		details = data;
-		getdata(data);
 		details = JSON.parse(details);
 		profile = JSON.parse(details['profile']);
 		$("#propic").attr('src', profile.dp);
@@ -39,3 +33,32 @@ function getdata(data){
 		}
 	}
 	})
+	LoadFriends();
+	
+}
+
+);
+function LoadFriends() {
+	friends = Ajax('profile.php', 'POST', 'friends=friends', false)
+	friends.then(function(data){
+	
+		friends = data;
+		friends = JSON.parse(friends);
+		// console.log("FRIENDS: <"+friends+">");
+		$('#display_friends').html('');
+		for (var i = 0; i < friends.length; i++)
+			$('#display_friends').append('<div class="w3-quarter"><a style="text-decoration: none" href="#chat"><p style="max-width:100%" class="w3-margin-bottom" onclick="startchat(' + friends[i]['user_id'] + ')"><strong>' + friends[i]['username'] + '</strong></p></a></div>');
+	});
+}
+
+function startchat(user_id) {
+	$('#middle_content').fadeOut('slow', function () {
+		$('#middle_content').load("includes/UI/loggedin.php #chatRoom", function () {
+			friend_id = user_id;
+			managescript(last_page() + ".js", 'remove');
+			managescript('chat.js', 'add');
+		});
+	}).fadeIn('slow');
+	$("#sofilButton").attr("disabled", true);
+	$("#sortingBtn").attr("disabled", true);
+}

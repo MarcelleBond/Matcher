@@ -1,5 +1,6 @@
 var where_i_stay = ''
-
+var mylat = ''
+var mylng = ''
 $(document).ready(function()
 {
     getLocation();
@@ -9,6 +10,8 @@ $('form').submit(async function (event) {
     event.preventDefault();
     value = $('form').serializeArray();
     value.push({name: 'location', value: where_i_stay});
+    value.push({name: 'lat', value: mylat});
+    value.push({name: 'lng', value: mylng});
     console.log('form submition');
     console.log(value);
     check = await register(value)
@@ -39,7 +42,6 @@ async function register(value) {
 
 
 function getLocation() {
-
     if (navigator.geolocation) {
         // alert("it works");
          navigator.geolocation.getCurrentPosition(showPosition, showError);
@@ -50,19 +52,25 @@ function getLocation() {
     }
 }
 function showPosition(position) {
-    url = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + position.coords.latitude + "," + position.coords.longitude + "&key=AIzaSyDwMhLbkQbBk7091NEYpSx9T_ykXnwgPuI";
-    $.post(url, function (response) {
-        console.log(response)
-        console.log("G API START");
-        console.log(response.results[4]["geometry"]["location"]["lat"] + " , " + response.results[4]["geometry"]["location"]["lng"]);
-        console.log("G API END");
-        console.log(response.results[4]['formatted_address'])
-        where_i_stay = response.results[4]['formatted_address'];
-        // alert(where_i_stay)
+    // console.log(position);
+    // console.log("we in showpos");
+   // alert('pos logged');
+  // newURL = "https://eu1.locationiq.com/v1/reverse.php?key=8e4472c0e891f7&lat=" + position.coords.latitude + "&lon=" + position.coords.longitude + "&format=json";
+  newURL = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + position.coords.latitude + "," + position.coords.longitude + "&key=AIzaSyBYnoXVRD46cmI0jzrp_PvFtRNTm5p-SW8";
+    $.post(newURL, function (response) {
+        // console.log(response)
+    //    console.log(response['display_name']);
+        // console.log("G API START");
+        // console.log(response.results[4]["geometry"]["location"]["lat"] + " , " + response.results[4]["geometry"]["location"]["lng"]);
+        // console.log("G API END");
+        // console.log(response.results[4]['formatted_address'])
+         where_i_stay =response['display_name'];
+         mylng = response.results[4]["geometry"]["location"]["lng"];
+         mylat = response.results[4]["geometry"]["location"]["lat"];
+
+       //  alert(where_i_stay);
     });
-
 }
-
 function showError(error) {
     //run IP geoloc on failure
   switch(error.code) {
@@ -84,36 +92,43 @@ function showError(error) {
       break;
   }
 }
-
 function ipFetch() {
-
     ///////////IP search start
-
-    url = "http://api.ipstack.com/check?access_key=d115280486eb2f2f8ebb6038c3dd4423";
+  //  url = "http://api.ipstack.com/check?access_key=d115280486eb2f2f8ebb6038c3dd4423";
+    //   url = "https://eu1.locationiq.com/v1/reverse.php?key=8e4472c0e891f7&lat=" + position.coords.latitude + "&lon=" + position.coords.longitude + "&format=json";
     //  url = "https://geoip-db.com/jsonp/";
-    $.post(url, function (response) {
-        //var jsonified = response.slice(9,-1);
-        //var test = JSON.parse(jsonified);
-        console.log("IPFETCh");
-        console.log(response['city']);
-        where_i_stay = response['city']
-       // console.log(response['latitude']);
-       // console.log(response["longitude"]);
-       // gMapSrch(response);
-    });
+    $.getJSON("http://www.geoplugin.net/json.gp", function(result){
+    // console.log('res', result);
+    where_i_stay =result['geoplugin_city'];
+         mylng = result["geoplugin_latitude"];
+         mylat = result["geoplugin_longitude"];
+        //  console.log(mylng);
+        //  console.log(mylat);
+        //  console.log(where_i_stay);
+});
+    // $.post(url, function (response) {
+    //     //var jsonified = response.slice(9,-1);
+    //     //var test = JSON.parse(jsonified);
+    //     console.log("IPFETCh");
+    //     console.log(response['city']);
+    //     where_i_stay = response['city']
+    //    // console.log(response['latitude']);
+    //    // console.log(response["longitude"]);
+    //    // gMapSrch(response);
+    // });
 }
-
 
   function gMapSrch(res){
 
           //////////googlemaps start
-          url = "https://maps.googleapis.com/maps/api/geocode/json?latlng="+res['latitude']+","+res["longitude"]+"&key=AIzaSyA47t1t0JjL53u3KznXoMF_6oeVVjWTYaM";
+          url = "https://maps.googleapis.com/maps/api/geocode/json?latlng="+res['latitude']+","+res["longitude"]+"&key=AIzaSyBYnoXVRD46cmI0jzrp_PvFtRNTm5p-SW8";
           $.post(url, function (response2) {
-            console.log("gmaps");
-          console.log(response2.results[4]['formatted_address']);
+        //     console.log("gmaps");
+        //   console.log(response2.results[4]['formatted_address']);
               where_i_stay = response2.results[4]['formatted_address'];
             // alert(where_i_stay)
-
+            mylng = response.results[4]["geometry"]["location"]["lng"];
+            mylat = response.results[4]["geometry"]["location"]["lat"];
           });   
     
           //////////googlemaps end

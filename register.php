@@ -49,7 +49,7 @@ if (!$user->isloggedin()) {
         if ($validate->passed()) {
             try
             {
-                $test = array('gender' => input::get('gender'), 'DOB' => input::get('age'),'location' => input::get('location'), 'preference' => 'BI-SEXUAL', 'fame' => 0);
+                $test = array('gender' => input::get('gender'), 'DOB' => input::get('age') , 'age' => age(input::get('age')),'location' => input::get('location'),'lat' => input::get('lat'),'lng' => input::get('lng'), 'preference' => 'BI-SEXUAL', 'fame' => 0);
                 $token = "QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm1234567890!$()*";
                 $token = str_shuffle($token);
                 $token = substr($token, 0, 10);

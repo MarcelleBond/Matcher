@@ -4,11 +4,15 @@ $('#home').click(function () {
 		managescript('display_profile.js', 'remove');
 		managescript('UI.js', 'remove');
 		managescript('UI.js', 'add');
-		managescript('navbar.js', 'remove');
+		managescript('navbar.js', 'remove');	
 	} else if (last_page() == 'home') {} else {
 		managescript(last_page() + ".js", 'remove');
 		managescript('home.js', 'add');
 	}
+	$("#sofilButton").attr("disabled", false); 
+	$("#sortingBtn").attr("disabled", false);
+	$("#searchBtn").attr("disabled", false);
+	
 
 });
 
@@ -21,21 +25,29 @@ $('#profile').click(function () {
 			});
 		}).fadeIn('slow');
 	}
+	$("#sofilButton").attr("disabled", true); 
+	$("#sortingBtn").attr("disabled", true);
+	$("#searchBtn").attr("disabled", true);
 });
 
 $('#logout_link').click(async function () {
 	response = await Ajax('logout.php', 'POST', null, false);
+	// console.log("RESPONSE: "+response);
 	if (response == 1) {
-		managescript(last_page() + ".js", 'remove');
-		managescript('UI.js', 'remove');
-		managescript('UI.js', 'add');
-		managescript('navbar.js', "remove");
+		// managescript(last_page() + ".js", 'remove');
+		// managescript('UI.js', 'remove');
+		// managescript('UI.js', 'add');
+		// // managescript('navbar.js', "remove");
+		location.reload();
 	}
 });
 
 $('#stats').click(function(){
 	managescript(last_page() + ".js", 'remove');
-	managescript('stats.js');
+	managescript('stats.js', 'add');
+	$("#sofilButton").attr("disabled", true); 
+	$("#sortingBtn").attr("disabled", true);
+	$("#searchBtn").attr("disabled", true);
 })
 
 $('#Notifications_icon').hover(async function () {
@@ -58,5 +70,6 @@ $('#NotificationsBtn').click(function () {
 })
 
 setInterval(function () {
+	// console.log("GODDAMNT");
 	checknotes();
 }, 1000);

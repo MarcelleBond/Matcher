@@ -18,7 +18,7 @@ $('form').submit(async function (event) {
 			managescript('login.js', 'remove');
 	}
 	else {
-		console.log("CHECK: " +check);
+		// console.log("CHECK: " +check);
 		if (document.getElementById('error'))
 			$('#error').html(check);
 		else {
@@ -26,6 +26,7 @@ $('form').submit(async function (event) {
 			$('#error').html(check);
 		}
 	}
+
 	return false;
 });
 

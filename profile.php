@@ -13,6 +13,10 @@ if (Input::exists('request')) {
 	else if (input::get('images')) {
 		echo json_encode($db->get('gallery', array('user_id', '=', $user->data()->user_id))->results());
 	}
+	else if (input::get("friends"))
+	{
+		echo json_encode($db->query("SELECT `username`, `user_id` FROM `users` JOIN `likes` ON `liker_id` = `user_id` OR `likee_id` = `user_id` WHERE (`likee_id` = ? OR `liker_id` = ?) AND (`user_id` != ? AND `liker_stat` = 1 AND `likee_stat` = 1)", array('likee_id' => intval( $user->data()->user_id), 'liker_id' => intval($user->data()->user_id), 'user_id' => intval($user->data()->user_id)))->results());
+	} 
 	///////UPDATE BIO////////////
 	else if (input::get('bio')) {
 		$profile->bio = escape(trim(input::get('bio')));
@@ -22,6 +26,7 @@ if (Input::exists('request')) {
 	///////UPDATE BIRTHDAY////////////
 	else if (input::get('age')) {
 		$profile->DOB = input::get('age');
+		$profile->age = age(input::get('age'));
 		$user->update(array('profile' => json_encode($profile)));
 		echo 1;
 	}
@@ -87,6 +92,15 @@ if (Input::exists('request')) {
 	
 	else if (input::get('mypostname')) {
 		checknotify();
+	}
+
+	///////UPDATE LOCATION////////////  
+	else if (input::get('lat')) {
+		$profile->lat = escape(trim(input::get('lat')));
+		$profile->lng = escape(trim(input::get('lng')));
+		$profile->location = escape(trim(input::get('location')));
+		$user->update(array('profile' => json_encode($profile)));
+		echo 1;
 	}
 
 }
@@ -262,6 +276,29 @@ function emailupdate2()
 				echo $error, "<br>";
 			}
 		}
+
+	}
+}
+
+
+function locationUpdate()
+{
+	global $user;
+	if (input::exists()) {
+
+
+
+		try {
+			$user->update(array(
+				'lat' => escape(trim(input::get('lat'))),
+				'lng' => escape(trim(input::get('lng'))),
+			));
+			echo "location update successfully";
+		} catch (Exception $e) {
+			die($e->getMessage());
+		}
+
+		
 
 	}
 }
