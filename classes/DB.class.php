@@ -3,6 +3,7 @@
 
 	class DB
 	{
+		//DB Object properties
 		private static $_instance = null;
 		private $_pdo,
 				$_query,
@@ -14,6 +15,7 @@
 		{
 			try
 			{
+				//Default constructor for crearting a new PDO Object, all important values referenced from config class
 				$this->_pdo = new PDO('mysql:host=' . config::get('mysql/host') .';
 				dbname=' . config::get('mysql/db'), config::get('mysql/user'),
 				config::get('mysql/password'));
@@ -22,12 +24,14 @@
 			}
 			catch (PDOException $e)
 			{
+				//on failure to connect
 				die($e->getMessage());
 			}
 		}
 
 		public static function getInstance()
 		{
+			//Returns instance of PDO connection if one exists, else  it creates a new one and returns it
 			if (!isset(self::$_instance)) {
 				self::$_instance = new DB();
 			}

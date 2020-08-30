@@ -40,7 +40,7 @@
 ## Installation
 
 - Clone the repo
-- Place the `camagru` directory in the `htdocs` directory of the `MAMP` or `XAMPP` application.
+- Place the `matcha` directory in the `htdocs` directory of the `MAMP` or `XAMPP` application.
 - Run the `XAMPP` or `MAMP` you can edit the port number but the defualt port is usually `80` or `8080`.
 - To build the database run the setup.php file. => http://localhost:8080/matcha/config/setup.php (Replace the 8080 with the port number on your XAMMP or MAMP Application)
 - Then run http://localhost:8080/matcha/ to open access the site. (Replace the 8080 with the port number on your XAMMP or MAMP Application)
