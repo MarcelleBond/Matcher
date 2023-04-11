@@ -6,21 +6,6 @@
 
 > A user will then be able to register, connect, fill his/her profile, search and look into the profile of other users, like them 1, chat with those that “liked” back.
 
-**Badges**
-
-- Build
-- Issues
-- Forks
-- Stars
-- Licence
-
-[![Build Status](http://img.shields.io/travis/badges/badgerbadgerbadger.svg?style=flat-square)](https://travis-ci.org/badges/badgerbadgerbadger)
-<a href="https://github.com/The-only-blue/matcha/issues"><img alt="GitHub issues" src="https://img.shields.io/github/issues/The-only-blue/Camagru"></a>
-<a href="https://github.com/The-only-blue/matcha/network"><img alt="GitHub forks" src="https://img.shields.io/github/forks/The-only-blue/Camagru"></a>
-<a href="https://github.com/The-only-blue/matcha/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/The-only-blue/Camagru"></a>
-<a href="https://github.com/The-only-blue/matcha"><img alt="GitHub license" src="https://img.shields.io/github/license/The-only-blue/Camagru"></a>
-
-
 ---
 ## Table of Contents
 
